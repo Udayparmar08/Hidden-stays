@@ -1,1 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hidden Stays India | Secluded Luxury & Offbeat Escapes</title>
+<style>
+:root {
+--primary: #1b3322; /* Forest Green /
+--accent: #c4a46b; / Warm Gold /
+--bg: #f9f6f0; / Soft Cream /
+--text: #2b2b2b; / Charcoal */
+}
 
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+background-color: var(--bg);
+color: var(--text);
+line-height: 1.6;
+}
+
+/* Navigation */
+nav {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px 8%;
+background: rgba(27, 51, 34, 0.95);
+position: fixed;
+width: 100%;
+top: 0;
+z-index: 1000;
+box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+nav .logo {
+color: #fff;
+font-size: 24px;
+font-weight: 700;
+letter-spacing: 2px;
+}
+
+nav .logo span {
+color: var(--accent);
+}
+
+nav ul {
+display: flex;
+list-style: none;
+}
+
+nav ul li {
+margin-left: 30px;
+}
+
+nav ul li a {
+color: #fff;
+text-decoration: none;
+font-size: 14px;
+letter-spacing: 1px;
+transition: color 0.3s;
+}
+
+nav ul li a:hover {
+color: var(--accent);
+}
+
+/* Hero Section */
+.hero {
+height: 85vh;
+background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+color: #fff;
+padding: 0 20px;
+margin-top: 60px;
+}
+
+.hero h1 {
+font-size: 48px;
+margin-bottom: 15px;
+font-weight: 300;
+letter-spacing: 3px;
+}
+
+.hero p {
+font-size: 18px;
+margin-bottom: 30px;
+max-width: 600px;
+font-weight: 300;
+color: #e0e0e0;
+}
+
+.search-bar {
+background: #fff;
+padding: 10px 20px;
+border-radius: 50px;
+display: flex;
+align-items: center;
+box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+width: 100%;
+max-width: 700px;
+}
+
+.search-input {
+border: none;
+outline: none;
+padding: 10px;
+flex: 1;
+font-size: 16px;
+}
+
+.search-btn {
+background: var(--primary);
+color: #fff;
+border: none;
+padding: 12px 30px;
+border-radius: 25px;
+cursor: pointer;
+font-weight: 600;
+transition: background 0.3s;
+}
+
+.search-btn:hover {
+background: #274b32;
+}
+
+/* Philosophy / Curator Note */
+.curator-note {
+padding: 80px 15%;
+text-align: center;
+background-color: #fff;
+}
+
+.curator-note h2 {
+color: var(--primary);
+font-size: 32px;
+margin-bottom: 20px;
+position: relative;
+padding-bottom: 15px;
+}
+
+.curator-note h2::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 50%;
+transform: translateX(-50%);
+width: 60px;
+height: 2px;
+background-color: var(--accent);
+}
+
+.curator-note p {
+font-size: 16px;
+color: #666;
+max-width: 800px;
+margin: 0 auto;
+}
+
+/* Stays Grid */
+.stays-section {
+padding: 60px 8% 100px 8%;
+}
+
+.section-title {
+font-size: 28px;
+color: var(--primary);
+margin-bottom: 40px;
+letter-spacing: 1px;
+}
+
+.grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 30px;
+}
+
+.card {
+background: #fff;
+border-radius: 12px;
+overflow: hidden;
+box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+transition: transform 0.3s;
+}
+
+.card:hover {
+transform: translateY(-5px);
+}
+
+.card-img {
+height: 240px;
+background-size: cover;
+background-position: center;
+}
+
+.card-content {
+padding: 25px;
+}
+
+.card-tag {
+font-size: 12px;
+text-transform: uppercase;
+color: var(--accent);
+font-weight: 700;
+letter-spacing: 1px;
+margin-bottom: 8px;
+}
+
+.card-title {
+font-size: 20px;
+color: var(--primary);
+margin-bottom: 10px;
+}
+
+.card-desc {
+font-size: 14px;
+color: #666;
+margin-bottom: 20px;
+}
+
+.card-footer {
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-top: 1px solid #eee;
+padding-top: 15px;
+}
+
+.price {
+font-weight: 700;
+color: var(--text);
+}
+
+.price span {
+font-weight: 300;
+font-size: 12px;
+color: #888;
+}
+
+.book-link {
+color: var(--primary);
+text-decoration: none;
+font-weight: 600;
+font-size: 14px;
+}
+
+.book-link:hover {
+text-decoration: underline;
+}
+
+/* Footer */
+footer {
+background: var(--primary);
+color: #fff;
+text-align: center;
+padding: 40px 20px;
+font-size: 14px;
+letter-spacing: 1px;
+}
+</style>
+</head>
+<body>
+
+<!-- Header & Navigation -->
+<nav>
+<div class="logo">HIDDEN<span>STAYS</span></div>
+<ul>
+<li><a href="#">Explore</a></li>
+<li><a href="#">Our Philosophy</a></li>
+<li><a href="#">List Your Property</a></li>
+<li><a href="#">Contact</a></li>
+</ul>
+</nav>
+
+<!-- Hero Section -->
+<header class="hero">
+<h1>Disconnect to Reconnect</h1>
+<p>A handpicked collection of India's most isolated, design-forward, and strictly private architectural wonders.</p>
+<div class="search-bar">
+<input type="text" class="search-input" placeholder="Try searching 'Himalayas', 'Treehouse', or 'Forest'...">
+<button class="search-btn">Find Secrets</button>
+</div>
+</header>
+
+<!-- Our Philosophy -->
+<section class="curator-note">
+<h2>Un-Tourism is the New Luxury</h2>
+<p>We do not aggregate commercial hotels. Every listing on Hidden Stays is verified by our team against strict parameters: absolute acoustic isolation (no road or city traffic sounds), hyper-local farm-to-table dining, and architectural uniqueness that respects the local ecology.</p>
+</section>
+
+<!-- Curated Stays Grid -->
+<section class="stays-section">
+<h2 class="section-title">The Secret Collection</h2>
+<div class="grid">
+
+<!-- Stay 1 -->
+<div class="card">
+<div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=600&q=80');"></div>
+<div class="card-content">
+<div class="card-tag">Himalayas • Glamping</div>
+<h3 class="card-title">The Glass Geodesic Dome</h3>
+<p class="card-desc">Perched at 7,500 feet inside an apple orchard near Fagu. Complete glass ceilings for stargazing with zero light pollution.</p>
+<div class="card-footer">
+<div class="price">₹8,500 <span>/ night</span></div>
+<a href="#" class="book-link">View Secret →</a>
+</div>
+</div>
+</div>
+
+<!-- Stay 2 -->
+<div class="card">
+<div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1546548970-71785318a17b?auto=format&fit=crop&w=600&q=80');"></div>
+<div class="card-content">
+<div class="card-tag">Western Ghats • Eco Cabin</div>
+<h3 class="card-title">The Stream-side Mudhouse</h3>
+<p class="card-desc">Tucked inside a 40-acre organic coffee plantation in Wayanad. Built entirely with sustainable locally sourced materials.</p>
+<div class="card-footer">
+<div class="price">₹6,200 <span>/ night</span></div>
+<a href="#" class="book-link">View Secret →</a>
+</div>
+</div>
+</div>
+
+<!-- Stay 3 -->
+<div class="card">
+<div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80');"></div>
+<div class="card-content">
+<div class="card-tag">Goa • Heritage Villa</div>
+<h3 class="card-title">The 150-Year Old Sanctuary</h3>
+<p class="card-desc">A standalone Indo-Portuguese heritage estate surrounded by a dense forest buffer zone in South Goa. Absolute privacy.</p>
+<div class="card-footer">
+<div class="price">₹14,000 <span>/ night</span></div>
+<a href="#" class="book-link">View Secret →</a>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- Footer -->
+<footer>
+<p>© 2026 Hidden Stays India. Crafted for the conscious traveler.</p>
+</footer>
+
+</body>
+</html>
