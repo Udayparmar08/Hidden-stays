@@ -1,501 +1,427 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hidden Stays | Immersive Luxury Seclusion</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Montserrat:wght@200;300;400;500&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hidden Stays</title>
 
-        :root {
-            --bg-dark: #0b0d0c;      /* Rich Obsidian Black */
-            --bg-light: #f5f4f0;     /* Editorial Linen/Cream */
-            --gold: #d4af37;         /* Antique Gold Accent */
-            --text-light: #f5f4f0;
-            --text-dark: #1a1c1b;
-            --muted-gray: #7a827d;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 300;
-            overflow-x: hidden;
-            letter-spacing: 0.5px;
-        }
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f8f6f2;
+    color:#333;
+}
 
-        /* Minimalist Floating Nav */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 30px 6%;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            background: linear-gradient(to bottom, rgba(11,13,12,0.8), rgba(11,13,12,0));
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-        }
+header{
+    position:absolute;
+    top:0;
+    width:100%;
+    padding:25px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:10;
+}
 
-        .logo {
-            font-family: 'Cinzel', serif;
-            font-size: 24px;
-            font-weight: 500;
-            letter-spacing: 3px;
-            color: var(--text-light);
-            text-decoration: none;
-        }
+.logo{
+    color:white;
+    font-size:32px;
+    font-family:'Playfair Display',serif;
+    letter-spacing:3px;
+}
 
-        .logo span {
-            color: var(--gold);
-        }
+nav ul{
+    display:flex;
+    gap:30px;
+    list-style:none;
+}
 
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
+nav ul li a{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
 
-        nav ul li {
-            margin-left: 40px;
-        }
+.btn{
+    background:white;
+    color:#222;
+    padding:12px 25px;
+    border-radius:30px;
+    text-decoration:none;
+    font-weight:600;
+}
 
-        nav ul li a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: color 0.4s;
-            opacity: 0.8;
-        }
+.hero{
+    height:100vh;
+    background:
+    linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
+    url("https://images.unsplash.com/photo-1506744038136-46273834b3fb");
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+    padding:0 8%;
+}
 
-        nav ul li a:hover {
-            color: var(--gold);
-            opacity: 1;
-        }
+.hero-content{
+    color:white;
+    max-width:650px;
+}
 
-        /* Cinematic Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            position: relative;
-            background: linear-gradient(rgba(11,13,12,0.4), rgba(11,13,12,0.9)), 
-                        url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
-        }
+.hero h1{
+    font-size:70px;
+    line-height:1.1;
+    font-family:'Playfair Display',serif;
+    margin-bottom:20px;
+}
 
-        .hero-tag {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            color: var(--gold);
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
+.hero p{
+    font-size:20px;
+    margin-bottom:30px;
+}
 
-        .hero h1 {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(32px, 5vw, 64px);
-            font-weight: 400;
-            line-height: 1.2;
-            margin-bottom: 25px;
-            max-width: 1000px;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
+.explore-btn{
+    background:#405239;
+    color:white;
+    text-decoration:none;
+    padding:15px 35px;
+    border-radius:50px;
+}
 
-        .hero p {
-            font-size: 16px;
-            max-width: 600px;
-            color: rgba(245,244,240,0.75);
-            line-height: 1.8;
-            margin-bottom: 40px;
-        }
+.search-box{
+    width:85%;
+    margin:auto;
+    margin-top:-50px;
+    background:white;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+    padding:25px;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:20px;
+}
 
-        /* Luxury Concierge Form Block */
-        .concierge-box {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 25px 40px;
-            border-radius: 4px;
-            width: 100%;
-            max-width: 900px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
-        }
+.search-item{
+    border-right:1px solid #ddd;
+    padding-right:15px;
+}
 
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            text-align: left;
-        }
+.search-item:last-child{
+    border:none;
+}
 
-        .input-group label {
-            font-size: 9px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--gold);
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
+.search-item label{
+    font-size:12px;
+    color:#888;
+}
 
-        .input-group input, .input-group select {
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            padding: 10px 0;
-            color: var(--text-light);
-            font-family: 'Montserrat', sans-serif;
-            font-size: 14px;
-            outline: none;
-            border-radius: 0;
-            transition: border-color 0.3s;
-        }
+.search-item input{
+    border:none;
+    width:100%;
+    margin-top:5px;
+}
 
-        .input-group input::placeholder {
-            color: rgba(255,255,255,0.3);
-        }
+.search-btn{
+    background:#405239;
+    color:white;
+    border:none;
+    border-radius:40px;
+    cursor:pointer;
+}
 
-        .input-group input:focus, .input-group select:focus {
-            border-bottom-color: var(--gold);
-        }
+.section{
+    padding:90px 8%;
+}
 
-        .concierge-box button {
-            background: var(--text-light);
-            color: var(--bg-dark);
-            border: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 11px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            height: 45px;
-            margin-top: auto;
-        }
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+}
 
-        .concierge-box button:hover {
-            background: var(--gold);
-            color: var(--text-light);
-        }
+.section-title h2{
+    font-size:50px;
+    font-family:'Playfair Display',serif;
+}
 
-        /* Editorial Split Section */
-        .editorial-intro {
-            padding: 140px 8%;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 80px;
-            align-items: center;
-        }
+.features{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:30px;
+    text-align:center;
+}
 
-        .editorial-text h2 {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(28px, 3.5vw, 42px);
-            line-height: 1.3;
-            margin-bottom: 30px;
-            font-weight: 400;
-        }
+.feature{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+}
 
-        .editorial-text p {
-            font-size: 15px;
-            line-height: 1.9;
-            color: var(--muted-gray);
-        }
+.stays-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
 
-        .editorial-img {
-            width: 100%;
-            height: 500px;
-            background: url('https://images.unsplash.com/photo-1546548970-71785318a17b?auto=format&fit=crop&w=1000&q=80') no-repeat center center/cover;
-            border-radius: 2px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-        }
+.card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
 
-        /* Portfolio/Collection Section */
-        .portfolio-section {
-            padding: 120px 6%;
-            background-color: var(--bg-dark);
-        }
+.card img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+}
 
-        .portfolio-header {
-            margin-bottom: 80px;
-            text-align: center;
-        }
+.card-content{
+    padding:20px;
+}
 
-        .portfolio-header h2 {
-            font-family: 'Cinzel', serif;
-            font-size: 36px;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-        }
+.card h3{
+    margin-bottom:10px;
+}
 
-        .portfolio-header p {
-            color: var(--gold);
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
+.banner{
+    background:#314232;
+    color:white;
+    padding:100px 8%;
+    display:flex;
+    align-items:center;
+    gap:50px;
+}
 
-        .space-showcase {
-            display: flex;
-            flex-direction: column;
-            gap: 120px;
-        }
+.banner img{
+    width:50%;
+    border-radius:20px;
+}
 
-        /* Immersive Row Layout */
-        .space-row {
-            display: flex;
-            align-items: center;
-            gap: 6%;
-        }
+.banner-text h2{
+    font-size:55px;
+    font-family:'Playfair Display',serif;
+    margin-bottom:20px;
+}
 
-        .space-row:nth-child(even) {
-            flex-direction: row-reverse;
-        }
+footer{
+    background:#1c241d;
+    color:white;
+    padding:60px 8%;
+}
 
-        .space-visual {
-            flex: 1.2;
-            height: 550px;
-            overflow: hidden;
-            position: relative;
-        }
+.footer-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:40px;
+}
 
-        .space-img {
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            transition: transform 1.2s cubic-bezier(0.15, 1, 0.3, 1);
-        }
+footer ul{
+    list-style:none;
+}
 
-        .space-visual:hover .space-img {
-            transform: scale(1.04);
-        }
+footer ul li{
+    margin:10px 0;
+}
 
-        .space-details {
-            flex: 0.8;
-            padding: 20px 0;
-        }
+footer a{
+    color:#ddd;
+    text-decoration:none;
+}
 
-        .space-loc {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--gold);
-            margin-bottom: 15px;
-            display: block;
-        }
+@media(max-width:900px){
 
-        .space-title {
-            font-family: 'Cinzel', serif;
-            font-size: 28px;
-            font-weight: 400;
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
+.hero h1{
+    font-size:45px;
+}
 
-        .space-description {
-            font-size: 14px;
-            line-height: 1.8;
-            color: rgba(255,255,255,0.6);
-            margin-bottom: 35px;
-        }
+.search-box,
+.features,
+.stays-grid,
+.footer-grid,
+.banner{
+    grid-template-columns:1fr;
+    flex-direction:column;
+}
 
-        .space-meta-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 25px;
-        }
-
-        .space-rate {
-            font-size: 18px;
-            font-weight: 400;
-        }
-
-        .space-rate span {
-            font-size: 11px;
-            color: var(--muted-gray);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .action-discover {
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-bottom: 1px solid var(--gold);
-            padding-bottom: 4px;
-            transition: color 0.3s, border-color 0.3s;
-        }
-
-        .action-discover:hover {
-            color: var(--gold);
-            border-bottom-color: var(--text-light);
-        }
-
-        /* Footer */
-        footer {
-            background-color: #050606;
-            padding: 80px 6%;
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.03);
-        }
-
-        footer p {
-            font-size: 12px;
-            letter-spacing: 2px;
-            color: rgba(255,255,255,0.4);
-            text-transform: uppercase;
-        }
-
-        /* Responsive Fixes */
-        @media (max-width: 900px) {
-            .space-row, .space-row:nth-child(even) {
-                flex-direction: column;
-                gap: 40px;
-            }
-            .space-visual {
-                width: 100%;
-                height: 350px;
-            }
-            nav ul { display: none; } /* Simplify mobile nav */
-        }
-    </style>
+.banner img{
+    width:100%;
+}
+}
+</style>
 </head>
+
 <body>
 
-    <!-- Minimalist Top Navigation -->
+<header>
+    <div class="logo">HIDDEN STAYS</div>
+
     <nav>
-        <a href="#" class="logo">HIDDEN<span>STAYS</span></a>
         <ul>
-            <li><a href="#portfolio">The Portfolio</a></li>
-            <li><a href="#">Our Standards</a></li>
-            <li><a href="#">Apply For Entry</a></li>
+            <li><a href="#">Destinations</a></li>
+            <li><a href="#">Collections</a></li>
+            <li><a href="#">Experiences</a></li>
+            <li><a href="#">About</a></li>
         </ul>
     </nav>
 
-    <!-- Cinematic Hero Area -->
-    <header class="hero">
-        <div class="hero-tag">Curated Seclusion</div>
-        <h1>Architectural Outposts.<br>Absolute Acoustic Silence.</h1>
-        <p>A private collector's matrix of architectural marvels throughout India, vetted extensively against road noise and urban pollution.</p>
-        
-        <!-- Live Concierge Integration Form -->
-        <form class="concierge-box" action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST">
-            <div class="input-group">
-                <label>Select Landscape Portfolio</label>
-                <select name="landscape_vibe" required style="color: white; background: #0b0d0c;">
-                    <option value="alpine">Himalayan Ridges</option>
-                    <option value="canopy">Deep Forest Canopies</option>
-                    <option value="coastal">Secluded Coastlines</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label>Secure Contact (WhatsApp)</label>
-                <input type="tel" name="client_whatsapp" placeholder="+91 00000 00000" required>
-            </div>
-            <div class="input-group">
-                <label>Target Window</label>
-                <input type="text" name="travel_timeline" placeholder="e.g., Autumn 2026" required>
-            </div>
-            <button type="submit">Request Invite</button>
-        </form>
-    </header>
+    <a href="#" class="btn">Book a Stay</a>
+</header>
 
-    <!-- Magazine Style Editorial Intro -->
-    <section class="editorial-intro">
-        <div class="editorial-text">
-            <h2>We do not map destinations.<br>We engineer decompression.</h2>
-            <p>Hidden Stays is a counter-response to mass commercial tourism. Every outpost is individually selected based on strict environmental factors: zero proximity to city sound rings, strict structural integrity using natural regional crafts, and farm-sourced hyper-local nourishment provisions.</p>
+<section class="hero">
+    <div class="hero-content">
+        <h1>Hidden Places.<br>Unforgettable Stays.</h1>
+        <p>Discover unique stays tucked away from the crowd.</p>
+        <a href="#" class="explore-btn">Explore Stays</a>
+    </div>
+</section>
+
+<div class="search-box">
+    <div class="search-item">
+        <label>Where To?</label>
+        <input type="text" placeholder="Anywhere">
+    </div>
+
+    <div class="search-item">
+        <label>Check In</label>
+        <input type="date">
+    </div>
+
+    <div class="search-item">
+        <label>Check Out</label>
+        <input type="date">
+    </div>
+
+    <div class="search-item">
+        <label>Guests</label>
+        <input type="number" placeholder="2">
+    </div>
+
+    <button class="search-btn">Search</button>
+</div>
+
+<section class="section">
+    <div class="section-title">
+        <h2>Thoughtful Stays in Hidden Places</h2>
+    </div>
+
+    <div class="features">
+        <div class="feature">
+            <h3>Handpicked</h3>
+            <p>Curated luxury stays.</p>
         </div>
-        <div class="editorial-img"></div>
-    </section>
 
-    <!-- Immersive Portfolio Presentation -->
-    <section class="portfolio-section" id="portfolio">
-        <div class="portfolio-header">
-            <p>Available Invitations</p>
-            <h2>The Secret Library</h2>
+        <div class="feature">
+            <h3>Hidden Gems</h3>
+            <p>Unique locations.</p>
         </div>
 
-        <div class="space-showcase">
-            
-            <!-- Retreat Outpost 1 -->
-            <div class="space-row">
-                <div class="space-visual">
-                    <div class="space-img" style="background-image: url('https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=80');"></div>
-                </div>
-                <div class="space-details">
-                    <span class="space-loc">Outpost 01 // Himachal Overlook</span>
-                    <h3 class="space-title">The Glass Geodesic Citadel</h3>
-                    <p class="space-description">Suspended over an isolated mountain cliff shelf at 7,500 feet. Features complete geometric glass dome framing engineered for unobstructed celestial observations with absolute dark-sky clarity.</p>
-                    <div class="space-meta-footer">
-                        <div class="space-rate">₹14,500 <span>/ Tier I Night</span></div>
-                        <a href="#" class="action-discover">Examine Coordinates</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Retreat Outpost 2 -->
-            <div class="space-row">
-                <div class="space-visual">
-                    <div class="space-img" style="background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80');"></div>
-                </div>
-                <div class="space-details">
-                    <span class="space-loc">Outpost 02 // Western Ghats Canopy</span>
-                    <h3 class="space-title">Earthen Stream-Side Sanctuary</h3>
-                    <p class="space-description">Constructed using zero-carbon rammed earth structures deeply embedded inside a 40-acre organic jungle plantation. Framed directly by private perennial spring basins.</p>
-                    <div class="space-meta-footer">
-                        <div class="space-rate">₹11,200 <span>/ Tier I Night</span></div>
-                        <a href="#" class="action-discover">Examine Coordinates</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Retreat Outpost 3 -->
-            <div class="space-row">
-                <div class="space-visual">
-                    <div class="space-img" style="background-image: url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80');"></div>
-                </div>
-                <div class="space-details">
-                    <span class="space-loc">Outpost 03 // South Goa Perimeter</span>
-                    <h3 class="space-title">150-Year Indigo Estate</h3>
-                    <p class="space-description">A colonial architecture footprint perfectly bracketed by a dense, unmapped tropical forest canopy layer. Intended exclusively for long-format creative and cognitive rest profiles.</p>
-                    <div class="space-meta-footer">
-                        <div class="space-rate">₹22,000 <span>/ Tier I Night</span></div>
-                        <a href="#" class="action-discover">Examine Coordinates</a>
-                    </div>
-                </div>
-            </div>
-
+        <div class="feature">
+            <h3>Meaningful</h3>
+            <p>Reconnect with nature.</p>
         </div>
-    </section>
 
-    <!-- Minimalist Base Branding -->
-    <footer>
-        <p>&copy; 2026 Hidden Stays India. Curated globally, hidden locally.</p>
-    </footer>
+        <div class="feature">
+            <h3>Memorable</h3>
+            <p>Experiences you'll never forget.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-title">
+        <h2>Featured Stays</h2>
+    </div>
+
+    <div class="stays-grid">
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000">
+            <div class="card-content">
+                <h3>Forest Cabin</h3>
+                <p>₹8,999 / night</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
+            <div class="card-content">
+                <h3>Ocean Hideaway</h3>
+                <p>₹12,999 / night</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750">
+            <div class="card-content">
+                <h3>Mountain Villa</h3>
+                <p>₹10,499 / night</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1494526585095-c41746248156">
+            <div class="card-content">
+                <h3>Island Retreat</h3>
+                <p>₹15,999 / night</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="banner">
+    <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
+
+    <div class="banner-text">
+        <h2>It's a Slower Kind of Luxury</h2>
+        <p>
+            Wake up to birdsong, mountain views and unforgettable experiences.
+        </p>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-grid">
+
+        <div>
+            <h2>HIDDEN STAYS</h2>
+            <p>Curated stays in hidden places.</p>
+        </div>
+
+        <div>
+            <h3>Explore</h3>
+            <ul>
+                <li><a href="#">Destinations</a></li>
+                <li><a href="#">Experiences</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h3>Company</h3>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h3>Support</h3>
+            <ul>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+
+    </div>
+</footer>
 
 </body>
 </html>
