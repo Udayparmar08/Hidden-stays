@@ -3,51 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hidden Stays India | Secluded Luxury & Offbeat Escapes</title>
+    <title>Hidden Stays | Immersive Luxury Seclusion</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Montserrat:wght@200;300;400;500&display=swap');
+
         :root {
-            --primary: #1b3322; /* Forest Green */
-            --accent: #c4a46b;  /* Warm Gold */
-            --bg: #f9f6f0;      /* Soft Cream */
-            --text: #2b2b2b;    /* Charcoal */
+            --bg-dark: #0b0d0c;      /* Rich Obsidian Black */
+            --bg-light: #f5f4f0;     /* Editorial Linen/Cream */
+            --gold: #d4af37;         /* Antique Gold Accent */
+            --text-light: #f5f4f0;
+            --text-dark: #1a1c1b;
+            --muted-gray: #7a827d;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            overflow-x: hidden;
+            letter-spacing: 0.5px;
         }
 
-        /* Navigation */
+        /* Minimalist Floating Nav */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 8%;
-            background: rgba(27, 51, 34, 0.95);
+            padding: 30px 6%;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: linear-gradient(to bottom, rgba(11,13,12,0.8), rgba(11,13,12,0));
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
-        nav .logo {
-            color: #fff;
+        .logo {
+            font-family: 'Cinzel', serif;
             font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 2px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            color: var(--text-light);
+            text-decoration: none;
         }
 
-        nav .logo span {
-            color: var(--accent);
+        .logo span {
+            color: var(--gold);
         }
 
         nav ul {
@@ -56,291 +65,426 @@
         }
 
         nav ul li {
-            margin-left: 30px;
+            margin-left: 40px;
         }
 
         nav ul li a {
-            color: #fff;
+            color: var(--text-light);
             text-decoration: none;
-            font-size: 14px;
-            letter-spacing: 1px;
-            transition: color 0.3s;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.4s;
+            opacity: 0.8;
         }
 
         nav ul li a:hover {
-            color: var(--accent);
+            color: var(--gold);
+            opacity: 1;
         }
 
-        /* Hero Section */
+        /* Cinematic Hero Section */
         .hero {
-            height: 85vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            color: #fff;
             padding: 0 20px;
-            margin-top: 60px;
+            position: relative;
+            background: linear-gradient(rgba(11,13,12,0.4), rgba(11,13,12,0.9)), 
+                        url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+        }
+
+        .hero-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-weight: 500;
         }
 
         .hero h1 {
-            font-size: 48px;
-            margin-bottom: 15px;
-            font-weight: 300;
-            letter-spacing: 3px;
+            font-family: 'Cinzel', serif;
+            font-size: clamp(32px, 5vw, 64px);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 25px;
+            max-width: 1000px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
 
         .hero p {
-            font-size: 18px;
-            margin-bottom: 30px;
+            font-size: 16px;
             max-width: 600px;
-            font-weight: 300;
-            color: #e0e0e0;
-        }
-
-        .search-bar {
-            background: #fff;
-            padding: 10px 20px;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            width: 100%;
-            max-width: 700px;
-        }
-
-        .search-input {
-            border: none;
-            outline: none;
-            padding: 10px;
-            flex: 1;
-            font-size: 16px;
-        }
-
-        .search-btn {
-            background: var(--primary);
-            color: #fff;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.3s;
-        }
-
-        .search-btn:hover {
-            background: #274b32;
-        }
-
-        /* Philosophy / Curator Note */
-        .curator-note {
-            padding: 80px 15%;
-            text-align: center;
-            background-color: #fff;
-        }
-
-        .curator-note h2 {
-            color: var(--primary);
-            font-size: 32px;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        .curator-note h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .curator-note p {
-            font-size: 16px;
-            color: #666;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Stays Grid */
-        .stays-section {
-            padding: 60px 8% 100px 8%;
-        }
-
-        .section-title {
-            font-size: 28px;
-            color: var(--primary);
+            color: rgba(245,244,240,0.75);
+            line-height: 1.8;
             margin-bottom: 40px;
-            letter-spacing: 1px;
         }
 
-        .grid {
+        /* Luxury Concierge Form Block */
+        .concierge-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 25px 40px;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 900px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
         }
 
-        .card {
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
+        .input-group label {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 8px;
+            font-weight: 500;
         }
 
-        .card-img {
-            height: 240px;
-            background-size: cover;
-            background-position: center;
+        .input-group input, .input-group select {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding: 10px 0;
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            outline: none;
+            border-radius: 0;
+            transition: border-color 0.3s;
         }
 
-        .card-content {
-            padding: 25px;
+        .input-group input::placeholder {
+            color: rgba(255,255,255,0.3);
         }
 
-        .card-tag {
+        .input-group input:focus, .input-group select:focus {
+            border-bottom-color: var(--gold);
+        }
+
+        .concierge-box button {
+            background: var(--text-light);
+            color: var(--bg-dark);
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            height: 45px;
+            margin-top: auto;
+        }
+
+        .concierge-box button:hover {
+            background: var(--gold);
+            color: var(--text-light);
+        }
+
+        /* Editorial Split Section */
+        .editorial-intro {
+            padding: 140px 8%;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 80px;
+            align-items: center;
+        }
+
+        .editorial-text h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(28px, 3.5vw, 42px);
+            line-height: 1.3;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .editorial-text p {
+            font-size: 15px;
+            line-height: 1.9;
+            color: var(--muted-gray);
+        }
+
+        .editorial-img {
+            width: 100%;
+            height: 500px;
+            background: url('https://images.unsplash.com/photo-1546548970-71785318a17b?auto=format&fit=crop&w=1000&q=80') no-repeat center center/cover;
+            border-radius: 2px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        /* Portfolio/Collection Section */
+        .portfolio-section {
+            padding: 120px 6%;
+            background-color: var(--bg-dark);
+        }
+
+        .portfolio-header {
+            margin-bottom: 80px;
+            text-align: center;
+        }
+
+        .portfolio-header h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 36px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .portfolio-header p {
+            color: var(--gold);
             font-size: 12px;
             text-transform: uppercase;
-            color: var(--accent);
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
+            letter-spacing: 3px;
         }
 
-        .card-title {
-            font-size: 20px;
-            color: var(--primary);
-            margin-bottom: 10px;
+        .space-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 120px;
         }
 
-        .card-desc {
-            font-size: 14px;
-            color: #666;
+        /* Immersive Row Layout */
+        .space-row {
+            display: flex;
+            align-items: center;
+            gap: 6%;
+        }
+
+        .space-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .space-visual {
+            flex: 1.2;
+            height: 550px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .space-img {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 1.2s cubic-bezier(0.15, 1, 0.3, 1);
+        }
+
+        .space-visual:hover .space-img {
+            transform: scale(1.04);
+        }
+
+        .space-details {
+            flex: 0.8;
+            padding: 20px 0;
+        }
+
+        .space-loc {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--gold);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .space-title {
+            font-family: 'Cinzel', serif;
+            font-size: 28px;
+            font-weight: 400;
             margin-bottom: 20px;
+            line-height: 1.3;
         }
 
-        .card-footer {
+        .space-description {
+            font-size: 14px;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 35px;
+        }
+
+        .space-meta-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 25px;
         }
 
-        .price {
-            font-weight: 700;
-            color: var(--text);
+        .space-rate {
+            font-size: 18px;
+            font-weight: 400;
         }
 
-        .price span {
-            font-weight: 300;
-            font-size: 12px;
-            color: #888;
+        .space-rate span {
+            font-size: 11px;
+            color: var(--muted-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .book-link {
-            color: var(--primary);
+        .action-discover {
+            color: var(--text-light);
             text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 4px;
+            transition: color 0.3s, border-color 0.3s;
         }
 
-        .book-link:hover {
-            text-decoration: underline;
+        .action-discover:hover {
+            color: var(--gold);
+            border-bottom-color: var(--text-light);
         }
 
         /* Footer */
         footer {
-            background: var(--primary);
-            color: #fff;
+            background-color: #050606;
+            padding: 80px 6%;
             text-align: center;
-            padding: 40px 20px;
-            font-size: 14px;
-            letter-spacing: 1px;
+            border-top: 1px solid rgba(255,255,255,0.03);
+        }
+
+        footer p {
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+        }
+
+        /* Responsive Fixes */
+        @media (max-width: 900px) {
+            .space-row, .space-row:nth-child(even) {
+                flex-direction: column;
+                gap: 40px;
+            }
+            .space-visual {
+                width: 100%;
+                height: 350px;
+            }
+            nav ul { display: none; } /* Simplify mobile nav */
         }
     </style>
 </head>
 <body>
 
-    <!-- Header & Navigation -->
+    <!-- Minimalist Top Navigation -->
     <nav>
-        <div class="logo">HIDDEN<span>STAYS</span></div>
+        <a href="#" class="logo">HIDDEN<span>STAYS</span></a>
         <ul>
-            <li><a href="#">Explore</a></li>
-            <li><a href="#">Our Philosophy</a></li>
-            <li><a href="#">List Your Property</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#portfolio">The Portfolio</a></li>
+            <li><a href="#">Our Standards</a></li>
+            <li><a href="#">Apply For Entry</a></li>
         </ul>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Cinematic Hero Area -->
     <header class="hero">
-        <h1>Disconnect to Reconnect</h1>
-        <p>A handpicked collection of India's most isolated, design-forward, and strictly private architectural wonders.</p>
-        <div class="search-bar">
-            <input type="text" class="search-input" placeholder="Try searching 'Himalayas', 'Treehouse', or 'Forest'...">
-            <button class="search-btn">Find Secrets</button>
-        </div>
+        <div class="hero-tag">Curated Seclusion</div>
+        <h1>Architectural Outposts.<br>Absolute Acoustic Silence.</h1>
+        <p>A private collector's matrix of architectural marvels throughout India, vetted extensively against road noise and urban pollution.</p>
+        
+        <!-- Live Concierge Integration Form -->
+        <form class="concierge-box" action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST">
+            <div class="input-group">
+                <label>Select Landscape Portfolio</label>
+                <select name="landscape_vibe" required style="color: white; background: #0b0d0c;">
+                    <option value="alpine">Himalayan Ridges</option>
+                    <option value="canopy">Deep Forest Canopies</option>
+                    <option value="coastal">Secluded Coastlines</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Secure Contact (WhatsApp)</label>
+                <input type="tel" name="client_whatsapp" placeholder="+91 00000 00000" required>
+            </div>
+            <div class="input-group">
+                <label>Target Window</label>
+                <input type="text" name="travel_timeline" placeholder="e.g., Autumn 2026" required>
+            </div>
+            <button type="submit">Request Invite</button>
+        </form>
     </header>
 
-    <!-- Our Philosophy -->
-    <section class="curator-note">
-        <h2>Un-Tourism is the New Luxury</h2>
-        <p>We do not aggregate commercial hotels. Every listing on Hidden Stays is verified by our team against strict parameters: absolute acoustic isolation (no road or city traffic sounds), hyper-local farm-to-table dining, and architectural uniqueness that respects the local ecology.</p>
+    <!-- Magazine Style Editorial Intro -->
+    <section class="editorial-intro">
+        <div class="editorial-text">
+            <h2>We do not map destinations.<br>We engineer decompression.</h2>
+            <p>Hidden Stays is a counter-response to mass commercial tourism. Every outpost is individually selected based on strict environmental factors: zero proximity to city sound rings, strict structural integrity using natural regional crafts, and farm-sourced hyper-local nourishment provisions.</p>
+        </div>
+        <div class="editorial-img"></div>
     </section>
 
-    <!-- Curated Stays Grid -->
-    <section class="stays-section">
-        <h2 class="section-title">The Secret Collection</h2>
-        <div class="grid">
+    <!-- Immersive Portfolio Presentation -->
+    <section class="portfolio-section" id="portfolio">
+        <div class="portfolio-header">
+            <p>Available Invitations</p>
+            <h2>The Secret Library</h2>
+        </div>
+
+        <div class="space-showcase">
             
-            <!-- Stay 1 -->
-            <div class="card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=600&q=80');"></div>
-                <div class="card-content">
-                    <div class="card-tag">Himalayas • Glamping</div>
-                    <h3 class="card-title">The Glass Geodesic Dome</h3>
-                    <p class="card-desc">Perched at 7,500 feet inside an apple orchard near Fagu. Complete glass ceilings for stargazing with zero light pollution.</p>
-                    <div class="card-footer">
-                        <div class="price">₹8,500 <span>/ night</span></div>
-                        <a href="#" class="book-link">View Secret →</a>
+            <!-- Retreat Outpost 1 -->
+            <div class="space-row">
+                <div class="space-visual">
+                    <div class="space-img" style="background-image: url('https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=80');"></div>
+                </div>
+                <div class="space-details">
+                    <span class="space-loc">Outpost 01 // Himachal Overlook</span>
+                    <h3 class="space-title">The Glass Geodesic Citadel</h3>
+                    <p class="space-description">Suspended over an isolated mountain cliff shelf at 7,500 feet. Features complete geometric glass dome framing engineered for unobstructed celestial observations with absolute dark-sky clarity.</p>
+                    <div class="space-meta-footer">
+                        <div class="space-rate">₹14,500 <span>/ Tier I Night</span></div>
+                        <a href="#" class="action-discover">Examine Coordinates</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Stay 2 -->
-            <div class="card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1546548970-71785318a17b?auto=format&fit=crop&w=600&q=80');"></div>
-                <div class="card-content">
-                    <div class="card-tag">Western Ghats • Eco Cabin</div>
-                    <h3 class="card-title">The Stream-side Mudhouse</h3>
-                    <p class="card-desc">Tucked inside a 40-acre organic coffee plantation in Wayanad. Built entirely with sustainable locally sourced materials.</p>
-                    <div class="card-footer">
-                        <div class="price">₹6,200 <span>/ night</span></div>
-                        <a href="#" class="book-link">View Secret →</a>
+            <!-- Retreat Outpost 2 -->
+            <div class="space-row">
+                <div class="space-visual">
+                    <div class="space-img" style="background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80');"></div>
+                </div>
+                <div class="space-details">
+                    <span class="space-loc">Outpost 02 // Western Ghats Canopy</span>
+                    <h3 class="space-title">Earthen Stream-Side Sanctuary</h3>
+                    <p class="space-description">Constructed using zero-carbon rammed earth structures deeply embedded inside a 40-acre organic jungle plantation. Framed directly by private perennial spring basins.</p>
+                    <div class="space-meta-footer">
+                        <div class="space-rate">₹11,200 <span>/ Tier I Night</span></div>
+                        <a href="#" class="action-discover">Examine Coordinates</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Stay 3 -->
-            <div class="card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80');"></div>
-                <div class="card-content">
-                    <div class="card-tag">Goa • Heritage Villa</div>
-                    <h3 class="card-title">The 150-Year Old Sanctuary</h3>
-                    <p class="card-desc">A standalone Indo-Portuguese heritage estate surrounded by a dense forest buffer zone in South Goa. Absolute privacy.</p>
-                    <div class="card-footer">
-                        <div class="price">₹14,000 <span>/ night</span></div>
-                        <a href="#" class="book-link">View Secret →</a>
+            <!-- Retreat Outpost 3 -->
+            <div class="space-row">
+                <div class="space-visual">
+                    <div class="space-img" style="background-image: url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80');"></div>
+                </div>
+                <div class="space-details">
+                    <span class="space-loc">Outpost 03 // South Goa Perimeter</span>
+                    <h3 class="space-title">150-Year Indigo Estate</h3>
+                    <p class="space-description">A colonial architecture footprint perfectly bracketed by a dense, unmapped tropical forest canopy layer. Intended exclusively for long-format creative and cognitive rest profiles.</p>
+                    <div class="space-meta-footer">
+                        <div class="space-rate">₹22,000 <span>/ Tier I Night</span></div>
+                        <a href="#" class="action-discover">Examine Coordinates</a>
                     </div>
                 </div>
             </div>
@@ -348,9 +492,9 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Minimalist Base Branding -->
     <footer>
-        <p>&copy; 2026 Hidden Stays India. Crafted for the conscious traveler.</p>
+        <p>&copy; 2026 Hidden Stays India. Curated globally, hidden locally.</p>
     </footer>
 
 </body>
