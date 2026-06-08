@@ -561,3 +561,112 @@ footer a{
     #faqs { padding: 60px 6% !important; }
 }
 </style>
+<div class="calendar-widget">
+    <h4>Select Your Escape Dates</h4>
+    <form id="stay-search-form" onsubmit="handleCalendarSubmit(event)">
+        <div class="date-input-group">
+            <div class="date-field">
+                <label for="checkin">Check-In</label>
+                <input type="date" id="checkin" required onchange="setMinCheckOut()">
+            </div>
+            <div class="date-field">
+                <label for="checkout">Check-Out</label>
+                <input type="date" id="checkout" required>
+            </div>
+        </div>
+        <button type="submit" class="search-stay-btn">
+            <i class="fa fa-calendar-check-o"></i> Check Availability
+        </button>
+    </form>
+</div>
+
+<style>
+    .calendar-widget {
+        background-color: #131a1f; /* Matches The Hide dark premium theme */
+        border: 1px solid #1e293b;
+        border-radius: 16px;
+        padding: 20px;
+        max-width: 420px;
+        margin: 20px auto;
+        font-family: sans-serif;
+        color: #f8fafc;
+    }
+    .calendar-widget h4 {
+        margin: 0 0 15px 0;
+        font-size: 16px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #10b981; /* Brand accent green */
+    }
+    .date-input-group {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    .date-field {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+    }
+    .date-field label {
+        font-size: 12px;
+        color: #94a3b8;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+    }
+    .date-field input[type="date"] {
+        background-color: #1c262c;
+        border: 1px solid #27353f;
+        color: #fff;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 14px;
+        outline: none;
+        color-scheme: dark; /* Forces mobile phone keyboards to display dark calendar */
+    }
+    .search-stay-btn {
+        width: 100%;
+        background-color: #10b981;
+        color: #0b0f12;
+        border: none;
+        padding: 14px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: transform 0.2s, background-color 0.2s;
+    }
+    .search-stay-btn:hover {
+        background-color: #059669;
+        transform: translateY(-1px);
+    }
+</style>
+
+<script>
+    // Automatically prevents users from selecting past dates or check-out dates before check-in
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('checkin').min = today;
+
+    function setMinCheckOut() {
+        const checkinVal = document.getElementById('checkin').value;
+        const checkoutInput = document.getElementById('checkout');
+        checkoutInput.min = checkinVal;
+        if (checkoutInput.value && checkoutInput.value < checkinVal) {
+            checkoutInput.value = checkinVal;
+        }
+    }
+
+    // Direct routing: Sends selected dates straight to your automated reservation chat loop
+    function handleCalendarSubmit(e) {
+        e.preventDefault();
+        const inDate = document.getElementById('checkin').value;
+        const outDate = document.getElementById('checkout').value;
+        
+        const message = `Hey The Hide! 🌲 I checked my dates on the platform:\n\n📅 Check-In: ${inDate}\n📅 Check-Out: ${outDate}\n\nPlease confirm availability and booking steps!`;
+        const encodedMessage = encodeURIComponent(message);
+        
+        // Routes immediately to your dashboard booking receiver link
+        window.open(`https://wa.me/919219747857?text=${encodedMessage}`, '_blank');
+    }
+</script>
