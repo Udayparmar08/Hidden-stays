@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -173,7 +174,7 @@ nav ul li a{
 }
 
 .features{
-    display:grid;
+    displaygrid;
     grid-template-columns:repeat(4,1fr);
     gap:30px;
     text-align:center;
@@ -250,6 +251,140 @@ nav ul li a{
 
 .card-book-btn:hover {
     background: #2d3b29;
+}
+
+/* LOYALTY CLUB STYLES */
+.loyalty-section {
+    background: #1e261d;
+    color: white;
+    padding: 90px 8%;
+}
+
+.loyalty-container {
+    max-w: 1200px;
+    margin: 0 auto;
+}
+
+.loyalty-dashboard {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 45px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.loyalty-input-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.loyalty-input-group label {
+    font-size: 13px;
+    color: #ccc;
+}
+
+.loyalty-input-group input {
+    background: transparent;
+    border: none;
+    color: #f8f6f2;
+    font-size: 16px;
+    font-weight: 600;
+    width: 50px;
+    text-align: center;
+    outline: none;
+}
+
+.loyalty-display-tier h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #f8f6f2;
+}
+
+.loyalty-display-tier p {
+    font-size: 13px;
+    color: #b3c2b0;
+    margin-top: 4px;
+}
+
+.loyalty-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.loyalty-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+    padding: 30px;
+    transition: all 0.3s ease;
+}
+
+.loyalty-card.active-card {
+    border-color: #f8f6f2;
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-5px);
+}
+
+.loyalty-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.loyalty-card .tier-sub {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #b3c2b0;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.loyalty-card ul {
+    list-style: none;
+    font-size: 13px;
+    color: #ddd;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.loyalty-card ul li span {
+    margin-right: 8px;
+    color: #b3c2b0;
+}
+
+.loyalty-cta-container {
+    text-align: center;
+    margin-top: 45px;
+}
+
+.loyalty-btn {
+    display: inline-block;
+    background: #f8f6f2;
+    color: #1c241d;
+    text-decoration: none;
+    padding: 14px 35px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.loyalty-btn:hover {
+    background: #ffffff;
+    transform: scale(1.02);
 }
 
 .banner{
@@ -340,8 +475,19 @@ footer a{
     .features,
     .stays-grid,
     .footer-grid,
+    .loyalty-grid,
     .banner{
         grid-template-columns:1fr;
+    }
+
+    .loyalty-dashboard {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .loyalty-input-group {
+        width: 100%;
+        justify-content: space-between;
     }
 
     .banner{
@@ -372,7 +518,7 @@ footer a{
             <li><a href="#">Destinations</a></li>
             <li><a href="#">Collections</a></li>
             <li><a href="#">Experiences</a></li>
-            <li><a href="#">About</a></li>
+            <li><a href="#loyalty-club">The Hideout Club</a></li>
         </ul>
     </nav>
 
@@ -505,6 +651,62 @@ footer a{
             </div>
         </div>
 
+    </div>
+</section>
+
+<section class="loyalty-section" id="loyalty-club">
+    <div class="loyalty-container">
+        <div class="section-title">
+            <h2 style="color: white;">The Hideout Club</h2>
+            <p style="color: #b3c2b0; margin-top: 10px;">Unlock member-only tariffs, visual perks, and priority space allocations.</p>
+        </div>
+
+        <div class="loyalty-dashboard">
+            <div class="loyalty-display-tier">
+                <h3 id="current-tier-title">Explorer Account</h3>
+                <p id="current-tier-perks">Accessing baseline platform assistance coordinates.</p>
+            </div>
+            <div class="loyalty-input-group">
+                <label for="loyalty-nights-input">Nights Stayed:</label>
+                <input type="number" id="loyalty-nights-input" value="0" min="0" max="30" oninput="calculateLoyaltyTier()">
+            </div>
+        </div>
+
+        <div class="loyalty-grid">
+            <div class="loyalty-card active-card" id="card-tier-1">
+                <h4>Explorer</h4>
+                <div class="tier-sub">Level 01 • 0-3 Nights</div>
+                <ul>
+                    <li><span>✓</span> Access to hidden platform map layouts</li>
+                    <li><span>✓</span> 24/7 WhatsApp Concierge Desk</li>
+                    <li style="color: rgba(255,255,255,0.3);"><span>✗</span> Protected member-only net pricing</li>
+                </ul>
+            </div>
+
+            <div class="loyalty-card" id="card-tier-2">
+                <h4>Wanderer</h4>
+                <div class="tier-sub">Level 02 • 4-9 Nights</div>
+                <ul>
+                    <li><span>✓</span> Priority booking reservation slots</li>
+                    <li style="font-weight: 600; color: #b3c2b0;"><span>✓</span> 5% Flat Booking Discount</li>
+                    <li><span>✓</span> Complimentary early check-in privileges</li>
+                </ul>
+            </div>
+
+            <div class="loyalty-card" id="card-tier-3">
+                <h4>Inner Circle</h4>
+                <div class="tier-sub">Level 03 • 10+ Nights</div>
+                <ul>
+                    <li><span>✓</span> Priority access to weekend drop slots</li>
+                    <li style="font-weight: 600; color: #b3c2b0;"><span>✓</span> 10% Lifetime Tariff Slash</li>
+                    <li><span>✓</span> Free bonfire setups & local treks</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="loyalty-cta-container">
+            <button class="loyalty-btn" onclick="routeLoyaltyToWhatsApp()">Activate Free Membership via WhatsApp</button>
+        </div>
     </div>
 </section>
 
@@ -673,7 +875,60 @@ footer a{
         const payload = encodeURIComponent(textBody);
         window.open(`https://wa.me/918219747857?text=${payload}`, '_blank');
     }
+
+    // LOYALTY PROGRAM INTERACTIVE COMPONENT ENGINE
+    function calculateLoyaltyTier() {
+        const nightsInput = document.getElementById('loyalty-nights-input');
+        let nightsValue = parseInt(nightsInput.value) || 0;
+        
+        if (nightsValue < 0) {
+            nightsValue = 0;
+            nightsInput.value = 0;
+        }
+
+        const tierTitle = document.getElementById('current-tier-title');
+        const tierPerks = document.getElementById('current-tier-perks');
+        
+        const card1 = document.getElementById('card-tier-1');
+        const card2 = document.getElementById('card-tier-2');
+        const card3 = document.getElementById('card-tier-3');
+
+        // Reset visual focus configurations
+        card1.classList.remove('active-card');
+        card2.classList.remove('active-card');
+        card3.classList.remove('active-card');
+
+        if (nightsValue <= 3) {
+            tierTitle.innerText = "Explorer Account";
+            tierTitle.style.color = "#f8f6f2";
+            tierPerks.innerText = "Accessing baseline platform assistance coordinates.";
+            card1.classList.add('active-card');
+        } else if (nightsValue >= 4 && nightsValue <= 9) {
+            tierTitle.innerText = "Wanderer Tier Active";
+            tierTitle.style.color = "#b3c2b0";
+            tierPerks.innerText = "5% structural margin deduction automatically active.";
+            card2.classList.add('active-card');
+        } else {
+            tierTitle.innerText = "Inner Circle Status";
+            tierTitle.style.color = "#d4af37"; // Elegant Gold Hue highlight
+            tierPerks.innerText = "10% maximum lifetime tariff slash fully verified.";
+            card3.classList.add('active-card');
+        }
+    }
+
+    function routeLoyaltyToWhatsApp() {
+        const totalNights = document.getElementById('loyalty-nights-input').value || "0";
+        const currentTier = document.getElementById('current-tier-title').innerText;
+        
+        const loyaltyText = `Hey Hidden Stays! 🌲 I am looking to initialize and verify my loyalty club membership profile:\n\n📊 Total Nights Logged: ${totalNights}\n🏆 Estimated Status Level: ${currentTier}\n\nPlease sync this data validation to my phone number!`;
+        
+        const encryptedPayload = encodeURIComponent(loyaltyText);
+        window.open(`https://wa.me/918219747857?text=${encryptedPayload}`, '_blank');
+    }
 </script>
 
 </body>
 </html>
+
+```
+
