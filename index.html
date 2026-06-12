@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -174,7 +173,7 @@ nav ul li a{
 }
 
 .features{
-    displaygrid;
+    display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:30px;
     text-align:center;
@@ -664,7 +663,7 @@ footer a{
         <div class="loyalty-dashboard">
             <div class="loyalty-display-tier">
                 <h3 id="current-tier-title">Explorer Account</h3>
-                <p id="current-tier-perks">Accessing baseline platform assistance coordinates.</p>
+                <p id="current-tier-perks">Accessing baseline platform assistance coordinates. Stay 1 night to level up!</p>
             </div>
             <div class="loyalty-input-group">
                 <label for="loyalty-nights-input">Nights Stayed:</label>
@@ -675,7 +674,7 @@ footer a{
         <div class="loyalty-grid">
             <div class="loyalty-card active-card" id="card-tier-1">
                 <h4>Explorer</h4>
-                <div class="tier-sub">Level 01 • 0-3 Nights</div>
+                <div class="tier-sub">Level 01 • 0 Nights Logged</div>
                 <ul>
                     <li><span>✓</span> Access to hidden platform map layouts</li>
                     <li><span>✓</span> 24/7 WhatsApp Concierge Desk</li>
@@ -685,7 +684,7 @@ footer a{
 
             <div class="loyalty-card" id="card-tier-2">
                 <h4>Wanderer</h4>
-                <div class="tier-sub">Level 02 • 4-9 Nights</div>
+                <div class="tier-sub">Level 02 • Just 1-5 Nights</div>
                 <ul>
                     <li><span>✓</span> Priority booking reservation slots</li>
                     <li style="font-weight: 600; color: #b3c2b0;"><span>✓</span> 5% Flat Booking Discount</li>
@@ -695,7 +694,7 @@ footer a{
 
             <div class="loyalty-card" id="card-tier-3">
                 <h4>Inner Circle</h4>
-                <div class="tier-sub">Level 03 • 10+ Nights</div>
+                <div class="tier-sub">Level 03 • 6+ Nights</div>
                 <ul>
                     <li><span>✓</span> Priority access to weekend drop slots</li>
                     <li style="font-weight: 600; color: #b3c2b0;"><span>✓</span> 10% Lifetime Tariff Slash</li>
@@ -876,7 +875,7 @@ footer a{
         window.open(`https://wa.me/918219747857?text=${payload}`, '_blank');
     }
 
-    // LOYALTY PROGRAM INTERACTIVE COMPONENT ENGINE
+    // UPDATED LOYALTY PROGRAM INTERACTIVE COMPONENT ENGINE (EASY LEVEL 1 UPGRADE)
     function calculateLoyaltyTier() {
         const nightsInput = document.getElementById('loyalty-nights-input');
         let nightsValue = parseInt(nightsInput.value) || 0;
@@ -898,12 +897,12 @@ footer a{
         card2.classList.remove('active-card');
         card3.classList.remove('active-card');
 
-        if (nightsValue <= 3) {
+        if (nightsValue === 0) {
             tierTitle.innerText = "Explorer Account";
             tierTitle.style.color = "#f8f6f2";
-            tierPerks.innerText = "Accessing baseline platform assistance coordinates.";
+            tierPerks.innerText = "Accessing baseline platform assistance coordinates. Stay 1 night to level up!";
             card1.classList.add('active-card');
-        } else if (nightsValue >= 4 && nightsValue <= 9) {
+        } else if (nightsValue >= 1 && nightsValue <= 5) {
             tierTitle.innerText = "Wanderer Tier Active";
             tierTitle.style.color = "#b3c2b0";
             tierPerks.innerText = "5% structural margin deduction automatically active.";
@@ -929,6 +928,4 @@ footer a{
 
 </body>
 </html>
-
-```
 
