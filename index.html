@@ -99,6 +99,834 @@ nav ul li a{
 .search-box{
     width:85%;
     margin:auto;
-    margin-top:-50
+    margin-top:-50px;
+    background:white;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+    padding:25px;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:20px;
+    position: relative;
+    z-index: 20;
+}
 
+.search-item{
+    border-right:1px solid #ddd;
+    padding-right:15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
+.search-item:last-of-type{
+    border:none;
+}
+
+.search-item label{
+    font-size:12px;
+    color:#888;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.search-item select,
+.search-item input {
+    border:none;
+    width:100%;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #222;
+    background: transparent;
+}
+
+.search-btn{
+    background:#405239;
+    color:white;
+    border:none;
+    border-radius:40px;
+    cursor:pointer;
+    font-weight: 600;
+    font-size: 15px;
+    transition: background 0.2s;
+}
+
+.search-btn:hover {
+    background: #2d3b29;
+}
+
+.section{
+    padding:90px 8%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.section-title h2{
+    font-size:50px;
+    font-family:'Playfair Display',serif;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:30px;
+    text-align:center;
+}
+
+.feature{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+}
+
+.stays-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+}
+
+.card img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.card h3{
+    margin-bottom:10px;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+}
+
+.card p.price {
+    font-weight: 600;
+    color: #405239;
+    margin-bottom: 15px;
+}
+
+.card p.desc {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.card-book-btn {
+    display: block;
+    text-align: center;
+    background: #405239;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.card-book-btn:hover {
+    background: #2d3b29;
+}
+
+/* LOYALTY CLUB STYLES */
+.loyalty-section {
+    background: #1e261d;
+    color: white;
+    padding: 90px 8%;
+}
+
+.loyalty-container {
+    max-w: 1200px;
+    margin: 0 auto;
+}
+
+.loyalty-dashboard {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 45px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.loyalty-input-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.loyalty-input-group label {
+    font-size: 13px;
+    color: #ccc;
+}
+
+.loyalty-input-group input {
+    background: transparent;
+    border: none;
+    color: #f8f6f2;
+    font-size: 16px;
+    font-weight: 600;
+    width: 50px;
+    text-align: center;
+    outline: none;
+}
+
+.loyalty-display-tier h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #f8f6f2;
+}
+
+.loyalty-display-tier p {
+    font-size: 13px;
+    color: #b3c2b0;
+    margin-top: 4px;
+}
+
+.loyalty-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.loyalty-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+    padding: 30px;
+    transition: all 0.3s ease;
+}
+
+.loyalty-card.active-card {
+    border-color: #f8f6f2;
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-5px);
+}
+
+.loyalty-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.loyalty-card .tier-sub {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #b3c2b0;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.loyalty-card ul {
+    list-style: none;
+    font-size: 13px;
+    color: #ddd;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.loyalty-card ul li span {
+    margin-right: 8px;
+    color: #b3c2b0;
+}
+
+.loyalty-cta-container {
+    text-align: center;
+    margin-top: 45px;
+}
+
+.loyalty-btn {
+    display: inline-block;
+    background: #f8f6f2;
+    color: #1c241d;
+    text-decoration: none;
+    padding: 14px 35px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.loyalty-btn:hover {
+    background: #ffffff;
+    transform: scale(1.02);
+}
+
+.banner{
+    background:#314232;
+    color:white;
+    padding:100px 8%;
+    display:flex;
+    align-items:center;
+    gap:50px;
+}
+
+.banner img{
+    width:50%;
+    border-radius:20px;
+}
+
+.banner-text h2{
+    font-size:55px;
+    font-family:'Playfair Display',serif;
+    margin-bottom:20px;
+}
+
+footer{
+    background:#1c241d;
+    color:white;
+    padding:60px 8%;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:40px;
+}
+
+footer ul{
+    list-style:none;
+}
+
+footer ul li{
+    margin:10px 0;
+}
+
+footer a{
+    color:#ddd;
+    text-decoration:none;
+}
+
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+@media(max-width:900px){
+    .hero h1{
+        font-size:45px;
+    }
+
+    .search-box{
+        grid-template-columns:1fr;
+        width:90%;
+        gap:15px;
+    }
+    
+    .search-item {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        padding-right: 0;
+        padding-bottom: 10px;
+    }
+
+    .features,
+    .stays-grid,
+    .footer-grid,
+    .loyalty-grid,
+    .banner{
+        grid-template-columns:1fr;
+    }
+
+    .loyalty-dashboard {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .loyalty-input-group {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .banner{
+        flex-direction:column;
+    }
+
+    .banner img{
+        width:100%;
+    }
+    
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <a href="#" style="display: flex; align-items: center; justify-content: flex-start; text-decoration: none; max-width: 180px; height: auto;">
+        <img src="1780859536915.png" alt="Hidden Stays" style="width: 100%; height: 50px; object-fit: contain; border-radius: 4px; display: block;">
+    </a>
+
+    <nav>
+        <ul>
+            <li><a href="#">Destinations</a></li>
+            <li><a href="#">Collections</a></li>
+            <li><a href="#">Experiences</a></li>
+            <li><a href="#loyalty-club">The Hideout Club</a></li>
+        </ul>
+    </nav>
+
+    <a href="#featured-section" class="btn">Book a Stay</a>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Hidden Places.<br>Unforgettable Stays.</h1>
+        <p>Discover unique stays tucked away from the crowd.</p>
+        <a href="#featured-section" class="explore-btn">Explore Stays</a>
+    </div>
+</section>
+
+<form class="search-box" onsubmit="filterMyStays(event)">
+    <div class="search-item">
+        <label for="destination-selection">Where To?</label>
+        <select id="destination-selection">
+            <option value="anywhere">Anywhere</option>
+            <option value="barot-valley">Barot Valley, HP 🏔️</option>
+            <option value="tirthan-valley">Tirthan Valley, HP 🌲</option>
+            <option value="manali">Manali, HP ❄️</option>
+            <option value="kullu">Kullu, HP ⛰️</option>
+        </select>
+    </div>
+
+    <div class="search-item">
+        <label for="checkin-date">Check In</label>
+        <input type="date" id="checkin-date" required onchange="updateMinCheckoutDate()">
+    </div>
+
+    <div class="search-item">
+        <label for="checkout-date">Check Out</label>
+        <input type="date" id="checkout-date" required>
+    </div>
+
+    <div class="search-item">
+        <label for="guest-count">Guests</label>
+        <input type="number" id="guest-count" value="1" min="1" max="10">
+    </div>
+
+    <button type="submit" class="search-btn">Search</button>
+</form>
+
+<section class="section">
+    <div class="section-title">
+        <h2>Thoughtful Stays in Hidden Places</h2>
+    </div>
+
+    <div class="features">
+        <div class="feature">
+            <h3>Handpicked</h3>
+            <p>Curated luxury stays.</p>
+        </div>
+        <div class="feature">
+            <h3>Hidden Gems</h3>
+            <p>Unique locations.</p>
+        </div>
+        <div class="feature">
+            <h3>Meaningful</h3>
+            <p>Reconnect with nature.</p>
+        </div>
+        <div class="feature">
+            <h3>Memorable</h3>
+            <p>Experiences you'll never forget.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="featured-section" style="background: #ffffff;">
+    <div class="section-title">
+        <h2 id="section-title">Featured Stays</h2>
+    </div>
+
+    <div class="stays-grid" id="property-grid">
+
+        <div class="card property-card" data-location="barot-valley">
+            <img src="https://images.unsplash.com/photo-1626602411112-10742f9a3af8?auto=format&fit=crop&w=600&q=80" alt="Barot Valley">
+            <div class="card-content">
+                <div>
+                    <h3>Trout Stream Cabin</h3>
+                    <p class="desc">Charming riverside log shelter overlooking the clean, rushing streams of Barot Valley.</p>
+                </div>
+                <div>
+                    <p class="price">₹4,500 / night</p>
+                    <button class="card-book-btn" onclick="triggerSecureBooking('Trout Stream Cabin', 'Barot Valley')">Book Stay</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card property-card" data-location="tirthan-valley">
+            <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80" alt="Tirthan Valley">
+            <div class="card-content">
+                <div>
+                    <h3>Pinecrest Treehouse</h3>
+                    <p class="desc">High-elevation wooden glass treehouse setup wrapped inside pine woods with waterfall trail paths.</p>
+                </div>
+                <div>
+                    <p class="price">₹6,200 / night</p>
+                    <button class="card-book-btn" onclick="triggerSecureBooking('Pinecrest Treehouse', 'Tirthan Valley')">Book Stay</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card property-card" data-location="manali">
+            <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=600&q=80" alt="Manali Outskirts">
+            <div class="card-content">
+                <div>
+                    <h3>Apple Grove Lodge</h3>
+                    <p class="desc">A traditional raw stone chalet completely isolated inside apple orchards away from town centers.</p>
+                </div>
+                <div>
+                    <p class="price">₹5,000 / night</p>
+                    <button class="card-book-btn" onclick="triggerSecureBooking('Apple Grove Lodge', 'Manali Outskirts')">Book Stay</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card property-card" data-location="kullu">
+            <img src="https://images.unsplash.com/photo-1589136777351-fdc9c94ba119?auto=format&fit=crop&w=600&q=80" alt="Kullu Valley">
+            <div class="card-content">
+                <div>
+                    <h3>Panoramic Eco Dome</h3>
+                    <p class="desc">Modern geodesic dome providing clear, 360-degree vistas of snow-capped high peaks.</p>
+                </div>
+                <div>
+                    <p class="price">₹7,500 / night</p>
+                    <button class="card-book-btn" onclick="triggerSecureBooking('Panoramic Eco Dome', 'Kullu Heights')">Book Stay</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="loyalty-section" id="loyalty-club">
+    <div class="loyalty-container">
+        <div class="section-title">
+            <h2 style="color: white;">The Hideout Club</h2>
+            <p style="color: #b3c2b0; margin-top: 10px;">Unlock member-only tariffs, visual perks, and priority space allocations.</p>
+        </div>
+
+        <div class="loyalty-dashboard">
+            <div class="loyalty-display-tier">
+                <h3 id="current-tier-title">Explorer Account</h3>
+                <p id="current-tier-perks">Accessing baseline platform assistance coordinates. Stay 1 night to level up!</p>
+            </div>
+            <div class="loyalty-input-group">
+                <label for="loyalty-nights-input">Nights Stayed:</label>
+                <input type="number" id="loyalty-nights-input" value="0" min="0" max="30" oninput="calculateLoyaltyTier()">
+            </div>
+        </div>
+
+        <div class="loyalty-grid">
+            <div class="loyalty-card active-card" id="card-tier-1">
+                <h4>Explorer</h4>
+                <div class="tier-sub">Level 01 • 0 Nights Logged</div>
+                <ul>
+                    <li><span>✓</span> Access to hidden platform map layouts</li>
+                    <li><span>✓</span> 24/7 Response Support Routing</li>
+                    <li style="color: rgba(255,255,255,0.3);"><span>✗</span> Protected member-only net pricing</li>
+                </ul>
+            </div>
+
+            <div class="loyalty-card" id="card-tier-2">
+                <h4>Wanderer</h4>
+                <div class="tier-sub">Level 02 • Just 1-5 Nights</div>
+                <ul>
+                    <li><span>✓</span> Priority booking reservation slots</li>
+                    <li style="font-weight: 600; color: #b3c2b0;"><span>✓</span> 5% Flat Booking Discount</li>
+                    <li><span>✓</span> Complimentary early check-in privileges</li>
+                </ul>
+            </div>
+
+            <div class="loyalty-card" id="card-tier-3">
+                <h4>Inner Circle</h4>
+                <div class="tier-sub">Level 03 • 6+ Nights</div>
+                <ul>
+                    <li><span>✓</span> Priority access to weekend drop slots</li>
+                    <li style="font-weight: 600; color: #b3c2b0;"><span>✓</span> 10% Lifetime Tariff Slash</li>
+                    <li><span>✓</span> Free bonfire setups & local treks</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="loyalty-cta-container">
+            <button class="loyalty-btn" onclick="routeLoyaltyToEmail()">Activate Free Membership via Email</button>
+        </div>
+    </div>
+</section>
+
+<section class="banner">
+    <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85" alt="Slow Luxury">
+    <div class="banner-text">
+        <h2>It's a Slower Kind of Luxury</h2>
+        <p>Wake up to birdsong, mountain views and unforgettable experiences.</p>
+    </div>
+</section>
+
+<section style="padding: 100px 8%; background: #ffffff; color: #1c241d;" id="standards">
+    <div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start;">
+        <div style="position: sticky; top: 100px;">
+            <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: #888; display: block; margin-bottom: 15px; font-weight: 600;">The Manifesto</span>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 42px; line-height: 1.2; color: #314232; margin-bottom: 25px;">How We Protect Your Peace.</h2>
+            <p style="font-size: 15px; line-height: 1.8; color: #666; margin-bottom: 30px;">Mass tourism aggregates properties automatically. We do the exact opposite. Every outpost featured in our index passes a multi-layered environmental audit before an invite code is generated.</p>
+            <div style="width: 50px; height: 1px; background: #405239;"></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 40px;">
+            <div style="border-bottom: 1px solid #eee; padding-bottom: 30px;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; color: #314232; margin-bottom: 10px;">01. Decibel & Acoustic Audit</h3>
+                <p style="font-size: 14px; line-height: 1.7; color: #555;">We deploy field teams to test coordinates during peak daytime and nighttime windows. Properties within earshot of commercial highways, temple/mosque public horn rings, or dense construction markers are permanently blacklisted.</p>
+            </div>
+            <div style="border-bottom: 1px solid #eee; padding-bottom: 30px;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; color: #314232; margin-bottom: 10px;">02. Hyper-Local Gastronomy</h3>
+                <p style="font-size: 14px; line-height: 1.7; color: #555;">No frozen logistics. Every outpost features independent estate kitchens sourcing raw ingredients within a 15-kilometer clean radius. Menus are entirely bespoke to your clean wellness profile.</p>
+            </div>
+            <div style="border-bottom: 1px solid #eee; padding-bottom: 30px;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; color: #314232; margin-bottom: 10px;">03. Physical Separation Buffer</h3>
+                <p style="font-size: 14px; line-height: 1.7; color: #555;">A home is not secluded if a neighbor overlooks your balcony. We require a minimum 2-acre private geographic envelope surrounding the core structural living pavilion to guarantee uncompromising visual isolation.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section style="padding: 100px 8%; background: #f8f6f2; border-top: 1px solid rgba(0,0,0,0.03);" id="faqs">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 60px;">
+            <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: #888; display: block; margin-bottom: 10px;">Common Inquiries</span>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 38px; color: #1c241d;">Vetting Framework Details</h2>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+            <details style="background: #ffffff; padding: 24px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.01); cursor: pointer;">
+                <summary style="font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: #314232; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                    How do I access these precise locations?
+                    <span style="color: #405239; font-weight: 300;">+</span>
+                </summary>
+                <p style="font-size: 14px; line-height: 1.7; color: #666; margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
+                    Exact route maps and layout coordinates are entirely secure. Full destination data, local concierge vehicle details, and gate pass variables are issued via encrypted digital channels exactly 72 hours before your scheduled arrival date.
+                </p>
+            </details>
+            <details style="background: #ffffff; padding: 24px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.01); cursor: pointer;">
+                <summary style="font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: #314232; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                    Can I list my own estate properties here?
+                    <span style="color: #405239; font-weight: 300;">+</span>
+                </summary>
+                <p style="font-size: 14px; line-height: 1.7; color: #666; margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
+                    We welcome applications from independent heritage hosts and architects. Your location will undergo our standard 48-hour quiet-zone audit before curation board selection. Use the main form menu to contact our partner desk.
+                </p>
+            </details>
+            <details style="background: #ffffff; padding: 24px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.01); cursor: pointer;">
+                <summary style="font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: #314232; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                    What is the booking security protocol?
+                    <span style="color: #405239; font-weight: 300;">+</span>
+                </summary>
+                <p style="font-size: 14px; line-height: 1.7; color: #666; margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
+                    Because memberships are strictly limited, individual profile requests are hand-reviewed. Once verified, invitations are secured directly via standard commercial netbanking channels with absolute consumer data privacy.
+                </p>
+            </details>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-grid">
+        <div>
+            <a href="#" style="display: flex; align-items: center; justify-content: flex-start; text-decoration: none; max-width: 180px; height: auto; margin-bottom: 15px;">
+                <img src="1780859536915.png" alt="Hidden Stays" style="width: 100%; height: 50px; object-fit: contain; border-radius: 4px; display: block;">
+            </a>
+            <p>Curated stays in hidden places.</p>
+        </div>
+        <div>
+            <h3>Explore</h3>
+            <ul>
+                <li><a href="#">Destinations</a></li>
+                <li><a href="#">Experiences</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3>Company</h3>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3>Support</h3>
+            <ul>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<a href="https://wa.me/918219747857?text=Hi%20Hidden%20Stays,%20I'm%20interested%20in%20booking%20an%20isolated%20retreat.🌲" 
+   class="whatsapp-float" 
+   target="_blank">
+    <svg viewBox="0 0 32 32" style="width:30px; height:30px; fill:white;">
+        <path d="M16 2a14 14 0 0 0-12.2 20.8L2 29l6.4-1.6A14 14 0 1 0 16 2zm7.5 20c-.3.9-1.6 1.7-2.6 1.9-.7.1-1.6.2-4.6-1-3.9-1.6-6.4-5.5-6.6-5.8-.2-.3-1.7-2.2-1.7-4.3 0-2 1-3 1.4-3.4.4-.4.8-.5 1-.5.3 0 .5 0 .8.1.3 0 .6-.1.9.7.3.8 1.1 2.8 1.2 3 .1.2.1.4 0 .6-.1.2-.2.4-.4.6-.2.2-.4.4-.5.6-.2.2-.4.4-.2.8.3.4 1.1 1.9 2.4 3.1 1.7 1.5 3.1 2 3.6 2.2.4.2.7.2.9-.1.3-.3 1.1-1.3 1.4-1.8.3-.4.5-.4.9-.2.4.2 2.4 1.1 2.8 1.3.4.2.7.3.8.5.1.3-.1 1.5-.7 2.4z"/>
+    </svg>
+</a>
+
+<script>
+    const tomorrow = new Date().toISOString().split('T')[0];
+    document.getElementById('checkin-date').min = tomorrow;
+
+    function updateMinCheckoutDate() {
+        const checkinVal = document.getElementById('checkin-date').value;
+        const checkoutInput = document.getElementById('checkout-date');
+        checkoutInput.min = checkinVal;
+        if (checkoutInput.value && checkoutInput.value < checkinVal) {
+            checkoutInput.value = checkinVal;
+        }
+    }
+
+    function filterMyStays(event) {
+        event.preventDefault();
+        
+        const destinationChosen = document.getElementById("destination-selection").value;
+        const cards = document.getElementsByClassName("property-card");
+        const titleText = document.getElementById("section-title");
+        
+        let foundCount = 0;
+
+        for (let i = 0; i < cards.length; i++) {
+            const cardLocation = cards[i].getAttribute("data-location");
+            
+            if (destinationChosen === "anywhere" || cardLocation === destinationChosen) {
+                cards[i].style.display = "flex";
+                foundCount++;
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+        
+        if (destinationChosen === "anywhere") {
+            titleText.innerText = "Featured Stays";
+        } else {
+            const labelName = destinationChosen.replace('-', ' ').toUpperCase();
+            titleText.innerText = `Available Stays in ${labelName} (${foundCount})`;
+        }
+    }
+
+    function triggerSecureBooking(propertyName, regionName) {
+        const inDate = document.getElementById('checkin-date').value || "Not Chosen";
+        const outDate = document.getElementById('checkout-date').value || "Not Chosen";
+        const totalGuests = document.getElementById('guest-count').value || "1";
+
+        const textBody = `Hey Hidden Stays! 🌲 I want to check availability for an escape:\n\n🏡 Property: ${propertyName}\n📍 Region: ${regionName}\n📅 Check-In: ${inDate}\n📅 Check-Out: ${outDate}\n👥 Guests: ${totalGuests}\n\nPlease share booking details and deposit validation!`;
+        
+        const payload = encodeURIComponent(textBody);
+        window.open(`https://wa.me/918219747857?text=${payload}`, '_blank');
+    }
+
+    // LOYALTY PROGRAM INTERACTIVE COMPONENT ENGINE (EASY LEVEL 01 UPDATED)
+    function calculateLoyaltyTier() {
+        const nightsInput = document.getElementById('loyalty-nights-input');
+        let nightsValue = parseInt(nightsInput.value) || 0;
+        
+        if (nightsValue < 0) {
+            nightsValue = 0;
+            nightsInput.value = 0;
+        }
+
+        const tierTitle = document.getElementById('current-tier-title');
+        const tierPerks = document.getElementById('current-tier-perks');
+        
+        const card1 = document.getElementById('card-tier-1');
+        const card2 = document.getElementById('card-tier-2');
+        const card3 = document.getElementById('card-tier-3');
+
+        card1.classList.remove('active-card');
+        card2.classList.remove('active-card');
+        card3.classList.remove('active-card');
+
+        if (nightsValue === 0) {
+            tierTitle.innerText = "Explorer Account";
+            tierTitle.style.color = "#f8f6f2";
+            tierPerks.innerText = "Accessing baseline platform assistance coordinates. Stay 1 night to level up!";
+            card1.classList.add('active-card');
+        } else if (nightsValue >= 1 && nightsValue <= 5) {
+            tierTitle.innerText = "Wanderer Tier Active";
+            tierTitle.style.color = "#b3c2b0";
+            tierPerks.innerText = "5% structural margin deduction automatically active.";
+            card2.classList.add('active-card');
+        } else {
+            tierTitle.innerText = "Inner Circle Status";
+            tierTitle.style.color = "#d4af37";
+            tierPerks.innerText = "10% maximum lifetime tariff slash fully verified.";
+            card3.classList.add('active-card');
+        }
+    }
+
+    // EMAIL PIPELINE BACKEND (ROUTED TO HIDDENSTAYS.IN@GMAIL.COM)
+    function routeLoyaltyToEmail() {
+        const totalNights = document.getElementById('loyalty-nights-input').value || "0";
+        const currentTier = document.getElementById('current-tier-title').innerText;
+        
+        const emailTo = "hiddenstays.in@gmail.com";
+        const emailSubject = "The Hideout Club: Loyalty Profile Activation Request";
+        
+        const emailBody = `Hello Hidden Stays Desk,\n\nI want to initialize and verify my loyalty club membership profile metrics:\n\n📊 Total Nights Logged: ${totalNights}\n🏆 Estimated Status Level: ${currentTier}\n\nPlease parse this validation structure and connect it to my profile database.\n\nBest regards.`;
+        
+        const payloadUrl = `mailto:${emailTo}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+        window.location.href = payloadUrl;
+    }
+</script>
+
+</body>
+</html>
