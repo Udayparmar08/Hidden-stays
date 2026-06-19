@@ -149,7 +149,6 @@ nav ul li a{
     padding: 2px 0;
 }
 
-/* Custom premium UI for the native date calendar picker icon button */
 .search-item input[type="date"]::-webkit-calendar-picker-indicator {
     background: transparent;
     bottom: 0;
@@ -1137,6 +1136,7 @@ footer a{
         document.getElementById('secure-payment-drawer').style.display = 'none';
     }
 
+    // INTERACTIVE LIVE TRANSACTION ROUTER VERIFIED MERCH DATA
     function executeUPITransfer() {
         const rawIn = document.getElementById('checkin-date').value;
         const rawOut = document.getElementById('checkout-date').value;
@@ -1152,17 +1152,20 @@ footer a{
         const totalCost = currentSelectedPrice * currentCalculatedNights;
         const tokenDeposit = Math.round(totalCost * 0.10);
         
-        const targetUPI = "hiddenstays.in@gmail.com"; 
-        const payeeName = "The Hide Stays";
-        const transactionNote = encodeURIComponent(`Deposit for ${currentSelectedProperty}`);
+        // SECURE STRUCTURAL ACCOUNT PARAMETERS
+        const targetUPI = "udayparmar2004-1@okhdfcbank"; 
+        const payeeName = "Uday Parmar";
+        const transactionNote = encodeURIComponent(`The Hide Token deposit for ${currentSelectedProperty}`);
         
+        // Native device inter-app deep-linking layer
         const upiDeepLink = `upi://pay?pa=${targetUPI}&pn=${encodeURIComponent(payeeName)}&am=${tokenDeposit}&cu=INR&tn=${transactionNote}`;
         
-        const whatsappFallbackMessage = `Hello The Hide Team! 🌲\n\nI want to validate my 10% confirmation token for:\n🏡 Stay: ${currentSelectedProperty}\n📅 Arrive: ${checkInFormatted}\n📅 Depart: ${checkOutFormatted}\n💰 Token Amount Due: ₹${tokenDeposit.toLocaleString('en-IN')}\n\nPlease share your current QR or verification status for this checkout loop!`;
+        // Conversational Fallback String Pipeline
+        const whatsappFallbackMessage = `Hello Uday! 🌲\n\nI have initialized my 10% booking token transaction for:\n🏡 Stay: ${currentSelectedProperty}\n📅 Arrive: ${checkInFormatted}\n📅 Depart: ${checkOutFormatted}\n\n💰 Calculated Token Deposit: ₹${tokenDeposit.toLocaleString('en-IN')}\n💳 Transferred to your ID: ${targetUPI}\n\nPlease confirm property calendar locking step!`;
         
         const backupWhatsAppUrl = `https://wa.me/918219747857?text=${encodeURIComponent(whatsappFallbackMessage)}`;
 
-        setTimeout(() => { window.open(backupWhatsAppUrl, '_blank'); }, 600);
+        setTimeout(() => { window.open(backupWhatsAppUrl, '_blank'); }, 700);
         window.location.href = upiDeepLink;
     }
 
