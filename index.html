@@ -31,13 +31,6 @@ header{
     z-index:10;
 }
 
-.logo{
-    color:white;
-    font-size:32px;
-    font-family:'Playfair Display',serif;
-    letter-spacing:3px;
-}
-
 nav ul{
     display:flex;
     gap:30px;
@@ -273,6 +266,120 @@ nav ul li a{
 
 .card-book-btn:hover {
     background: #1c241d;
+}
+
+/* PREMIUM PAYMENT MODAL DRAWERS */
+.payment-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(28, 25, 23, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 20000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.payment-card-box {
+    background: #ffffff;
+    max-width: 480px;
+    width: 100%;
+    border-radius: 24px;
+    padding: 35px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    border: 1px solid rgba(49,66,50,0.05);
+    position: relative;
+    animation: slideUpModal 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUpModal {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #f5f5f4;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-weight: 600;
+    cursor: pointer;
+    color: #78716c;
+}
+
+.payment-title-panel {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.payment-title-panel h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: #1c1917;
+}
+
+.payment-invoice-grid {
+    background: #f8f6f2;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.invoice-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #6c6763;
+}
+
+.invoice-row.total-row {
+    border-top: 1px dashed #e5e5e0;
+    padding-top: 12px;
+    font-weight: 600;
+    color: #1c1917;
+    font-size: 15px;
+}
+
+.invoice-row.token-highlight {
+    color: #314232;
+    font-weight: 600;
+    background: rgba(49, 66, 50, 0.06);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.upi-payment-action {
+    background: #1c1917;
+    color: white;
+    width: 100%;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.3s;
+}
+
+.upi-payment-action:hover {
+    background: #314232;
 }
 
 /* LOYALTY CLUB STYLES */
@@ -543,8 +650,16 @@ footer a{
 <body>
 
 <header>
-    <a href="#" style="display: flex; align-items: center; justify-content: flex-start; text-decoration: none; max-width: 180px; height: auto;">
-        <span style="font-family:'Playfair Display',serif; color:white; font-size:24px; font-weight:700; letter-spacing:2px;">THE HIDE</span>
+    <a href="#" style="display: flex; align-items: center; gap: 12px; text-decoration: none; height: auto;">
+        <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
+            <circle cx="50" cy="50" r="46" stroke="#d4af37" stroke-width="1.5" stroke-opacity="0.6"/>
+            <path d="M25 65L50 30L75 65" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M38 65H62" stroke="#d4af37" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <div style="display: flex; flex-direction: column; justify-content: center;">
+            <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-size: 22px; font-weight: 700; letter-spacing: 3px; line-height: 1;">THE HIDE</span>
+            <span style="font-family: 'Poppins', sans-serif; color: #b3c2b0; font-size: 9px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px;">Hidden Stays</span>
+        </div>
     </a>
 
     <nav>
@@ -580,12 +695,12 @@ footer a{
     </div>
 
     <div class="search-item">
-        <label for="checkin-date">Arrive (DD/MM/YYYY)</label>
+        <label for="checkin-date">Arrive</label>
         <input type="date" id="checkin-date" required onchange="calculateNightsAndSync()">
     </div>
 
     <div class="search-item">
-        <label for="checkout-date">Depart (DD/MM/YYYY)</label>
+        <label for="checkout-date">Depart</label>
         <input type="date" id="checkout-date" required onchange="calculateNightsAndSync()">
     </div>
 
@@ -637,8 +752,8 @@ footer a{
                     <p class="desc">Charming riverside log shelter overlooking the clean, rushing streams of Barot Valley.</p>
                 </div>
                 <div>
-                    <p class="price">₹4,500 / night</p>
-                    <button class="card-book-btn" onclick="triggerSecureBooking('Trout Stream Cabin', 'Barot Valley')">Book Stay</button>
+                    <p class="price">1 night / ₹4,500</p>
+                    <button class="card-book-btn" onclick="openPaymentModal('Trout Stream Cabin', 'Barot Valley', 4500)">Book Stay</button>
                 </div>
             </div>
         </div>
@@ -651,8 +766,8 @@ footer a{
                     <p class="desc">High-elevation wooden glass treehouse setup wrapped inside pine woods with waterfall trail paths.</p>
                 </div>
                 <div>
-                    <p class="price">₹6,200 / night</p>
-                    <button class="card-book-btn" onclick="triggerSecureBooking('Pinecrest Treehouse', 'Tirthan Valley')">Book Stay</button>
+                    <p class="price">1 night / ₹6,200</p>
+                    <button class="card-book-btn" onclick="openPaymentModal('Pinecrest Treehouse', 'Tirthan Valley', 6200)">Book Stay</button>
                 </div>
             </div>
         </div>
@@ -665,8 +780,8 @@ footer a{
                     <p class="desc">A traditional raw stone chalet completely isolated inside apple orchards away from town centers.</p>
                 </div>
                 <div>
-                    <p class="price">₹5,000 / night</p>
-                    <button class="card-book-btn" onclick="triggerSecureBooking('Apple Grove Lodge', 'Manali Outskirts')">Book Stay</button>
+                    <p class="price">1 night / ₹5,000</p>
+                    <button class="card-book-btn" onclick="openPaymentModal('Apple Grove Lodge', 'Manali Outskirts', 5000)">Book Stay</button>
                 </div>
             </div>
         </div>
@@ -679,14 +794,55 @@ footer a{
                     <p class="desc">Modern geodesic dome providing clear, 360-degree vistas of snow-capped high peaks.</p>
                 </div>
                 <div>
-                    <p class="price">₹7,500 / night</p>
-                    <button class="card-book-btn" onclick="triggerSecureBooking('Panoramic Eco Dome', 'Kullu Heights')">Book Stay</button>
+                    <p class="price">1 night / ₹7,500</p>
+                    <button class="card-book-btn" onclick="openPaymentModal('Panoramic Eco Dome', 'Kullu Heights', 7500)">Book Stay</button>
                 </div>
             </div>
         </div>
 
     </div>
 </section>
+
+<div class="payment-modal" id="secure-payment-drawer">
+    <div class="payment-card-box">
+        <button class="close-modal-btn" onclick="closePaymentModal()">✕</button>
+        <div class="payment-title-panel">
+            <span>Secure Checkout</span>
+            <h3 id="modal-property-name">Trout Stream Cabin</h3>
+            <p style="font-size:12px; color:#78716c;" id="modal-location-name">Barot Valley</p>
+        </div>
+
+        <div class="payment-invoice-grid">
+            <div class="invoice-row">
+                <span>Duration Parameters</span>
+                <span id="modal-nights-count">0 Nights</span>
+            </div>
+            <div class="invoice-row class-base-price">
+                <span>Baseline Villa Rate (Per Night)</span>
+                <span id="modal-per-night-cost">₹0</span>
+            </div>
+            <div class="invoice-row total-row">
+                <span>Total Stays Tariff</span>
+                <span id="modal-total-cost">₹0</span>
+            </div>
+            <div class="invoice-row token-highlight">
+                <span>10% Secure Token Deposit Due</span>
+                <span id="modal-token-cost">₹0</span>
+            </div>
+        </div>
+
+        <p style="font-size: 11px; color:#878680; text-align:center; margin-bottom: 20px; line-height: 1.5;">
+            *Transfer your 10% confirmation token instantly via secure business UPI layout. Remaining balance settled directly at the cabin property desk on check-in.
+        </p>
+
+        <button class="upi-payment-action" onclick="executeUPITransfer()">
+            <svg style="width:18px; height:18px; fill:currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/>
+            </svg>
+            Pay Token Deposit via UPI
+        </button>
+    </div>
+</div>
 
 <section class="loyalty-section" id="loyalty-club">
     <div class="loyalty-container">
@@ -815,10 +971,16 @@ footer a{
     </div>
 </section>
 
-<footer>
+<footer style="background:#1c241d; color:white; padding:60px 8%;">
     <div class="footer-grid">
         <div>
-            <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 10px;">THE HIDE</h3>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="46" stroke="#d4af37" stroke-width="2" stroke-opacity="0.8"/>
+                    <path d="M25 65L50 30L75 65" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 18px; letter-spacing: 2px;">THE HIDE</span>
+            </div>
             <p>Curated stays in hidden places.</p>
         </div>
         <div>
@@ -854,20 +1016,22 @@ footer a{
 </a>
 
 <script>
-    // AUTO-SET LOGIC FOR ARRIVAL CALENDAR
+    // CACHE VARIABLES FOR RUNTIME RESERVATIONS
+    let currentSelectedProperty = "";
+    let currentSelectedLocation = "";
+    let currentSelectedPrice = 0;
+    let currentCalculatedNights = 0;
+
     const today = new Date();
     const tomorrowStr = new Date(today.getTime() + 24 * 60 * 60 * 1000).toISOString().split('T')[0];
     document.getElementById('checkin-date').min = tomorrowStr;
 
-    // LIVE RANGE CALCULATION MECHANISM
     function calculateNightsAndSync() {
         const checkinVal = document.getElementById('checkin-date').value;
         const checkoutInput = document.getElementById('checkout-date');
         const badge = document.getElementById('duration-nights-badge');
         
         if (!checkinVal) return;
-        
-        // Force logical departure bounds
         checkoutInput.min = checkinVal;
         
         if (checkoutInput.value && checkoutInput.value < checkinVal) {
@@ -878,26 +1042,23 @@ footer a{
             const date1 = new Date(checkinVal);
             const date2 = new Date(checkoutInput.value);
             const timeDiff = date2.getTime() - date1.getTime();
-            const dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-            
-            badge.innerText = `${dayDiff} ${dayDiff === 1 ? 'Night' : 'Nights'}`;
+            currentCalculatedNights = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            badge.innerText = `${currentCalculatedNights} ${currentCalculatedNights === 1 ? 'Night' : 'Nights'}`;
         } else {
+            currentCalculatedNights = 0;
             badge.innerText = '0 Nights';
         }
     }
 
     function filterMyStays(event) {
         event.preventDefault();
-        
         const destinationChosen = document.getElementById("destination-selection").value;
         const cards = document.getElementsByClassName("property-card");
         const titleText = document.getElementById("section-title");
-        
         let foundCount = 0;
 
         for (let i = 0; i < cards.length; i++) {
             const cardLocation = cards[i].getAttribute("data-location");
-            
             if (destinationChosen === "anywhere" || cardLocation === destinationChosen) {
                 cards[i].style.display = "flex";
                 foundCount++;
@@ -905,7 +1066,6 @@ footer a{
                 cards[i].style.display = "none";
             }
         }
-        
         if (destinationChosen === "anywhere") {
             titleText.innerText = "Featured Stays";
         } else {
@@ -914,25 +1074,65 @@ footer a{
         }
     }
 
-    // RE-ENGINEERED COMPONENT TRANSITION TO YOUR DESK
-    function triggerSecureBooking(propertyName, regionName) {
+    // MODAL INTERFACE CONTROLS
+    function openPaymentModal(propertyName, regionName, pricePerNight) {
         const rawIn = document.getElementById('checkin-date').value;
         const rawOut = document.getElementById('checkout-date').value;
-        const totalGuests = document.getElementById('guest-count') ? document.getElementById('guest-count').value : "1";
+        
+        if (!rawIn || !rawOut || currentCalculatedNights <= 0) {
+            alert("Please pick valid Arrival and Departure dates at the calendar box before processing checkout options.");
+            document.getElementById('checkin-date').focus();
+            return;
+        }
 
-        // Converts generic inputs to Indian DD/MM/YYYY view for your booking records
+        currentSelectedProperty = propertyName;
+        currentSelectedLocation = regionName;
+        currentSelectedPrice = pricePerNight;
+
+        const totalCost = pricePerNight * currentCalculatedNights;
+        const tokenDeposit = Math.round(totalCost * 0.10);
+
+        document.getElementById('modal-property-name').innerText = propertyName;
+        document.getElementById('modal-location-name').innerText = regionName;
+        document.getElementById('modal-nights-count').innerText = `${currentCalculatedNights} Nights`;
+        document.getElementById('modal-per-night-cost').innerText = `₹${pricePerNight.toLocaleString('en-IN')}`;
+        document.getElementById('modal-total-cost').innerText = `₹${totalCost.toLocaleString('en-IN')}`;
+        document.getElementById('modal-token-cost').innerText = `₹${tokenDeposit.toLocaleString('en-IN')}`;
+
+        document.getElementById('secure-payment-drawer').style.display = 'flex';
+    }
+
+    function closePaymentModal() {
+        document.getElementById('secure-payment-drawer').style.display = 'none';
+    }
+
+    function executeUPITransfer() {
+        const rawIn = document.getElementById('checkin-date').value;
+        const rawOut = document.getElementById('checkout-date').value;
+
         const formatIndianDate = (dateStr) => {
-            if(!dateStr) return "Not Picked";
             const parts = dateStr.split('-');
             return `${parts[2]}/${parts[1]}/${parts[0]}`;
         };
 
         const checkInFormatted = formatIndianDate(rawIn);
         const checkOutFormatted = formatIndianDate(rawOut);
-
-        const textBody = `Hello The Hide Team! 🌲\nI'm exploring an architectural escape via your platform:\n\n🏡 Property: ${propertyName}\n📍 Location: ${regionName}\n📅 Arrive: ${checkInFormatted}\n📅 Depart: ${checkOutFormatted}\n\nPlease check live calendar slot validation for me!`;
         
-        window.open(`https://wa.me/918219747857?text=${encodeURIComponent(textBody)}`, '_blank');
+        const totalCost = currentSelectedPrice * currentCalculatedNights;
+        const tokenDeposit = Math.round(totalCost * 0.10);
+        
+        const targetUPI = "hiddenstays.in@gmail.com"; 
+        const payeeName = "The Hide Stays";
+        const transactionNote = encodeURIComponent(`Deposit for ${currentSelectedProperty}`);
+        
+        const upiDeepLink = `upi://pay?pa=${targetUPI}&pn=${encodeURIComponent(payeeName)}&am=${tokenDeposit}&cu=INR&tn=${transactionNote}`;
+        
+        const whatsappFallbackMessage = `Hello The Hide Team! 🌲\n\nI want to validate my 10% confirmation token for:\n🏡 Stay: ${currentSelectedProperty}\n📅 Arrive: ${checkInFormatted}\n📅 Depart: ${checkOutFormatted}\n💰 Token Amount Due: ₹${tokenDeposit.toLocaleString('en-IN')}\n\nPlease share your current QR or verification status for this checkout loop!`;
+        
+        const backupWhatsAppUrl = `https://wa.me/918219747857?text=${encodeURIComponent(whatsappFallbackMessage)}`;
+
+        setTimeout(() => { window.open(backupWhatsAppUrl, '_blank'); }, 600);
+        window.location.href = upiDeepLink;
     }
 
     function calculateLoyaltyTier() {
@@ -955,4 +1155,7 @@ footer a{
         card2.classList.remove('active-card');
         card3.classList.remove('active-card');
 
-        if (nightsValue ===
+        if (nightsValue === 0) {
+            tierTitle.innerText = "Explorer Account";
+            tierTitle.style.color = "#f8
+
