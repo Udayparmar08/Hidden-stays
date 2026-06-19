@@ -140,6 +140,39 @@ nav ul li a{
     cursor: pointer;
 }
 
+/* PREMIUM NATIVE CALENDAR OVERRIDES */
+.search-item input[type="date"] {
+    position: relative;
+    color: #1c1917;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 2px 0;
+}
+
+/* Custom premium UI for the native date calendar picker icon button */
+.search-item input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
+
+.search-item input[type="date"]::after {
+    content: '📅';
+    font-size: 14px;
+    position: absolute;
+    right: 5px;
+    top: 2px;
+    color: #314232;
+    pointer-events: none;
+}
+
 .search-btn{
     background:#314232;
     color:white;
@@ -1171,7 +1204,6 @@ footer a{
         }
     }
 
-    // RE-ENGINEERED TO WHATSAPP DELIVERY ENGINE (100% SUCCESS RATE)
     function routeLoyaltyToEmail() {
         const totalNights = document.getElementById('loyalty-nights-input').value || "0";
         const currentTier = document.getElementById('current-tier-title').innerText;
@@ -1186,5 +1218,4 @@ footer a{
 
 </body>
 </html>
-
 
