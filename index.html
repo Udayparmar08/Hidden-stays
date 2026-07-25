@@ -183,7 +183,7 @@ header{
 /* HERO SECTION */
 .hero{
     height:90vh;
-    background: linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)), url("https://images.unsplash.com/photo-1506744038136-46273834b3fb");
+    background: linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)), url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80");
     background-size:cover;
     background-position:center;
     display:flex;
@@ -268,7 +268,7 @@ header{
 .stays-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:30px; }
 .card{ background:white; border-radius:20px; overflow:hidden; display: flex; flex-direction: column; box-shadow:0 10px 25px rgba(0,0,0,0.03); transition: transform 0.3s; }
 .card:hover{ transform: translateY(-5px); }
-.card img{ width:100%; height:230px; object-fit:cover; }
+.card img{ width:100%; height:230px; object-fit:cover; background: #1c241d; }
 .card-content{ padding:25px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; gap: 15px; }
 .card-title{ font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #1c1917; }
 .card-location{ font-size: 12px; color: #80807b; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
@@ -377,7 +377,7 @@ header{
 /* EXPLORE STAY DETAILS MODAL */
 .explore-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(12, 18, 13, 0.9); backdrop-filter: blur(10px); z-index: 25000; justify-content: center; align-items: center; padding: 20px; }
 .explore-card-box { background: #121713; color: #f8f6f2; max-width: 650px; width: 100%; max-height: 90vh; border-radius: 24px; padding: 30px; position: relative; overflow-y: auto; border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
-.explore-card-box img { width: 100%; height: 280px; object-fit: cover; border-radius: 16px; margin-bottom: 20px; }
+.explore-card-box img { width: 100%; height: 280px; object-fit: cover; border-radius: 16px; margin-bottom: 20px; background: #1c241d; }
 .explore-header h3 { font-family: 'Playfair Display', serif; font-size: 26px; color: #d4af37; }
 .explore-header p { font-size: 12px; color: #a8bba5; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px; }
 
@@ -520,7 +520,9 @@ footer a{ color:#ddd; text-decoration:none; }
     <div class="stays-grid" id="property-grid">
         
         <div class="card property-card" data-location="Barot Valley">
-            <img src="https://images.unsplash.com/photo-1626602411112-10742f9a3af8?auto=format&fit=crop&w=600&q=80" alt="Trout Stream Cabin">
+            <img src="https://images.unsplash.com/photo-1626602411112-10742f9a3af8?auto=format&fit=crop&w=600&q=80" 
+                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=600&q=80';" 
+                 alt="Trout Stream Cabin">
             <div class="card-content">
                 <div>
                     <div class="card-title">Trout Stream Cabin</div>
@@ -535,7 +537,9 @@ footer a{ color:#ddd; text-decoration:none; }
         </div>
 
         <div class="card property-card" data-location="Tirthan Valley">
-            <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80" alt="Pinecrest Treehouse">
+            <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80" 
+                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=600&q=80';" 
+                 alt="Pinecrest Treehouse">
             <div class="card-content">
                 <div>
                     <div class="card-title">Pinecrest Treehouse</div>
@@ -550,7 +554,9 @@ footer a{ color:#ddd; text-decoration:none; }
         </div>
 
         <div class="card property-card" data-location="Manali">
-            <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=600&q=80" alt="Apple Grove Lodge">
+            <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=600&q=80" 
+                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80';" 
+                 alt="Apple Grove Lodge">
             <div class="card-content">
                 <div>
                     <div class="card-title">Apple Grove Lodge</div>
@@ -686,7 +692,9 @@ footer a{ color:#ddd; text-decoration:none; }
 <div class="explore-modal" id="explore-modal">
     <div class="explore-card-box">
         <button class="modal-close-btn" onclick="closeExploreModal()" style="color:#a8bba5;">✕</button>
-        <img id="explore-img" src="" alt="Cabin Preview">
+        <img id="explore-img" src="" 
+             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80';" 
+             alt="Cabin Preview">
         
         <div class="explore-header">
             <h3 id="explore-title">Cabin Title</h3>
@@ -1046,4 +1054,5 @@ footer a{ color:#ddd; text-decoration:none; }
 </script>
 </body>
 </html>
+
 
