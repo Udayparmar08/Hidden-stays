@@ -11,6 +11,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="/manifest.json">
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
@@ -34,7 +36,7 @@ header{
     width:100%;
     padding:25px 8%;
     display:flex;
-    justify-style:space-between;
+    justify-content:space-between;
     align-items:center;
     z-index:10;
 }
@@ -1094,6 +1096,11 @@ footer a{
 </a>
 
 <script>
+    // Initialize Configured Supabase Credentials
+    const SUPABASE_URL = "https://tjlpwkroldhsztkelfuy.supabase.co";
+    const SUPABASE_ANON_KEY = "EyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqbHB3a3JvbGRoc3p0a2VsZnV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ5MjIxMjIsImV4cCI6MjEwMDQ5ODEyMn0.1Ya0pNANKRFggdSq9YjDPLEzPzKY9atyKE6KUcrjCrE";
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
     let currentSelectedProperty = "";
     let currentSelectedLocation = "";
     let currentSelectedPrice = 0;
@@ -1186,7 +1193,10 @@ footer a{
         document.getElementById('secure-payment-drawer').style.display = 'none';
     }
 
-    function executeUPITransfer() {
+    async function executeUPITransfer() {
+        const guestPhone = prompt("Please enter your 10-digit WhatsApp phone number for booking confirmation:", "91");
+        if (!guestPhone) return;
+
         const rawIn = document.getElementById('checkin-date').value;
         const rawOut = document.getElementById('checkout-date').value;
 
@@ -1200,17 +1210,35 @@ footer a{
         
         const totalCost = currentSelectedPrice * currentCalculatedNights;
         const tokenDeposit = Math.round(totalCost * 0.10);
-        
+
+        // 1. Write the reservation directly to Supabase
+        const { data, error } = await supabaseClient
+            .from('guest_bookings')
+            .insert([{
+                guest_phone: guestPhone,
+                property_name: currentSelectedProperty,
+                location: currentSelectedLocation,
+                check_in: rawIn,
+                check_out: rawOut,
+                nights: currentCalculatedNights,
+                token_deposit: tokenDeposit,
+                payment_status: 'PENDING'
+            }]);
+
+        if (error) {
+            console.error("Supabase Database Error:", error);
+        } else {
+            console.log("Booking successfully recorded in Supabase!");
+        }
+
+        // 2. Native device UPI payment deep-link
         const targetUPI = "udayparmar2004-1@okhdfcbank"; 
         const payeeName = "Uday Parmar";
         const transactionNote = encodeURIComponent(`The Hide Token deposit for ${currentSelectedProperty}`);
-        
-        // Native device inter-app deep-linking layer
         const upiDeepLink = `upi://pay?pa=${targetUPI}&pn=${encodeURIComponent(payeeName)}&am=${tokenDeposit}&cu=INR&tn=${transactionNote}`;
         
-        // Conversational Fallback String Pipeline
-        const whatsappFallbackMessage = `Hello Uday! 🌲\n\nI have initialized my 10% booking token transaction for:\n🏡 Stay: ${currentSelectedProperty}\n📅 Arrive: ${checkInFormatted}\n📅 Depart: ${checkOutFormatted}\n\n💰 Calculated Token Deposit: ₹${tokenDeposit.toLocaleString('en-IN')}\n💳 Transferred to your ID: ${targetUPI}\n\nPlease confirm property calendar locking step!`;
-        
+        // 3. WhatsApp Backup String
+        const whatsappFallbackMessage = `Hello Uday! 🌲\n\nI have initialized my 10% booking token transaction for:\n🏡 Stay: ${currentSelectedProperty}\n📅 Arrive: ${checkInFormatted}\n📅 Depart: ${checkOutFormatted}\n\n💰 Calculated Token Deposit: ₹${tokenDeposit.toLocaleString('en-IN')}\n💳 Transferred to your ID: ${targetUPI}\n📞 My Contact: +${guestPhone}\n\nPlease confirm property calendar locking step!`;
         const backupWhatsAppUrl = `https://wa.me/918219747857?text=${encodeURIComponent(whatsappFallbackMessage)}`;
 
         setTimeout(() => { window.open(backupWhatsAppUrl, '_blank'); }, 700);
