@@ -953,9 +953,12 @@ footer a{ color:#ddd; text-decoration:none; }
 
 <script>
     // Initialize Configured Supabase Credentials
-    const SUPABASE_URL = "https://tjlpwkroldhsztkelfuy.supabase.co";
-    const SUPABASE_ANON_KEY = "EyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqbHB3a3JvbGRoc3p0a2VsZnV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ5MjIxMjIsImV4cCI6MjEwMDQ5ODEyMn0.1Ya0pNANKRFggdSq9YjDPLEzPzKY9atyKE6KUcrjCrE";
-    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // Replace the string inside the quotes with your newly copied API key
+const SUPABASE_URL = "https://tjlpwkroldhsztkelfuy.supabase.co";
+const SUPABASE_ANON_KEY = "PASTE_YOUR_COPIED_ANON_KEY_HERE";
+
+const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 
     let currentSelectedProperty = "";
     let currentSelectedLocation = "";
