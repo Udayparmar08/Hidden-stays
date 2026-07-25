@@ -3,13 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>The Hide | Curated Boutique Stays</title>
+<title>The Hide | Curated Boutique Stays in Himachal</title>
 
 <meta name="theme-color" content="#192119">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="/manifest.json">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Hide | Curated Boutique Mountain Stays in Himachal">
+<meta property="og:description" content="Discover unique architectural gems and slow-living sanctuaries tucked away in Himachali valleys.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1506744038136-46273834b3fb">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -66,7 +71,6 @@ header{
     height: 2px;
     background-color: #d4af37;
     border-radius: 2px;
-    transition: all 0.3s ease;
 }
 
 .btn-nav{
@@ -124,9 +128,7 @@ header{
     border-left: 1px solid rgba(212, 175, 55, 0.3);
 }
 
-.side-drawer.active {
-    right: 0;
-}
+.side-drawer.active { right: 0; }
 
 .drawer-header {
     display: flex;
@@ -150,10 +152,7 @@ header{
     color: #a8bba5;
     font-size: 24px;
     cursor: pointer;
-    transition: color 0.2s;
 }
-
-.close-drawer-btn:hover { color: #d4af37; }
 
 .drawer-menu-list {
     display: flex;
@@ -239,7 +238,6 @@ header{
     background: transparent;
 }
 
-/* Custom Aesthetic Date Input Styling */
 .search-item input[type="date"] {
     color-scheme: dark;
     cursor: pointer;
@@ -275,8 +273,107 @@ header{
 .card-title{ font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #1c1917; }
 .card-location{ font-size: 12px; color: #80807b; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
 .card-price{ font-size: 15px; font-weight: 600; color: #314232; margin-top: 8px; }
-.card-book-btn { width: 100%; background: #314232; color: white; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; transition: background 0.2s; }
+
+.card-btn-group { display: flex; gap: 10px; margin-top: 10px; }
+
+.card-explore-btn {
+    flex: 1;
+    background: transparent;
+    color: #314232;
+    border: 1px solid #314232;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.card-explore-btn:hover { background: rgba(49, 66, 50, 0.08); }
+
+.card-book-btn {
+    flex: 1.2;
+    background: #314232;
+    color: white;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
 .card-book-btn:hover { background: #1c241d; }
+
+/* EXPLORE STAY DETAILS MODAL */
+.explore-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(12, 18, 13, 0.9);
+    backdrop-filter: blur(10px);
+    z-index: 25000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.explore-card-box {
+    background: #121713;
+    color: #f8f6f2;
+    max-width: 650px;
+    width: 100%;
+    max-height: 90vh;
+    border-radius: 24px;
+    padding: 30px;
+    position: relative;
+    overflow-y: auto;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+
+.explore-card-box img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 20px;
+}
+
+.explore-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: #d4af37;
+}
+
+.explore-header p {
+    font-size: 12px;
+    color: #a8bba5;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 15px;
+}
+
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.amenity-item {
+    font-size: 12px;
+    color: #e5e5e0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
 /* CHECKOUT DRAWER / MODAL */
 .payment-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 15, 0.85); backdrop-filter: blur(10px); z-index: 20000; justify-content: center; align-items: center; padding: 20px; }
@@ -334,12 +431,12 @@ footer a{ color:#ddd; text-decoration:none; }
         </svg>
         <div style="display: flex; flex-direction: column;">
             <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-size: 22px; font-weight: 700; letter-spacing: 3px;">THE HIDE</span>
-            <span style="font-family: 'Poppins', sans-serif; color: #b3c2b0; font-size: 9px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;">Hidden Stays</span>
+            <span style="font-family: 'Poppins', sans-serif; color: #b3c2b0; font-size: 9px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;">Himachal Stays</span>
         </div>
     </a>
 
     <div style="display: flex; align-items: center; gap: 15px;">
-        <a href="#featured-section" class="btn-nav">Explore Stays</a>
+        <button onclick="scrollToStays()" class="btn-nav" style="border:none; cursor:pointer;">Explore Stays</button>
         <div class="menu-trigger" onclick="toggleDrawer()">
             <span></span>
             <span></span>
@@ -364,12 +461,12 @@ footer a{ color:#ddd; text-decoration:none; }
 
             <div class="drawer-card">
                 <h4>The Hideout Club</h4>
-                <p>Unlock member-only tariffs, early check-in privileges, and complimentary bonfire setups. Stay 1 night to level up!</p>
+                <p>Unlock member-only tariffs, early check-in privileges, and complimentary bonfire setups in Himachal. Stay 1 night to level up!</p>
             </div>
 
             <div class="drawer-card">
-                <h4>Our Manifesto</h4>
-                <p>Every outpost featured in our index passes a strict acoustic decibel audit and geographic separation test before listing.</p>
+                <h4>Himachal Quiet Manifesto</h4>
+                <p>Every outpost featured in our index passes a strict acoustic decibel audit and geographic separation test in Barot, Tirthan & Manali.</p>
             </div>
         </div>
     </div>
@@ -382,7 +479,7 @@ footer a{ color:#ddd; text-decoration:none; }
 <section class="hero">
     <div class="hero-content">
         <h1>Hidden Places.<br>Unforgettable Stays.</h1>
-        <p>Discover unique architectural gems tucked away from the crowd.</p>
+        <p>Discover unique architectural gems tucked away in Himachali valleys.</p>
     </div>
 </section>
 
@@ -391,7 +488,7 @@ footer a{ color:#ddd; text-decoration:none; }
         <div class="search-item">
             <label>Destination</label>
             <select id="search-location" onchange="filterStays()">
-                <option value="ALL">All Valleys</option>
+                <option value="ALL">All Valleys (Himachal)</option>
                 <option value="Barot Valley">Barot Valley, HP</option>
                 <option value="Tirthan Valley">Tirthan Valley, HP</option>
                 <option value="Manali">Manali, HP</option>
@@ -410,7 +507,7 @@ footer a{ color:#ddd; text-decoration:none; }
 </div>
 
 <section class="section" id="featured-section">
-    <h2 class="section-title">Curated Mountain Cabins</h2>
+    <h2 class="section-title">Curated Himachal Mountain Cabins</h2>
     <div class="stays-grid" id="property-grid">
         
         <div class="card property-card" data-location="Barot Valley">
@@ -421,7 +518,10 @@ footer a{ color:#ddd; text-decoration:none; }
                     <div class="card-location">Barot Valley, Himachal</div>
                     <div class="card-price">₹4,500 / night</div>
                 </div>
-                <button class="card-book-btn" onclick="openPaymentModal('Trout Stream Cabin', 'Barot Valley', 4500)">Book Stay</button>
+                <div class="card-btn-group">
+                    <button class="card-explore-btn" onclick="openExploreModal('Trout Stream Cabin', 'Barot Valley, Himachal', '4,500', 'https://images.unsplash.com/photo-1626602411112-10742f9a3af8?auto=format&fit=crop&w=800&q=80', 'Charming riverside log shelter overlooking the clean, rushing trout streams of Barot Valley. Private bonfire lawn, mountain views, and organic estate kitchen.')">View Details</button>
+                    <button class="card-book-btn" onclick="openPaymentModal('Trout Stream Cabin', 'Barot Valley', 4500)">Book Stay</button>
+                </div>
             </div>
         </div>
 
@@ -433,7 +533,10 @@ footer a{ color:#ddd; text-decoration:none; }
                     <div class="card-location">Tirthan Valley, Himachal</div>
                     <div class="card-price">₹6,200 / night</div>
                 </div>
-                <button class="card-book-btn" onclick="openPaymentModal('Pinecrest Treehouse', 'Tirthan Valley', 6200)">Book Stay</button>
+                <div class="card-btn-group">
+                    <button class="card-explore-btn" onclick="openExploreModal('Pinecrest Treehouse', 'Tirthan Valley, Himachal', '6,200', 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80', 'High-elevation wooden glass treehouse setup wrapped inside pine woods with waterfall trail paths nearby.')">View Details</button>
+                    <button class="card-book-btn" onclick="openPaymentModal('Pinecrest Treehouse', 'Tirthan Valley', 6200)">Book Stay</button>
+                </div>
             </div>
         </div>
 
@@ -442,15 +545,48 @@ footer a{ color:#ddd; text-decoration:none; }
             <div class="card-content">
                 <div>
                     <div class="card-title">Apple Grove Lodge</div>
-                    <div class="card-location">Manali, Himachal</div>
+                    <div class="card-location">Manali Outskirts, Himachal</div>
                     <div class="card-price">₹5,000 / night</div>
                 </div>
-                <button class="card-book-btn" onclick="openPaymentModal('Apple Grove Lodge', 'Manali Outskirts', 5000)">Book Stay</button>
+                <div class="card-btn-group">
+                    <button class="card-explore-btn" onclick="openExploreModal('Apple Grove Lodge', 'Manali Outskirts, Himachal', '5,000', 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=800&q=80', 'A traditional raw stone chalet completely isolated inside apple orchards away from town centers.')">View Details</button>
+                    <button class="card-book-btn" onclick="openPaymentModal('Apple Grove Lodge', 'Manali Outskirts', 5000)">Book Stay</button>
+                </div>
             </div>
         </div>
 
     </div>
 </section>
+
+<div class="explore-modal" id="explore-modal">
+    <div class="explore-card-box">
+        <button class="modal-close-btn" onclick="closeExploreModal()" style="color:#a8bba5;">✕</button>
+        <img id="explore-img" src="" alt="Cabin Preview">
+        
+        <div class="explore-header">
+            <h3 id="explore-title">Cabin Title</h3>
+            <p id="explore-location">Himachal Valley</p>
+        </div>
+
+        <p id="explore-desc" style="font-size: 13px; color: #a8bba5; line-height: 1.7; margin-bottom: 20px;"></p>
+
+        <h4 style="font-size: 14px; color: #d4af37; text-transform: uppercase; letter-spacing: 1px;">Included Amenities</h4>
+        <div class="amenities-grid">
+            <div class="amenity-item">🌲 High-Speed Wi-Fi</div>
+            <div class="amenity-item">🔥 Private Bonfire Setup</div>
+            <div class="amenity-item">🍳 Local Estate Kitchen</div>
+            <div class="amenity-item">🏔️ Panoramic Peak Views</div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+            <div>
+                <span style="font-size: 11px; color: #8fae90; text-transform: uppercase;">Tariff Rate</span>
+                <div style="font-size: 20px; font-weight: 700; color: #ffffff;" id="explore-price">₹0</div>
+            </div>
+            <button class="card-book-btn" id="explore-book-trigger" style="width: auto; padding: 12px 25px;">Proceed to Book</button>
+        </div>
+    </div>
+</div>
 
 <div class="payment-modal" id="secure-payment-drawer">
     <div class="payment-card-box">
@@ -495,11 +631,11 @@ footer a{ color:#ddd; text-decoration:none; }
     <div class="footer-grid">
         <div>
             <span style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 18px; letter-spacing: 2px;">THE HIDE</span>
-            <p style="margin-top: 10px; font-size: 13px; color: #a8bba5;">Curated stays in hidden places.</p>
+            <p style="margin-top: 10px; font-size: 13px; color: #a8bba5;">Curated stays in hidden places in Himachal.</p>
         </div>
         <div>
             <h3>Explore</h3>
-            <ul><li><a href="#featured-section">Destinations</a></li></ul>
+            <ul><li><a href="#featured-section">Himachal Outposts</a></li></ul>
         </div>
         <div>
             <h3>Company</h3>
@@ -507,7 +643,7 @@ footer a{ color:#ddd; text-decoration:none; }
         </div>
         <div>
             <h3>Support</h3>
-            <ul><li><a href="javascript:void(0)" onclick="toggleDrawer()">Referral Code</a></li></ul>
+            <ul><li><a href="javascript:void(0)" onclick="toggleDrawer()">Referral Program</a></li></ul>
         </div>
     </div>
 </footer>
@@ -530,13 +666,16 @@ footer a{ color:#ddd; text-decoration:none; }
     let isDiscountApplied = false;
     let activeDiscountPercent = 0;
 
-    // Toggle Side Drawer
     function toggleDrawer() {
         document.getElementById('drawer-overlay').classList.toggle('active');
         document.getElementById('side-drawer').classList.toggle('active');
     }
 
-    // Set Min Date
+    function scrollToStays() {
+        document.getElementById('featured-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Set Min Date constraint
     const today = new Date();
     const tomorrowStr = new Date(today.getTime() + 24 * 60 * 60 * 1000).toISOString().split('T')[0];
     document.getElementById('checkin-date').min = tomorrowStr;
@@ -569,7 +708,29 @@ footer a{ color:#ddd; text-decoration:none; }
 
     function applySearchFilter() {
         filterStays();
-        document.getElementById('featured-section').scrollIntoView({ behavior: 'smooth' });
+        scrollToStays();
+    }
+
+    // Open Explore Details Modal
+    function openExploreModal(title, location, price, img, desc) {
+        document.getElementById('explore-title').innerText = title;
+        document.getElementById('explore-location').innerText = location;
+        document.getElementById('explore-price').innerText = `₹${price} / night`;
+        document.getElementById('explore-img').src = img;
+        document.getElementById('explore-desc').innerText = desc;
+
+        const numericPrice = parseInt(price.replace(/,/g, ''));
+        const bookBtn = document.getElementById('explore-book-trigger');
+        bookBtn.onclick = function() {
+            closeExploreModal();
+            openPaymentModal(title, location.split(',')[0], numericPrice);
+        };
+
+        document.getElementById('explore-modal').style.display = 'flex';
+    }
+
+    function closeExploreModal() {
+        document.getElementById('explore-modal').style.display = 'none';
     }
 
     function openPaymentModal(propertyName, regionName, pricePerNight) {
