@@ -157,7 +157,7 @@ header{
 .drawer-menu-list {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 20px;
 }
 
 .drawer-card {
@@ -264,7 +264,7 @@ header{
 
 /* STAYS SECTION */
 .section{ padding:80px 8%; }
-.section-title{ font-family: 'Playfair Display', serif; font-size: 32px; margin-bottom: 30px; color: #1c1917; }
+.section-title{ font-family: 'Playfair Display', serif; font-size: 32px; margin-bottom: 30px; color: #1c1917; text-align: center; }
 .stays-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:30px; }
 .card{ background:white; border-radius:20px; overflow:hidden; display: flex; flex-direction: column; box-shadow:0 10px 25px rgba(0,0,0,0.03); transition: transform 0.3s; }
 .card:hover{ transform: translateY(-5px); }
@@ -306,74 +306,83 @@ header{
 
 .card-book-btn:hover { background: #1c241d; }
 
-/* EXPLORE STAY DETAILS MODAL */
-.explore-modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(12, 18, 13, 0.9);
-    backdrop-filter: blur(10px);
-    z-index: 25000;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
+/* LOYALTY CLUB STYLES */
+.loyalty-section { background: #121713; color: white; padding: 80px 8%; border-top: 1px solid rgba(212, 175, 55, 0.2); }
+.loyalty-container { max-width: 1100px; margin: 0 auto; }
 
-.explore-card-box {
-    background: #121713;
-    color: #f8f6f2;
-    max-width: 650px;
-    width: 100%;
-    max-height: 90vh;
-    border-radius: 24px;
-    padding: 30px;
-    position: relative;
-    overflow-y: auto;
+.loyalty-dashboard {
+    background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(212, 175, 55, 0.3);
-    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.explore-card-box img {
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
-    border-radius: 16px;
-    margin-bottom: 20px;
-}
-
-.explore-header h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 26px;
-    color: #d4af37;
-}
-
-.explore-header p {
-    font-size: 12px;
-    color: #a8bba5;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 15px;
-}
-
-.amenities-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin: 20px 0;
-    padding: 15px;
-    background: rgba(255,255,255,0.03);
-    border-radius: 14px;
-    border: 1px solid rgba(255,255,255,0.05);
-}
-
-.amenity-item {
-    font-size: 12px;
-    color: #e5e5e0;
+.loyalty-input-group {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
 }
+
+.loyalty-input-group label { font-size: 13px; color: #a8bba5; }
+.loyalty-input-group input { background: transparent; border: none; color: #d4af37; font-size: 18px; font-weight: 700; width: 50px; text-align: center; outline: none; }
+
+.loyalty-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+
+.loyalty-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 30px;
+    transition: all 0.3s ease;
+}
+
+.loyalty-card.active-card {
+    border-color: #d4af37;
+    background: rgba(212, 175, 55, 0.08);
+    transform: translateY(-5px);
+}
+
+.loyalty-card h4 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 5px; color: #d4af37; }
+.loyalty-card .tier-sub { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #a8bba5; margin-bottom: 20px; }
+.loyalty-card ul { list-style: none; font-size: 13px; color: #d6d3d1; display: flex; flex-direction: column; gap: 12px; }
+
+/* REVIEWS SECTION */
+.reviews-section { background: #f8f6f2; padding: 80px 8%; border-top: 1px solid rgba(0,0,0,0.05); }
+.reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
+.review-card { background: #ffffff; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.03); display: flex; flex-direction: column; justify-content: space-between; }
+.review-stars { color: #d4af37; font-size: 16px; margin-bottom: 12px; }
+.review-text { font-size: 13px; color: #555; line-height: 1.7; font-style: italic; margin-bottom: 20px; }
+.review-author { font-weight: 700; font-size: 14px; color: #1c1917; }
+.review-location { font-size: 11px; color: #80807b; text-transform: uppercase; letter-spacing: 1px; }
+
+.review-btn-container { text-align: center; margin-top: 40px; }
+.btn-submit-review { background: #314232; color: white; border: none; padding: 12px 30px; border-radius: 30px; font-weight: 600; font-size: 13px; cursor: pointer; transition: background 0.2s; }
+.btn-submit-review:hover { background: #1c241d; }
+
+/* REVIEW SUBMISSION MODAL */
+.review-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(12, 18, 13, 0.9); backdrop-filter: blur(10px); z-index: 26000; justify-content: center; align-items: center; padding: 20px; }
+.review-modal-box { background: #121713; color: #f8f6f2; max-width: 450px; width: 100%; border-radius: 24px; padding: 30px; border: 1px solid rgba(212, 175, 55, 0.3); position: relative; }
+.review-modal-box input, .review-modal-box textarea, .review-modal-box select { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid rgba(212, 175, 55, 0.3); color: white; padding: 12px; border-radius: 12px; margin-bottom: 15px; outline: none; font-family: 'Poppins', sans-serif; font-size: 13px; }
+
+/* EXPLORE STAY DETAILS MODAL */
+.explore-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(12, 18, 13, 0.9); backdrop-filter: blur(10px); z-index: 25000; justify-content: center; align-items: center; padding: 20px; }
+.explore-card-box { background: #121713; color: #f8f6f2; max-width: 650px; width: 100%; max-height: 90vh; border-radius: 24px; padding: 30px; position: relative; overflow-y: auto; border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
+.explore-card-box img { width: 100%; height: 280px; object-fit: cover; border-radius: 16px; margin-bottom: 20px; }
+.explore-header h3 { font-family: 'Playfair Display', serif; font-size: 26px; color: #d4af37; }
+.explore-header p { font-size: 12px; color: #a8bba5; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px; }
+
+.amenities-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 20px 0; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 14px; border: 1px solid rgba(255,255,255,0.05); }
+.amenity-item { font-size: 12px; color: #e5e5e0; display: flex; align-items: center; gap: 8px; }
 
 /* CHECKOUT DRAWER / MODAL */
 .payment-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 15, 0.85); backdrop-filter: blur(10px); z-index: 20000; justify-content: center; align-items: center; padding: 20px; }
@@ -415,7 +424,7 @@ footer a{ color:#ddd; text-decoration:none; }
     .hero h1{ font-size:42px; }
     .search-box{ grid-template-columns:1fr; gap:15px; margin-top: -40px; }
     .search-item { border-right: none; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 10px; }
-    .stays-grid, .footer-grid { grid-template-columns:1fr; }
+    .stays-grid, .footer-grid, .loyalty-grid, .reviews-grid { grid-template-columns:1fr; }
 }
 </style>
 </head>
@@ -454,19 +463,19 @@ footer a{ color:#ddd; text-decoration:none; }
         </div>
 
         <div class="drawer-menu-list">
-            <div class="drawer-card">
-                <h4>Give 10%, Get 10%</h4>
-                <p>Have a referral code? Use promo code <strong style="color:#d4af37;">NEWHIDE</strong> at checkout for an instant 10% discount on your deposit token!</p>
-            </div>
-
-            <div class="drawer-card">
+            <div class="drawer-card" onclick="toggleDrawer(); scrollToSection('loyalty-club');" style="cursor: pointer;">
                 <h4>The Hideout Club</h4>
                 <p>Unlock member-only tariffs, early check-in privileges, and complimentary bonfire setups. Stay 1 night to level up!</p>
             </div>
 
+            <div class="drawer-card" onclick="toggleDrawer(); scrollToSection('reviews');" style="cursor: pointer;">
+                <h4>Verified Guest Reviews</h4>
+                <p>See real feedback and ratings from travelers who stayed at our curated mountain retreats.</p>
+            </div>
+
             <div class="drawer-card">
-                <h4>Quiet Manifesto</h4>
-                <p>Every outpost featured in our index passes a strict acoustic decibel audit and geographic separation test in Barot, Tirthan & Manali.</p>
+                <h4>Give 10%, Get 10%</h4>
+                <p>Have a referral code? Use promo code <strong style="color:#d4af37;">NEWHIDE</strong> at checkout for an instant 10% discount on your deposit token!</p>
             </div>
         </div>
     </div>
@@ -558,6 +567,122 @@ footer a{ color:#ddd; text-decoration:none; }
     </div>
 </section>
 
+<section class="loyalty-section" id="loyalty-club">
+    <div class="loyalty-container">
+        <div class="section-title">
+            <h2 style="color: #d4af37;">The Hideout Club</h2>
+            <p style="color: #a8bba5; font-size: 13px; margin-top: 8px;">Unlock member-only tariffs, visual perks, and priority space allocations.</p>
+        </div>
+
+        <div class="loyalty-dashboard">
+            <div>
+                <h3 id="current-tier-title" style="font-family:'Playfair Display',serif; font-size:24px; color:#ffffff;">Explorer Account</h3>
+                <p id="current-tier-perks" style="font-size:12px; color:#a8bba5; margin-top:4px;">Stay 1 night to level up to Wanderer Tier!</p>
+            </div>
+            <div class="loyalty-input-group">
+                <label for="loyalty-nights-input">Nights Stayed Logged:</label>
+                <input type="number" id="loyalty-nights-input" value="0" min="0" max="30" oninput="calculateLoyaltyTier()">
+            </div>
+        </div>
+
+        <div class="loyalty-grid">
+            <div class="loyalty-card active-card" id="card-tier-1">
+                <h4>Explorer</h4>
+                <div class="tier-sub">Level 01 • 0 Nights</div>
+                <ul>
+                    <li>✓ Access to hidden platform map layouts</li>
+                    <li>✓ 24/7 Response Support Routing</li>
+                </ul>
+            </div>
+
+            <div class="loyalty-card" id="card-tier-2">
+                <h4>Wanderer</h4>
+                <div class="tier-sub">Level 02 • 1 to 5 Nights</div>
+                <ul>
+                    <li>✓ Priority booking reservation slots</li>
+                    <li style="color: #d4af37; font-weight: 600;">✓ 5% Flat Booking Discount</li>
+                    <li>✓ Early Check-in Privileges</li>
+                </ul>
+            </div>
+
+            <div class="loyalty-card" id="card-tier-3">
+                <h4>Inner Circle</h4>
+                <div class="tier-sub">Level 03 • 6+ Nights</div>
+                <ul>
+                    <li>✓ Priority access to weekend drop slots</li>
+                    <li style="color: #d4af37; font-weight: 600;">✓ 10% Lifetime Tariff Slash</li>
+                    <li>✓ Free Bonfire & Treks</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="reviews-section" id="reviews">
+    <h2 class="section-title">Verified Guest Reviews</h2>
+    <p style="text-align: center; font-size: 13px; color: #78716c; margin-top: -20px;">Real feedback from travelers who stayed at our curated escapes.</p>
+
+    <div class="reviews-grid" id="reviews-grid-container">
+        <div class="review-card">
+            <div>
+                <div class="review-stars">★★★★★</div>
+                <div class="review-text">"Waking up right next to the rushing river in Barot Valley was magic. Unmatched peace and super smooth UPI booking."</div>
+            </div>
+            <div>
+                <div class="review-author">Ananya Sharma</div>
+                <div class="review-location">Stayed at Trout Stream Cabin</div>
+            </div>
+        </div>
+
+        <div class="review-card">
+            <div>
+                <div class="review-stars">★★★★★</div>
+                <div class="review-text">"The treehouse in Tirthan was insanely clean and private. Used code NEWHIDE for deposit discount. 10/10 recommendation!"</div>
+            </div>
+            <div>
+                <div class="review-author">Rohan Kapoor</div>
+                <div class="review-location">Stayed at Pinecrest Treehouse</div>
+            </div>
+        </div>
+
+        <div class="review-card">
+            <div>
+                <div class="review-stars">★★★★★</div>
+                <div class="review-text">"Tucked inside apple trees away from Manali crowd. Exactly what we needed for a quiet weekend retreat."</div>
+            </div>
+            <div>
+                <div class="review-author">Vikram Mehta</div>
+                <div class="review-location">Stayed at Apple Grove Lodge</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="review-btn-container">
+        <button class="btn-submit-review" onclick="openReviewModal()">+ Write a Guest Review</button>
+    </div>
+</section>
+
+<div class="review-modal" id="review-modal">
+    <div class="review-modal-box">
+        <button class="modal-close-btn" onclick="closeReviewModal()" style="color:#a8bba5;">✕</button>
+        <h3 style="font-family:'Playfair Display',serif; color:#d4af37; font-size:22px; margin-bottom:15px;">Write a Review</h3>
+        
+        <input type="text" id="review-author-input" placeholder="Your Name">
+        <select id="review-cabin-input">
+            <option value="Trout Stream Cabin">Trout Stream Cabin</option>
+            <option value="Pinecrest Treehouse">Pinecrest Treehouse</option>
+            <option value="Apple Grove Lodge">Apple Grove Lodge</option>
+        </select>
+        <select id="review-rating-input">
+            <option value="5">★★★★★ (5/5 Excellent)</option>
+            <option value="4">★★★★☆ (4/5 Very Good)</option>
+        </select>
+        <textarea id="review-text-input" rows="4" placeholder="Share your stay experience..."></textarea>
+        
+        <button onclick="submitGuestReview()" style="width:100%; background:#d4af37; color:#121713; border:none; padding:12px; border-radius:12px; font-weight:700; cursor:pointer;">Submit Review</button>
+    </div>
+</div>
+
 <div class="explore-modal" id="explore-modal">
     <div class="explore-card-box">
         <button class="modal-close-btn" onclick="closeExploreModal()" style="color:#a8bba5;">✕</button>
@@ -643,7 +768,10 @@ footer a{ color:#ddd; text-decoration:none; }
         </div>
         <div>
             <h3>Support</h3>
-            <ul><li><a href="javascript:void(0)" onclick="toggleDrawer()">Referral Program</a></li></ul>
+            <ul>
+                <li><a href="#loyalty-club">Hideout Club</a></li>
+                <li><a href="#reviews">Guest Reviews</a></li>
+            </ul>
         </div>
     </div>
 </footer>
@@ -671,8 +799,12 @@ footer a{ color:#ddd; text-decoration:none; }
         document.getElementById('side-drawer').classList.toggle('active');
     }
 
+    function scrollToSection(id) {
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
     function scrollToStays() {
-        document.getElementById('featured-section').scrollIntoView({ behavior: 'smooth' });
+        scrollToSection('featured-section');
     }
 
     // Set Min Date constraint
@@ -711,7 +843,78 @@ footer a{ color:#ddd; text-decoration:none; }
         scrollToStays();
     }
 
-    // Open Explore Details Modal
+    /* LOYALTY TIER CALCULATION */
+    function calculateLoyaltyTier() {
+        const nightsVal = parseInt(document.getElementById('loyalty-nights-input').value) || 0;
+        
+        const title = document.getElementById('current-tier-title');
+        const perks = document.getElementById('current-tier-perks');
+        
+        const c1 = document.getElementById('card-tier-1');
+        const c2 = document.getElementById('card-tier-2');
+        const c3 = document.getElementById('card-tier-3');
+
+        c1.classList.remove('active-card');
+        c2.classList.remove('active-card');
+        c3.classList.remove('active-card');
+
+        if (nightsVal === 0) {
+            title.innerText = "Explorer Account";
+            perks.innerText = "Stay 1 night to level up to Wanderer Tier!";
+            c1.classList.add('active-card');
+        } else if (nightsVal >= 1 && nightsVal <= 5) {
+            title.innerText = "Wanderer Tier Active";
+            perks.innerText = "5% flat discount active on your bookings.";
+            c2.classList.add('active-card');
+        } else {
+            title.innerText = "Inner Circle Member";
+            perks.innerText = "10% lifetime tariff slash unlocked!";
+            c3.classList.add('active-card');
+        }
+    }
+
+    /* REVIEWS FUNCTIONS */
+    function openReviewModal() {
+        document.getElementById('review-modal').style.display = 'flex';
+    }
+
+    function closeReviewModal() {
+        document.getElementById('review-modal').style.display = 'none';
+    }
+
+    function submitGuestReview() {
+        const author = document.getElementById('review-author-input').value.trim();
+        const cabin = document.getElementById('review-cabin-input').value;
+        const rating = document.getElementById('review-rating-input').value;
+        const text = document.getElementById('review-text-input').value.trim();
+
+        if (!author || !text) {
+            alert("Please provide your name and review details.");
+            return;
+        }
+
+        const starsStr = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+        const container = document.getElementById('reviews-grid-container');
+
+        const newCard = document.createElement('div');
+        newCard.className = 'review-card';
+        newCard.innerHTML = `
+            <div>
+                <div class="review-stars">${starsStr}</div>
+                <div class="review-text">"${text}"</div>
+            </div>
+            <div>
+                <div class="review-author">${author}</div>
+                <div class="review-location">Stayed at ${cabin}</div>
+            </div>
+        `;
+
+        container.prepend(newCard);
+        closeReviewModal();
+        alert("Thank you! Your guest review has been posted successfully.");
+    }
+
+    /* EXPLORE STAY MODAL */
     function openExploreModal(title, location, price, img, desc) {
         document.getElementById('explore-title').innerText = title;
         document.getElementById('explore-location').innerText = location;
@@ -843,3 +1046,4 @@ footer a{ color:#ddd; text-decoration:none; }
 </script>
 </body>
 </html>
+
