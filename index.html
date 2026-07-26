@@ -241,6 +241,28 @@
         .booking-side-drawer.active { right: 0; }
         .close-drawer-btn { position: absolute; top: 20px; right: 20px; background: transparent; border: none; color: #a8bba5; font-size: 22px; cursor: pointer; }
 
+        /* 4-STEP CHECKOUT PROGRESS TABS BAR */
+        .step-progress-bar {
+            display: flex; justify-content: space-between; border-bottom: 1px solid rgba(212,175,55,0.25);
+            padding-bottom: 12px; margin-bottom: 20px; text-align: center;
+        }
+        .step-tab {
+            flex: 1; font-size: 10px; color: #888; font-weight: 600; text-transform: uppercase;
+            position: relative; cursor: pointer; padding: 4px; transition: color 0.2s ease;
+        }
+        .step-tab.active { color: #d4af37; font-weight: 700; }
+        .step-tab.completed { color: #22c55e; }
+        .step-tab-num {
+            display: block; width: 22px; height: 22px; line-height: 20px; border-radius: 50%;
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);
+            margin: 0 auto 4px auto; font-size: 10px;
+        }
+        .step-tab.active .step-tab-num { background: #d4af37; color: #000; border-color: #d4af37; font-weight: 800; }
+        .step-tab.completed .step-tab-num { background: #22c55e; color: #000; border-color: #22c55e; }
+
+        .step-content-pane { display: none; }
+        .step-content-pane.active { display: block; }
+
         .stay-summary-mini { background: rgba(255,255,255,0.03); border: 1px dashed rgba(212, 175, 55, 0.4); border-radius: 12px; padding: 12px 15px; display: flex; justify-content: space-between; margin: 15px 0; font-size: 12px; }
         .input-group { margin-bottom: 12px; display: flex; flex-direction: column; text-align: left; }
         .input-group label { font-size: 10px; text-transform: uppercase; color: #d4af37; margin-bottom: 4px; letter-spacing: 1px; }
@@ -260,6 +282,8 @@
         .pay-desc { font-size: 10px; color: #a8bba5; margin-top: 2px; }
 
         .submit-booking-btn { width: 100%; background: #d4af37; color: #121713; border: none; padding: 14px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; margin-top: 15px; }
+        .back-step-btn { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #a8bba5; padding: 12px 18px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; }
+        
         .whatsapp-voucher-btn { width: 100%; background: #22c55e; color: #ffffff; border: none; padding: 14px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; margin-top: 10px; display: flex; justify-content: center; align-items: center; gap: 8px; }
 
         .confirmation-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 15px; text-align: left; font-size: 12px; line-height: 1.8; }
@@ -273,7 +297,8 @@
         .amenity-chip { background: rgba(255,255,255,0.04); border: 1px solid rgba(212,175,55,0.2); padding: 8px 10px; border-radius: 8px; font-size: 11px; color: #a8bba5; display: flex; align-items: center; gap: 8px; }
         .amenity-chip i { color: #d4af37; width: 16px; text-align: center; }
 
-        .room-category-card { background: rgba(0,0,0,0.3); border: 1px solid rgba(212,175,55,0.25); border-radius: 10px; padding: 12px; margin-bottom: 10px; text-align: left; display: flex; justify-content: space-between; align-items: center; }
+        .room-category-card { background: rgba(0,0,0,0.3); border: 1px solid rgba(212,175,55,0.25); border-radius: 10px; padding: 12px; margin-bottom: 10px; text-align: left; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: all 0.2s ease; }
+        .room-category-card.selected { border-color: #d4af37; background: rgba(212,175,55,0.1); }
         .room-cat-name { font-weight: 700; color: #f8f6f2; font-size: 12px; }
         .room-cat-desc { font-size: 10px; color: #a8bba5; }
 
@@ -434,7 +459,7 @@
                         </div>
                         <div class="btn-group">
                             <button class="view-details-btn" onclick="openPropertyDetails('Cedar Wood Riverside Cabin', 'Barot Valley, Mandi', 4800, 'prop-1')">View Details</button>
-                            <button class="book-btn" onclick="openPaymentModal('Cedar Wood Riverside Cabin', 'Barot Valley', 4800)">Select Room →</button>
+                            <button class="book-btn" onclick="openPaymentModal('Cedar Wood Riverside Cabin', 'Barot Valley', 4800, 'prop-1')">Select Room →</button>
                         </div>
                     </div>
                 </div>
@@ -475,7 +500,7 @@
                         </div>
                         <div class="btn-group">
                             <button class="view-details-btn" onclick="openPropertyDetails('The Secret Pine Cottage', 'Tirthan Valley, Kullu', 5500, 'prop-2')">View Details</button>
-                            <button class="book-btn" onclick="openPaymentModal('The Secret Pine Cottage', 'Tirthan Valley', 5500)">Select Room →</button>
+                            <button class="book-btn" onclick="openPaymentModal('The Secret Pine Cottage', 'Tirthan Valley', 5500, 'prop-2')">Select Room →</button>
                         </div>
                     </div>
                 </div>
@@ -516,7 +541,7 @@
                         </div>
                         <div class="btn-group">
                             <button class="view-details-btn" onclick="openPropertyDetails('Ridge View Glass Loft', 'Jhatingri, Joginder Nagar', 6200, 'prop-3')">View Details</button>
-                            <button class="book-btn" onclick="openPaymentModal('Ridge View Glass Loft', 'Joginder Nagar', 6200)">Select Room →</button>
+                            <button class="book-btn" onclick="openPaymentModal('Ridge View Glass Loft', 'Joginder Nagar', 6200, 'prop-3')">Select Room →</button>
                         </div>
                     </div>
                 </div>
@@ -545,7 +570,7 @@
                 </div>
                 <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.1); padding-top:15px; margin-top:10px;">
                     <div><span style="font-size:18px; font-weight:700; color:#d4af37;">₹12,499</span> <span style="font-size:10px; color:#a8bba5;">/ person</span></div>
-                    <button class="book-btn" onclick="openPaymentModal('Delhi to Himachal Travel Package', 'Himachal Circuit', 12499)">Select Package</button>
+                    <button class="book-btn" onclick="openPaymentModal('Delhi to Himachal Travel Package', 'Himachal Circuit', 12499, 'prop-1')">Select Package</button>
                 </div>
             </div>
 
@@ -563,7 +588,7 @@
                 </div>
                 <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.1); padding-top:15px; margin-top:10px;">
                     <div><span style="font-size:18px; font-weight:700; color:#d4af37;">₹9,800</span> <span style="font-size:10px; color:#a8bba5;">/ person</span></div>
-                    <button class="book-btn" onclick="openPaymentModal('Chandigarh to Himachal Package', 'Mandi Circuit', 9800)">Select Package</button>
+                    <button class="book-btn" onclick="openPaymentModal('Chandigarh to Himachal Package', 'Mandi Circuit', 9800, 'prop-1')">Select Package</button>
                 </div>
             </div>
         </div>
@@ -594,8 +619,6 @@
 
     <section class="section-container" id="reviews">
         <h2 class="section-title">Verified Guest Reviews</h2>
-        <p class="section-sub">Authentic feedback from remote workers and travelers</p>
-
         <div class="reviews-grid">
             <div class="review-card">
                 <div class="review-stars">★★★★★</div>
@@ -654,7 +677,7 @@
         </div>
     </div>
 
-    <!-- MMT-STYLE PROPERTY DETAIL & ROOM CATEGORIES MODAL -->
+    <!-- PROPERTY DETAIL MODAL -->
     <div class="booking-drawer-overlay" id="details-drawer-overlay" onclick="closePropertyDetails()"></div>
     <div class="booking-side-drawer" id="details-side-drawer">
         <button class="close-drawer-btn" onclick="closePropertyDetails()">✕</button>
@@ -668,14 +691,12 @@
         <h3 id="detail-modal-title" style="font-family:'Playfair Display', serif; font-size:22px; color:#d4af37;">Property Name</h3>
         <p id="detail-modal-location" style="font-size:11px; color:#a8bba5; margin-bottom:12px;"><i class="fa-solid fa-location-dot"></i> Location</p>
 
-        <!-- PROPERTY OVERVIEW & ACTIVITIES -->
         <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(212,175,55,0.25); border-radius:12px; padding:12px; margin-bottom:12px; text-align:left;">
             <div style="font-size:10px; font-weight:700; color:#d4af37; margin-bottom:4px; text-transform:uppercase;">Overview & Experiences</div>
             <p id="detail-modal-overview" style="font-size:11px; color:#a8bba5; line-height:1.5;">Peaceful mountain retreat surrounded by cedar pine forests.</p>
             <div style="font-size:11px; color:#d4af37; font-weight:600; margin-top:8px;" id="detail-modal-activities">🔥 Bonfire | 🎣 Trout Fishing | 🏔️ Ridge Trekking</div>
         </div>
 
-        <!-- FULL AMENITIES CATALOG (MATCHING MMT DRAWERS) -->
         <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(212,175,55,0.25); border-radius:12px; padding:12px; margin-bottom:12px;">
             <div style="font-size:10px; font-weight:700; color:#d4af37; margin-bottom:8px; text-transform:uppercase;">Amenities Catalog</div>
             <div class="amenities-catalog-grid">
@@ -690,118 +711,87 @@
             </div>
         </div>
 
-        <!-- ROOM CATEGORIES & RATES -->
-        <div style="margin-bottom:12px;">
-            <div style="font-size:10px; font-weight:700; color:#d4af37; margin-bottom:8px; text-transform:uppercase; text-align:left;">Select Room Category</div>
-            <div class="room-category-card">
-                <div>
-                    <div class="room-cat-name">Standard Pine Room</div>
-                    <div class="room-cat-desc">Double bed + Fiber Wi-Fi</div>
-                </div>
-                <div style="font-weight:700; color:#d4af37; font-size:12px;" id="cat-price-std">₹3,800/night</div>
-            </div>
-            <div class="room-category-card" style="border-color:#d4af37;">
-                <div>
-                    <div class="room-cat-name">Deluxe View Suite</div>
-                    <div class="room-cat-desc">Private Balcony + Work Desk + Breakfast</div>
-                </div>
-                <div style="font-weight:700; color:#d4af37; font-size:12px;" id="cat-price-dlx">₹4,800/night</div>
-            </div>
-        </div>
-
-        <button class="submit-booking-btn" id="detail-modal-book-btn">Proceed to Reserve Room →</button>
+        <button class="submit-booking-btn" id="detail-modal-book-btn">Proceed to Select Room →</button>
     </div>
 
-    <!-- WISHLIST DRAWER -->
-    <div class="booking-drawer-overlay" id="wishlist-drawer-overlay" onclick="closeWishlistDrawer()"></div>
-    <div class="booking-side-drawer" id="wishlist-side-drawer" style="max-width: 480px;">
-        <button class="close-drawer-btn" onclick="closeWishlistDrawer()">✕</button>
-        <h3 style="font-family:'Playfair Display', serif; font-size:22px; color:#ef4444; margin-bottom:5px;"><i class="fa-solid fa-heart"></i> Saved Wishlist</h3>
-        <p style="font-size:11px; color:#a8bba5; margin-bottom:20px;">Your favorite saved mountain stays for easy future access.</p>
-
-        <div id="wishlist-items-container">
-            <p style="font-size:12px; color:#a8bba5; text-align:center;">No saved stays yet. Click the heart icon on any stay card to save it here!</p>
-        </div>
-    </div>
-
-    <!-- SUPPORT DRAWER -->
-    <div class="booking-drawer-overlay" id="support-drawer-overlay" onclick="toggleSupportDrawer()"></div>
-    <div class="booking-side-drawer" id="support-side-drawer">
-        <button class="close-drawer-btn" onclick="toggleSupportDrawer()">✕</button>
-        <h3 style="font-family:'Playfair Display', serif; font-size:22px; color:#d4af37; margin-bottom:10px;"><i class="fa-solid fa-headset"></i> Guest Support</h3>
-        <p style="font-size:12px; color:#a8bba5; margin-bottom:20px;">We are available 24/7 for booking inquiries, complaints, and host assistance.</p>
-
-        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(212,175,55,0.3); border-radius:12px; padding:15px; margin-bottom:20px; text-align:left; font-size:12px;">
-            <p style="margin-bottom:8px;"><i class="fa-solid fa-envelope" style="color:#d4af37;"></i> <strong>Email Support:</strong> hiddenstays.in@gmail.com</p>
-            <p style="margin-bottom:8px;"><i class="fa-solid fa-phone" style="color:#d4af37;"></i> <strong>Phone:</strong> +91 8219747857</p>
-            <p style="margin-bottom:8px;"><i class="fa-brands fa-whatsapp" style="color:#22c55e;"></i> <strong>WhatsApp:</strong> +91 8219747857</p>
-            <p><i class="fa-solid fa-location-dot" style="color:#d4af37;"></i> <strong>HQ:</strong> Joginder Nagar, Distt. Mandi (H.P.)</p>
-        </div>
-
-        <form onsubmit="handleSupportSubmit(event)">
-            <div class="input-group">
-                <label>Your Name</label>
-                <input type="text" required placeholder="Enter name">
-            </div>
-            <div class="input-group">
-                <label>Message / Question / Complaint</label>
-                <textarea rows="3" required placeholder="How can we help you?"></textarea>
-            </div>
-            <button type="submit" class="submit-booking-btn">Send Support Message</button>
-        </form>
-    </div>
-
-    <!-- MY GETAWAY DRAWER -->
-    <div class="booking-drawer-overlay" id="getaway-drawer-overlay" onclick="toggleGetawayDrawer()"></div>
-    <div class="booking-side-drawer" id="getaway-side-drawer" style="max-width: 500px;">
-        <button class="close-drawer-btn" onclick="toggleGetawayDrawer()">✕</button>
-        <h3 style="font-family:'Playfair Display', serif; font-size:22px; color:#d4af37; margin-bottom:5px;"><i class="fa-solid fa-suitcase"></i> My Getaway</h3>
-        <p style="font-size:11px; color:#a8bba5; margin-bottom:20px;">Look up your active reservation details using your Booking ID or Mobile Number.</p>
-
-        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(212,175,55,0.3); border-radius:14px; padding:18px; margin-bottom:20px;">
-            <div class="input-group">
-                <label>Booking ID or Mobile Number</label>
-                <input type="text" id="getaway-lookup-input" placeholder="e.g. HIDE-1082 or 9876543210">
-            </div>
-            <button class="submit-booking-btn" style="margin-top:5px;" onclick="lookupGuestBookings()"><i class="fa-solid fa-magnifying-glass"></i> View Booking Details</button>
-        </div>
-
-        <div id="getaway-results-container">
-            <p style="font-size:12px; color:#a8bba5; text-align:center;">Enter your details above to check stay summary, dates & payment info.</p>
-        </div>
-    </div>
-
-    <!-- BOOKING CHECKOUT DRAWER (WITH MMT ADDONS & PROMO CODES) -->
+    <!-- 4-STEP BOOKING CHECKOUT DRAWER -->
     <div class="booking-drawer-overlay" id="booking-drawer-overlay" onclick="closeBookingDrawer()"></div>
     <div class="booking-side-drawer" id="booking-side-drawer">
         <button class="close-drawer-btn" onclick="closeBookingDrawer()">✕</button>
         
-        <div id="booking-step-1">
-            <div class="drawer-header">
-                <h3 id="drawer-property-title" style="font-family:'Playfair Display', serif; font-size:22px; color:#d4af37;">Review Booking & Pay</h3>
-                <p id="drawer-property-sub" style="font-size: 11px; color: #a8bba5;">Direct payment to host website for instant confirmation</p>
+        <!-- STEP TABS HEADER -->
+        <div class="step-progress-bar">
+            <div class="step-tab active" id="tab-step-1" onclick="switchStep(1)">
+                <span class="step-tab-num">1</span>
+                Room
+            </div>
+            <div class="step-tab" id="tab-step-2" onclick="switchStep(2)">
+                <span class="step-tab-num">2</span>
+                Add-ons
+            </div>
+            <div class="step-tab" id="tab-step-3" onclick="switchStep(3)">
+                <span class="step-tab-num">3</span>
+                Details
+            </div>
+            <div class="step-tab" id="tab-step-4" onclick="switchStep(4)">
+                <span class="step-tab-num">4</span>
+                Payment
+            </div>
+        </div>
+
+        <div class="stay-summary-mini">
+            <div><span id="summary-dates">Dates: Selected Dates</span></div>
+            <div><span id="summary-total" style="color:#d4af37; font-weight:700;">Total: ₹0</span></div>
+        </div>
+
+        <!-- ==================== STEP 1: ROOM CATEGORY SELECTION ==================== -->
+        <div class="step-content-pane active" id="pane-step-1">
+            <h3 id="drawer-property-title" style="font-family:'Playfair Display', serif; font-size:20px; color:#d4af37; margin-bottom:4px;">Cedar Wood Riverside Cabin</h3>
+            <p style="font-size:11px; color:#a8bba5; margin-bottom:15px;">Step 1 of 4: Choose your room category</p>
+
+            <div class="room-category-card selected" id="rcard-std" onclick="selectRoomCategory('Standard Pine Room', 3800, 'rcard-std')">
+                <div>
+                    <div class="room-cat-name">Standard Pine Room</div>
+                    <div class="room-cat-desc">Double Bed + High-Speed Fiber Wi-Fi</div>
+                </div>
+                <div style="font-weight:700; color:#d4af37; font-size:12px;" id="rprice-std">₹3,800/night</div>
             </div>
 
-            <div class="stay-summary-mini">
-                <div><span id="summary-dates">Dates: Selected Dates</span></div>
-                <div><span id="summary-total" style="color:#d4af37; font-weight:700;">Total: ₹0</span></div>
+            <div class="room-category-card" id="rcard-dlx" onclick="selectRoomCategory('Deluxe View Suite', 4800, 'rcard-dlx')">
+                <div>
+                    <div class="room-cat-name">Deluxe View Suite</div>
+                    <div class="room-cat-desc">Private Balcony + Work Desk + Organic Breakfast</div>
+                </div>
+                <div style="font-weight:700; color:#d4af37; font-size:12px;" id="rprice-dlx">₹4,800/night</div>
             </div>
 
-            <!-- COUPONS / DISCOUNT SELECTION -->
+            <div class="room-category-card" id="rcard-ste" onclick="selectRoomCategory('Luxury Glass Loft', 6200, 'rcard-ste')">
+                <div>
+                    <div class="room-cat-name">Luxury Glass Loft</div>
+                    <div class="room-cat-desc">Panoramic Views + Living Lounge + Private Chef</div>
+                </div>
+                <div style="font-weight:700; color:#d4af37; font-size:12px;" id="rprice-ste">₹6,200/night</div>
+            </div>
+
+            <button type="button" class="submit-booking-btn" onclick="switchStep(2)">Proceed to Add-ons & Coupons →</button>
+        </div>
+
+        <!-- ==================== STEP 2: ADD-ONS & COUPONS ==================== -->
+        <div class="step-content-pane" id="pane-step-2">
+            <h3 style="font-family:'Playfair Display', serif; font-size:20px; color:#d4af37; margin-bottom:4px;">Coupons & Trip Add-ons</h3>
+            <p style="font-size:11px; color:#a8bba5; margin-bottom:15px;">Step 2 of 4: Apply discounts and protections</p>
+
             <div style="margin-bottom:15px; text-align:left;">
-                <label style="font-size:10px; font-weight:700; color:#d4af37; text-transform:uppercase;">Apply Coupon Code</label>
+                <label style="font-size:10px; font-weight:700; color:#d4af37; text-transform:uppercase;">Apply Promo Code</label>
                 <div class="coupon-card">
-                    <div>
-                        <strong>WELCOMETRIP</strong> — Save ₹425 on first stay
-                    </div>
+                    <div><strong>WELCOMETRIP</strong> — Save ₹425 on stay</div>
                     <button type="button" class="book-btn" style="padding:4px 8px; font-size:10px;" onclick="applyCoupon('WELCOMETRIP', 425)">Apply</button>
                 </div>
             </div>
 
-            <!-- MMT-STYLE TRIP PROTECTION / ADDONS -->
             <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(212,175,55,0.25); border-radius:10px; padding:12px; margin-bottom:15px; text-align:left; font-size:11px;">
-                <div style="font-weight:700; color:#d4af37; margin-bottom:5px;">🛡️ Trip Secure & Addons</div>
-                <label style="display:flex; align-items:center; gap:8px; margin-bottom:6px; cursor:pointer;">
+                <div style="font-weight:700; color:#d4af37; margin-bottom:8px;"><i class="fa-solid fa-shield-halved"></i> Trip Secure & Protection</div>
+                <label style="display:flex; align-items:center; gap:8px; margin-bottom:8px; cursor:pointer;">
                     <input type="checkbox" id="addon-breakfast" onchange="recalculateTotalAndRender()"> Add Organic Trout Breakfast (+₹270/guest)
                 </label>
                 <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
@@ -809,7 +799,18 @@
                 </label>
             </div>
 
-            <form id="guest-info-form" onsubmit="handleGuestSubmit(event)">
+            <div style="display:flex; gap:10px;">
+                <button type="button" class="back-step-btn" onclick="switchStep(1)">← Back</button>
+                <button type="button" class="submit-booking-btn" style="margin-top:0;" onclick="switchStep(3)">Proceed to Guest Details →</button>
+            </div>
+        </div>
+
+        <!-- ==================== STEP 3: GUEST DETAILS ==================== -->
+        <div class="step-content-pane" id="pane-step-3">
+            <h3 style="font-family:'Playfair Display', serif; font-size:20px; color:#d4af37; margin-bottom:4px;">Guest Contact Information</h3>
+            <p style="font-size:11px; color:#a8bba5; margin-bottom:15px;">Step 3 of 4: Enter details for confirmation voucher</p>
+
+            <form id="guest-info-form" onsubmit="validateStep3AndProceed(event)">
                 <div class="input-group">
                     <label>Full Name *</label>
                     <input type="text" id="guest-full-name" placeholder="e.g. Uday Parmar" required>
@@ -838,37 +839,52 @@
                     </select>
                 </div>
 
-                <div class="input-group" style="margin-top: 5px;">
-                    <label>Select Payment Option *</label>
-                    <div class="payment-options-grid">
-                        <label class="payment-card active" onclick="selectPaymentMethod('UPI_DIRECT', this)">
-                            <input type="radio" name="payment_choice" value="UPI_DIRECT" checked hidden>
-                            <div class="pay-title">📱 Online UPI (GPay / PhonePe / Paytm)</div>
-                            <div class="pay-desc">Direct website payment (<span class="total-val-str" style="color:#d4af37;">₹0</span>) — Instant Confirmation</div>
-                        </label>
-
-                        <label class="payment-card" onclick="selectPaymentMethod('CARD_DIRECT', this)">
-                            <input type="radio" name="payment_choice" value="CARD_DIRECT" hidden>
-                            <div class="pay-title">💳 Debit / Credit Card</div>
-                            <div class="pay-desc">Visa, Mastercard, RuPay direct checkout</div>
-                        </label>
-
-                        <label class="payment-card" onclick="selectPaymentMethod('PAY_AT_PROPERTY', this)">
-                            <input type="radio" name="payment_choice" value="PAY_AT_PROPERTY" hidden>
-                            <div class="pay-title">🏢 Pay 100% at Property</div>
-                            <div class="pay-desc">Pay host on arrival at cabin (0 Advance)</div>
-                        </label>
-                    </div>
+                <div style="display:flex; gap:10px; margin-top:15px;">
+                    <button type="button" class="back-step-btn" onclick="switchStep(2)">← Back</button>
+                    <button type="submit" class="submit-booking-btn" style="margin-top:0;">Proceed to Payment →</button>
                 </div>
-
-                <button type="submit" class="submit-booking-btn" id="drawer-action-btn">Pay & Confirm Booking Now →</button>
             </form>
         </div>
 
-        <div id="booking-step-3" style="display: none; text-align: center; padding-top: 20px;">
+        <!-- ==================== STEP 4: PAYMENT ==================== -->
+        <div class="step-content-pane" id="pane-step-4">
+            <h3 style="font-family:'Playfair Display', serif; font-size:20px; color:#d4af37; margin-bottom:4px;">Final Payment & Confirmation</h3>
+            <p style="font-size:11px; color:#a8bba5; margin-bottom:15px;">Step 4 of 4: Direct payment to host for instant reservation</p>
+
+            <div class="input-group">
+                <label>Select Payment Option *</label>
+                <div class="payment-options-grid">
+                    <label class="payment-card active" onclick="selectPaymentMethod('UPI_DIRECT', this)">
+                        <input type="radio" name="payment_choice" value="UPI_DIRECT" checked hidden>
+                        <div class="pay-title">📱 Online UPI (GPay / PhonePe / Paytm)</div>
+                        <div class="pay-desc">Direct website payment (<span class="total-val-str" style="color:#d4af37;">₹0</span>) — Instant Confirmation</div>
+                    </label>
+
+                    <label class="payment-card" onclick="selectPaymentMethod('CARD_DIRECT', this)">
+                        <input type="radio" name="payment_choice" value="CARD_DIRECT" hidden>
+                        <div class="pay-title">💳 Debit / Credit Card</div>
+                        <div class="pay-desc">Visa, Mastercard, RuPay direct checkout</div>
+                    </label>
+
+                    <label class="payment-card" onclick="selectPaymentMethod('PAY_AT_PROPERTY', this)">
+                        <input type="radio" name="payment_choice" value="PAY_AT_PROPERTY" hidden>
+                        <div class="pay-title">🏢 Pay 100% at Property</div>
+                        <div class="pay-desc">Pay host on arrival at cabin (0 Advance)</div>
+                    </label>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:10px; margin-top:15px;">
+                <button type="button" class="back-step-btn" onclick="switchStep(3)">← Back</button>
+                <button type="button" class="submit-booking-btn" style="margin-top:0;" id="drawer-action-btn" onclick="handleGuestSubmit()">Pay & Confirm Booking Now →</button>
+            </div>
+        </div>
+
+        <!-- ==================== STEP 5: CONFIRMATION VOUCHER ==================== -->
+        <div id="booking-step-5" style="display: none; text-align: center; padding-top: 10px;">
             <div style="font-size: 45px; color: #22c55e;">✓</div>
-            <h3 style="font-family:'Playfair Display', serif; color: #d4af37; font-size: 24px;">Booking Confirmed!</h3>
-            <p style="font-size: 12px; color: #a8bba5; margin: 10px 0;">Payment was received via website and your booking is instantly confirmed.</p>
+            <h3 style="font-family:'Playfair Display', serif; color: #d4af37; font-size: 22px;">Booking Confirmed!</h3>
+            <p style="font-size: 12px; color: #a8bba5; margin: 8px 0;">Payment received and your booking voucher has been generated.</p>
             
             <div class="confirmation-box">
                 <p><strong>Booking ID:</strong> <span id="confirmed-booking-id">#HIDE-1082</span></p>
@@ -884,25 +900,78 @@
         </div>
     </div>
 
+    <!-- WISHLIST DRAWER -->
+    <div class="booking-drawer-overlay" id="wishlist-drawer-overlay" onclick="closeWishlistDrawer()"></div>
+    <div class="booking-side-drawer" id="wishlist-side-drawer" style="max-width: 480px;">
+        <button class="close-drawer-btn" onclick="closeWishlistDrawer()">✕</button>
+        <h3 style="font-family:'Playfair Display', serif; font-size:22px; color:#ef4444; margin-bottom:5px;"><i class="fa-solid fa-heart"></i> Saved Wishlist</h3>
+        <p style="font-size:11px; color:#a8bba5; margin-bottom:20px;">Your favorite saved mountain stays for easy future access.</p>
+        <div id="wishlist-items-container">
+            <p style="font-size:12px; color:#a8bba5; text-align:center;">No saved stays yet.</p>
+        </div>
+    </div>
+
+    <!-- SUPPORT DRAWER -->
+    <div class="booking-drawer-overlay" id="support-drawer-overlay" onclick="toggleSupportDrawer()"></div>
+    <div class="booking-side-drawer" id="support-side-drawer">
+        <button class="close-drawer-btn" onclick="toggleSupportDrawer()">✕</button>
+        <h3 style="font-family:'Playfair Display', serif; font-size:22px; color:#d4af37; margin-bottom:10px;"><i class="fa-solid fa-headset"></i> Guest Support</h3>
+        <p style="font-size:12px; color:#a8bba5; margin-bottom:20px;">We are available 24/7 for booking inquiries, complaints, and host assistance.</p>
+        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(212,175,55,0.3); border-radius:12px; padding:15px; margin-bottom:20px; text-align:left; font-size:12px;">
+            <p style="margin-bottom:8px;"><i class="fa-solid fa-envelope" style="color:#d4af37;"></i> <strong>Email Support:</strong> hiddenstays.in@gmail.com</p>
+            <p style="margin-bottom:8px;"><i class="fa-solid fa-phone" style="color:#d4af37;"></i> <strong>Phone:</strong> +91 8219747857</p>
+            <p style="margin-bottom:8px;"><i class="fa-brands fa-whatsapp" style="color:#22c55e;"></i> <strong>WhatsApp:</strong> +91 8219747857</p>
+        </div>
+        <form onsubmit="handleSupportSubmit(event)">
+            <div class="input-group">
+                <label>Your Name</label>
+                <input type="text" required placeholder="Enter name">
+            </div>
+            <div class="input-group">
+                <label>Message / Question / Complaint</label>
+                <textarea rows="3" required placeholder="How can we help you?"></textarea>
+            </div>
+            <button type="submit" class="submit-booking-btn">Send Support Message</button>
+        </form>
+    </div>
+
+    <!-- MY GETAWAY DRAWER -->
+    <div class="booking-drawer-overlay" id="getaway-drawer-overlay" onclick="toggleGetawayDrawer()"></div>
+    <div class="booking-side-drawer" id="getaway-side-drawer" style="max-width: 500px;">
+        <button class="close-drawer-btn" onclick="toggleGetawayDrawer()">✕</button>
+        <h3 style="font-family:'Playfair Display', serif; font-size:22px; color:#d4af37; margin-bottom:5px;"><i class="fa-solid fa-suitcase"></i> My Getaway</h3>
+        <p style="font-size:11px; color:#a8bba5; margin-bottom:20px;">Look up your active reservation details using your Booking ID or Mobile Number.</p>
+        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(212,175,55,0.3); border-radius:14px; padding:18px; margin-bottom:20px;">
+            <div class="input-group">
+                <label>Booking ID or Mobile Number</label>
+                <input type="text" id="getaway-lookup-input" placeholder="e.g. HIDE-1082 or 9876543210">
+            </div>
+            <button class="submit-booking-btn" style="margin-top:5px;" onclick="lookupGuestBookings()"><i class="fa-solid fa-magnifying-glass"></i> View Booking Details</button>
+        </div>
+        <div id="getaway-results-container">
+            <p style="font-size:12px; color:#a8bba5; text-align:center;">Enter your details above to check stay summary, dates & payment info.</p>
+        </div>
+    </div>
+
     <footer id="contact" style="padding:30px 5%; text-align:center; font-size:11px; color:#888;">
         <p>&copy; 2026 The Hide Stays & Tourism Services. Headquartered in Joginder Nagar, District Mandi, Himachal Pradesh.</p>
     </footer>
 
     <script>
-        // 1. SUPABASE INITIALIZATION
+        // SUPABASE & EMAILJS
         const SUPABASE_URL = "https://tjlpwkroldhsztkelfuy.supabase.co";
         const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqbHB3a3JvbGRoc3p0a2VsZnV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ5MjIxMjIsImV4cCI6MjEwMDQ5ODEyMn0.1Ya0pNANKRFggdSq9YjDPLEzPzKY9atyKE6KUcrjCrE";
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        // 2. EMAILJS INITIALIZATION
         try { emailjs.init("YOUR_PUBLIC_KEY"); } catch(e) {}
 
         // GLOBAL STATE
         let currentSelectedProperty = "";
         let currentSelectedLocation = "";
-        let currentSelectedPrice = 0;
+        let currentSelectedRoomName = "Standard Pine Room";
+        let currentSelectedPrice = 3800;
         let currentCalculatedNights = 0;
         let appliedDiscount = 0;
+        let currentCheckoutStep = 1;
         let selectedPaymentMethod = 'UPI_DIRECT';
         let latestBookingDetails = {};
         let userWishlist = JSON.parse(localStorage.getItem('hide_wishlist') || '[]');
@@ -910,43 +979,33 @@
         const propertyDatabase = {
             'prop-1': {
                 name: "Cedar Wood Riverside Cabin", location: "Barot Valley, Mandi", price: 4800,
-                photos: [
-                    "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1000&q=80",
-                    "https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=1000&q=80"
-                ],
-                overview: "Acoustic-insulated cedar wood cabin situated along the Uhl River (<38 dB). Ideal for remote work.",
-                activities: "🔥 Uhl Riverside Bonfire | 🎣 Trout Fishing | 🚶 Forest Trail Walking",
-                stdPrice: "₹3,800/night", dlxPrice: "₹4,800/night"
+                photos: ["https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1000&q=80"],
+                overview: "Acoustic-insulated cedar wood cabin along Uhl River (<38 dB).",
+                activities: "🔥 Bonfire | 🎣 Trout Fishing | 🚶 Forest Trails",
+                stdPrice: 3800, dlxPrice: 4800, stePrice: 6200
             },
             'prop-2': {
                 name: "The Secret Pine Cottage", location: "Tirthan Valley, Kullu", price: 5500,
-                photos: [
-                    "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1000&q=80"
-                ],
-                overview: "Stone and pine cottage near Great Himalayan National Park (<35 dB) with organic home dining.",
-                activities: "🏞️ GHNP Trekking | 🌊 Waterfall Walks | ☕ Farm Dining",
-                stdPrice: "₹4,200/night", dlxPrice: "₹5,500/night"
+                photos: ["https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1000&q=80"],
+                overview: "Stone pine cottage near GHNP (<35 dB).",
+                activities: "🏞️ GHNP Trekking | 🌊 Waterfall Walks",
+                stdPrice: 4200, dlxPrice: 5500, stePrice: 7000
             },
             'prop-3': {
                 name: "Ridge View Glass Loft", location: "Jhatingri, Joginder Nagar", price: 6200,
-                photos: [
-                    "https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=1000&q=80"
-                ],
-                overview: "Glass loft with 360-degree sunset views over the Dhauladhar ranges.",
-                activities: "🌅 Sunset Photography | 🌌 Stargazing Deck | ☕ Private Chef BBQ",
-                stdPrice: "₹4,800/night", dlxPrice: "₹6,200/night"
+                photos: ["https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=1000&q=80"],
+                overview: "Glass loft with 360-degree sunset views over Dhauladhar ranges.",
+                activities: "🌅 Sunset Views | 🌌 Stargazing Deck",
+                stdPrice: 4800, dlxPrice: 6200, stePrice: 8500
             }
         };
 
-        let currentModalPhotoIndex = 0;
         let currentModalPhotos = [];
 
         window.addEventListener('DOMContentLoaded', () => {
             const todayStr = new Date().toISOString().split('T')[0];
             document.getElementById('checkin-date').min = todayStr;
             document.getElementById('checkout-date').min = todayStr;
-            document.getElementById('checkin-date').value = "";
-            document.getElementById('checkout-date').value = "";
             updateWishlistBadge();
             syncHeartButtons();
         });
@@ -978,10 +1037,55 @@
             }
         }
 
+        // STEP NAVIGATION SYSTEM
+        function switchStep(stepNum) {
+            currentCheckoutStep = stepNum;
+
+            // Highlight progress tabs
+            for (let i = 1; i <= 4; i++) {
+                const tab = document.getElementById(`tab-step-${i}`);
+                const pane = document.getElementById(`pane-step-${i}`);
+                if (tab) {
+                    tab.classList.remove('active', 'completed');
+                    if (i < stepNum) tab.classList.add('completed');
+                    if (i === stepNum) tab.classList.add('active');
+                }
+                if (pane) {
+                    pane.classList.remove('active');
+                    if (i === stepNum) pane.classList.add('active');
+                }
+            }
+            recalculateTotalAndRender();
+        }
+
+        function selectRoomCategory(roomName, pricePerNight, cardId) {
+            currentSelectedRoomName = roomName;
+            currentSelectedPrice = pricePerNight;
+
+            document.querySelectorAll('.room-category-card').forEach(c => c.classList.remove('selected'));
+            const selectedCard = document.getElementById(cardId);
+            if (selectedCard) selectedCard.classList.add('selected');
+
+            recalculateTotalAndRender();
+        }
+
+        function validateStep3AndProceed(event) {
+            event.preventDefault();
+            const name = document.getElementById('guest-full-name').value.trim();
+            const phone = document.getElementById('guest-mobile').value.trim();
+            const email = document.getElementById('guest-email').value.trim();
+
+            if (!name || phone.length < 10 || !email) {
+                alert("Please fill in all guest details correctly.");
+                return;
+            }
+            switchStep(4);
+        }
+
         function recalculateTotalAndRender() {
             let total = currentSelectedPrice * (currentCalculatedNights || 1);
-            
             const adults = parseInt(document.getElementById('guest-count-adults').value || '1');
+            
             if (document.getElementById('addon-breakfast').checked) total += (270 * adults);
             if (document.getElementById('addon-insurance').checked) total += (39 * (currentCalculatedNights || 1));
             
@@ -1034,7 +1138,7 @@
                         <h4 style="font-family:'Playfair Display', serif; font-size:18px; color:#f8f6f2;">${item.name}</h4>
                         <p style="font-size:11px; color:#a8bba5; margin-bottom:8px;"><i class="fa-solid fa-location-dot" style="color:#d4af37;"></i> ${item.location}</p>
                         <p style="font-size:14px; font-weight:700; color:#d4af37; margin-bottom:12px;">₹${item.price.toLocaleString('en-IN')} / night</p>
-                        <button class="book-btn" style="width:100%;" onclick="closeWishlistDrawer(); openPaymentModal('${item.name}', '${item.location}', ${item.price})">Book Stay</button>
+                        <button class="book-btn" style="width:100%;" onclick="closeWishlistDrawer(); openPaymentModal('${item.name}', '${item.location}', ${item.price}, '${item.id}')">Book Stay</button>
                     </div>
                 `).join('');
             }
@@ -1048,9 +1152,8 @@
         }
 
         function openPropertyDetails(title, location, price, propId) {
-            const data = propertyDatabase[propId];
+            const data = propertyDatabase[propId] || propertyDatabase['prop-1'];
             currentModalPhotos = data.photos;
-            currentModalPhotoIndex = 0;
 
             document.getElementById('detail-modal-img').src = currentModalPhotos[0];
             document.getElementById('detail-modal-title').innerText = data.name;
@@ -1058,12 +1161,9 @@
             document.getElementById('detail-modal-overview').innerText = data.overview;
             document.getElementById('detail-modal-activities').innerText = data.activities;
 
-            document.getElementById('cat-price-std').innerText = data.stdPrice;
-            document.getElementById('cat-price-dlx').innerText = data.dlxPrice;
-
             document.getElementById('detail-modal-book-btn').onclick = function() {
                 closePropertyDetails();
-                openPaymentModal(data.name, data.location, data.price);
+                openPaymentModal(data.name, data.location, data.price, propId);
             };
 
             document.getElementById('details-drawer-overlay').classList.add('active');
@@ -1071,8 +1171,8 @@
         }
 
         function changeModalPhoto(dir) {
-            currentModalPhotoIndex = (currentModalPhotoIndex + dir + currentModalPhotos.length) % currentModalPhotos.length;
-            document.getElementById('detail-modal-img').src = currentModalPhotos[currentModalPhotoIndex];
+            if (!currentModalPhotos || currentModalPhotos.length === 0) return;
+            document.getElementById('detail-modal-img').src = currentModalPhotos[0];
         }
 
         function closePropertyDetails() {
@@ -1096,7 +1196,7 @@
 
         function toggleFaq(el) { el.classList.toggle('active'); }
 
-        function openPaymentModal(propertyName, regionName, pricePerNight) {
+        function openPaymentModal(propertyName, regionName, pricePerNight, propId) {
             const checkIn = document.getElementById('checkin-date').value;
             const checkOut = document.getElementById('checkout-date').value;
 
@@ -1106,19 +1206,22 @@
                 return;
             }
 
+            const pData = propertyDatabase[propId] || propertyDatabase['prop-1'];
             currentSelectedProperty = propertyName;
             currentSelectedLocation = regionName;
-            currentSelectedPrice = pricePerNight;
+            currentSelectedPrice = pData.stdPrice;
             appliedDiscount = 0;
 
             document.getElementById('drawer-property-title').innerText = propertyName;
             document.getElementById('summary-dates').innerText = `${currentCalculatedNights} Night(s) (${checkIn} to ${checkOut})`;
             
-            recalculateTotalAndRender();
+            document.getElementById('rprice-std').innerText = `₹${pData.stdPrice.toLocaleString('en-IN')}/night`;
+            document.getElementById('rprice-dlx').innerText = `₹${pData.dlxPrice.toLocaleString('en-IN')}/night`;
+            document.getElementById('rprice-ste').innerText = `₹${pData.stePrice.toLocaleString('en-IN')}/night`;
 
-            document.getElementById('booking-step-1').style.display = 'block';
-            document.getElementById('booking-step-3').style.display = 'none';
+            switchStep(1);
 
+            document.getElementById('booking-step-5').style.display = 'none';
             document.getElementById('booking-drawer-overlay').classList.add('active');
             document.getElementById('booking-side-drawer').classList.add('active');
         }
@@ -1135,12 +1238,17 @@
             document.getElementById('drawer-action-btn').innerText = (method === 'PAY_AT_PROPERTY') ? "Confirm Reservation (Pay at Stay) →" : "Pay & Confirm Booking Now →";
         }
 
-        async function handleGuestSubmit(event) {
-            event.preventDefault();
+        async function handleGuestSubmit() {
             const fullName = document.getElementById('guest-full-name').value.trim();
             const phone = document.getElementById('guest-mobile').value.trim();
             const email = document.getElementById('guest-email').value.trim();
             const adults = document.getElementById('guest-count-adults').value;
+
+            if (!fullName || phone.length < 10 || !email) {
+                alert("Please complete Step 3 (Guest Details) first!");
+                switchStep(3);
+                return;
+            }
 
             const checkIn = document.getElementById('checkin-date').value;
             const checkOut = document.getElementById('checkout-date').value;
@@ -1149,14 +1257,15 @@
 
             latestBookingDetails = {
                 bookingCode, fullName, phone, email, adults,
-                propertyName: currentSelectedProperty, location: currentSelectedLocation,
+                propertyName: `${currentSelectedProperty} (${currentSelectedRoomName})`,
+                location: currentSelectedLocation,
                 checkIn, checkOut, nights: currentCalculatedNights, totalCost,
                 paymentStatus: selectedPaymentMethod === 'PAY_AT_PROPERTY' ? 'Pay at Property' : 'Paid Online (Website)'
             };
 
             const { error } = await _supabase.from('guest_bookings').insert([{
                 booking_id: bookingCode, guest_name: fullName, guest_phone: "+91" + phone,
-                guest_email: email, property_name: currentSelectedProperty, location: currentSelectedLocation,
+                guest_email: email, property_name: latestBookingDetails.propertyName, location: currentSelectedLocation,
                 check_in: checkIn, check_out: checkOut, nights: currentCalculatedNights,
                 adults_count: adults + " Adult(s)", total_amount: totalCost,
                 payment_status: latestBookingDetails.paymentStatus
@@ -1167,7 +1276,7 @@
             try {
                 emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
                     booking_id: bookingCode, to_name: fullName, to_email: email,
-                    property_name: currentSelectedProperty, location: currentSelectedLocation,
+                    property_name: latestBookingDetails.propertyName, location: currentSelectedLocation,
                     check_in: checkIn, check_out: checkOut, nights: currentCalculatedNights,
                     total_amount: "₹" + totalCost.toLocaleString('en-IN'), payment_status: latestBookingDetails.paymentStatus
                 });
@@ -1177,8 +1286,9 @@
             document.getElementById('confirmed-payment-mode').innerText = latestBookingDetails.paymentStatus;
             document.getElementById('confirmed-total-payable').innerText = `₹${totalCost.toLocaleString('en-IN')}`;
             
-            document.getElementById('booking-step-1').style.display = 'none';
-            document.getElementById('booking-step-3').style.display = 'block';
+            // Hide steps and show Step 5 confirmation
+            for(let i=1; i<=4; i++) { document.getElementById(`pane-step-${i}`).style.display = 'none'; }
+            document.getElementById('booking-step-5').style.display = 'block';
 
             setTimeout(() => { openWhatsAppConfirmation(); }, 800);
         }
