@@ -1,1058 +1,525 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>The Hide | Curated Boutique Stays</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hide — Curated Mountain Stays & Offbeat Cabins in Himachal</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<meta name="theme-color" content="#192119">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="manifest" href="/manifest.json">
+    <style>
+        /* BASE & RESET */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: #0b0f0c; color: #f8f6f2;
+            font-family: 'Poppins', sans-serif; line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="The Hide | Curated Boutique Mountain Stays">
-<meta property="og:description" content="Discover unique architectural gems and slow-living sanctuaries tucked away in serene valleys.">
-<meta property="og:image" content="https://images.unsplash.com/photo-1506744038136-46273834b3fb">
+        a { color: inherit; text-decoration: none; }
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        /* NAVIGATION BAR */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            background: rgba(11, 15, 12, 0.85); backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 18px 5%; display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: #d4af37; letter-spacing: 2px; }
+        .nav-links { display: flex; gap: 25px; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-links a:hover { color: #d4af37; }
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    -webkit-tap-highlight-color: transparent;
-}
+        /* HERO SECTION */
+        .hero {
+            height: 85vh; background: linear-gradient(180deg, rgba(11, 15, 12, 0.4) 0%, #0b0f0c 100%), 
+                        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            padding: 0 20px; margin-top: 60px;
+        }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 56px; color: #f8f6f2; line-height: 1.2; margin-bottom: 15px; }
+        .hero p { font-size: 18px; color: #a8bba5; max-width: 650px; margin-bottom: 35px; }
 
-body{
-    font-family:'Poppins',sans-serif;
-    background:#f8f6f2;
-    color:#1c1917;
-    overflow-x: hidden;
-}
+        /* SEARCH & DATES BAR */
+        .search-bar-card {
+            background: rgba(18, 23, 19, 0.95); border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 16px; padding: 20px 30px; display: flex; gap: 20px; align-items: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6); backdrop-filter: blur(10px);
+        }
+        .search-item { display: flex; flex-direction: column; text-align: left; }
+        .search-item label { font-size: 11px; text-transform: uppercase; color: #d4af37; letter-spacing: 1px; margin-bottom: 5px; }
+        .search-item input {
+            background: transparent; border: none; color: #f8f6f2; font-family: 'Poppins', sans-serif;
+            font-size: 14px; outline: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 3px;
+        }
 
-/* HEADER & SLIDING MENU TRIGGER */
-header{
-    position:absolute;
-    top:0;
-    width:100%;
-    padding:25px 8%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    z-index:100;
-}
+        /* PROPERTIES GRID */
+        .section-container { padding: 80px 5%; max-width: 1300px; margin: 0 auto; text-align: center; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 38px; color: #d4af37; margin-bottom: 10px; }
+        .section-sub { color: #a8bba5; font-size: 15px; margin-bottom: 50px; }
 
-.menu-trigger {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
+        .properties-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 35px; }
+        .property-card {
+            background: #121713; border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 16px;
+            overflow: hidden; transition: transform 0.3s ease, border-color 0.3s ease; text-align: left;
+        }
+        .property-card:hover { transform: translateY(-8px); border-color: #d4af37; }
+        .card-img { width: 100%; height: 240px; object-fit: cover; }
+        .card-body { padding: 25px; }
+        .location-tag { font-size: 12px; color: #d4af37; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .card-title { font-family: 'Playfair Display', serif; font-size: 22px; color: #f8f6f2; margin-bottom: 10px; }
+        .card-features { display: flex; gap: 15px; font-size: 12px; color: #a8bba5; margin-bottom: 20px; }
+        .card-price-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
+        .price { font-size: 20px; font-weight: 700; color: #f8f6f2; }
+        .book-btn {
+            background: #d4af37; color: #0b0f0c; border: none; padding: 10px 20px; border-radius: 10px;
+            font-weight: 700; font-size: 13px; cursor: pointer; transition: background 0.2s ease;
+        }
+        .book-btn:hover { background: #f1c40f; }
 
-.menu-trigger:hover {
-    background: rgba(212, 175, 55, 0.2);
-    border-color: #d4af37;
-}
+        /* SLIDING BOOKING PANEL & OVERLAY */
+        .booking-drawer-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px);
+            z-index: 21000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        .booking-drawer-overlay.active { opacity: 1; pointer-events: auto; }
 
-.menu-trigger span {
-    width: 18px;
-    height: 2px;
-    background-color: #d4af37;
-    border-radius: 2px;
-}
+        .booking-side-drawer {
+            position: fixed; top: 0; right: -500px; width: 100%; max-width: 480px; height: 100%;
+            background: #121713; color: #f8f6f2; z-index: 21001; padding: 35px 25px;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5); border-left: 1px solid rgba(212, 175, 55, 0.3);
+            overflow-y: auto; transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .booking-side-drawer.active { right: 0; }
 
-.btn-nav{
-    background:white;
-    color:#1c1917;
-    padding:10px 22px;
-    border-radius:30px;
-    text-decoration:none;
-    font-weight:600;
-    font-size: 13px;
-    transition: transform 0.2s, background 0.2s;
-}
+        .close-drawer-btn {
+            position: absolute; top: 20px; right: 20px; background: transparent; border: none;
+            color: #a8bba5; font-size: 22px; cursor: pointer;
+        }
 
-.btn-nav:hover{
-    transform: translateY(-2px);
-    background: #f0ece1;
-}
+        .stay-summary-mini {
+            background: rgba(255,255,255,0.03); border: 1px dashed rgba(212, 175, 55, 0.4);
+            border-radius: 12px; padding: 12px 15px; display: flex; justify-content: space-between;
+            margin: 20px 0; font-size: 13px;
+        }
 
-/* SLIDING DRAWER MENU */
-.drawer-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(8px);
-    z-index: 2000;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-}
+        .input-group { margin-bottom: 15px; display: flex; flex-direction: column; text-align: left; }
+        .input-group label { font-size: 11px; text-transform: uppercase; color: #d4af37; margin-bottom: 5px; letter-spacing: 1px; }
+        .input-group input, .input-group select {
+            background: rgba(0,0,0,0.4); border: 1px solid rgba(212, 175, 55, 0.3);
+            color: white; padding: 12px; border-radius: 10px; outline: none; font-family: 'Poppins', sans-serif; font-size: 13px;
+        }
 
-.drawer-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-}
+        .phone-input-inline { display: flex; align-items: center; background: rgba(0,0,0,0.4); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 10px; padding-left: 12px; }
+        .phone-input-inline span { color: #d4af37; font-weight: 700; margin-right: 8px; }
+        .phone-input-inline input { border: none !important; width: 100%; }
 
-.side-drawer {
-    position: fixed;
-    top: 0;
-    right: -420px;
-    width: 100%;
-    max-width: 420px;
-    height: 100%;
-    background: #121713;
-    color: #f8f6f2;
-    z-index: 2001;
-    padding: 40px 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow-y: auto;
-    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    border-left: 1px solid rgba(212, 175, 55, 0.3);
-}
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-.side-drawer.active { right: 0; }
+        .payment-options-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 5px; }
+        .payment-card {
+            background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px; padding: 12px 14px; cursor: pointer; transition: all 0.2s ease; text-align: left;
+        }
+        .payment-card.active {
+            background: rgba(212, 175, 55, 0.12); border: 1.5px solid #d4af37;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+        .pay-title { font-size: 13px; font-weight: 700; color: #f8f6f2; }
+        .pay-desc { font-size: 11px; color: #a8bba5; margin-top: 3px; }
 
-.drawer-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-    padding-bottom: 20px;
-    margin-bottom: 30px;
-}
+        .submit-booking-btn {
+            width: 100%; background: #d4af37; color: #121713; border: none; padding: 14px;
+            border-radius: 12px; font-weight: 700; font-size: 14px; cursor: pointer; transition: background 0.2s; margin-top: 15px;
+        }
+        .submit-booking-btn:hover { background: #f1c40f; }
 
-.drawer-header h3 {
-    font-family: 'Playfair Display', serif;
-    color: #d4af37;
-    font-size: 22px;
-    letter-spacing: 1px;
-}
+        .secondary-btn { width: 100%; background: transparent; color: #a8bba5; border: none; padding: 10px; margin-top: 8px; cursor: pointer; font-size: 12px; }
 
-.close-drawer-btn {
-    background: none;
-    border: none;
-    color: #a8bba5;
-    font-size: 24px;
-    cursor: pointer;
-}
+        .otp-container { display: flex; justify-content: center; gap: 12px; margin: 20px 0; }
+        .otp-box { width: 50px; height: 50px; text-align: center; font-size: 20px; font-weight: 700; background: rgba(0,0,0,0.5); border: 1.5px solid #d4af37; border-radius: 10px; color: white; }
 
-.drawer-menu-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
+        .confirmation-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 20px; text-align: left; font-size: 13px; line-height: 1.8; }
 
-.drawer-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 20px;
-}
-
-.drawer-card h4 {
-    font-family: 'Playfair Display', serif;
-    color: #d4af37;
-    font-size: 18px;
-    margin-bottom: 8px;
-}
-
-.drawer-card p {
-    font-size: 12px;
-    color: #a8bba5;
-    line-height: 1.6;
-}
-
-/* HERO SECTION */
-.hero{
-    height:90vh;
-    background: linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)), url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80");
-    background-size:cover;
-    background-position:center;
-    display:flex;
-    align-items:center;
-    padding:0 8%;
-}
-
-.hero-content{ color:white; max-width:650px; }
-.hero h1{ font-size:62px; font-family:'Playfair Display',serif; line-height: 1.1; margin-bottom:20px; }
-.hero p{ font-size: 16px; color: #e2e8f0; font-weight: 300; }
-
-/* CLEAN AESTHETIC CALENDAR & SEARCH SECTION */
-.search-container { width: 84%; margin: auto; margin-top: -50px; position: relative; z-index: 20; }
-
-.search-box{
-    background: #121713;
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    border-radius: 24px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    padding: 24px 30px;
-    display: grid;
-    grid-template-columns: 1.2fr 1.5fr 1.5fr 1fr;
-    gap: 20px;
-    align-items: center;
-}
-
-.search-item{
-    border-right: 1px solid rgba(212, 175, 55, 0.2);
-    padding-right: 15px;
-    display: flex;
-    flex-direction: column;
-}
-
-.search-item:nth-child(3){ border:none; }
-
-.search-item label{
-    font-size: 11px;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: #d4af37;
-    margin-bottom: 6px;
-    letter-spacing: 1.5px;
-}
-
-.search-item select, .search-item input{
-    border: none;
-    outline: none;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: #f8f6f2;
-    background: transparent;
-}
-
-.search-item input[type="date"] {
-    color-scheme: dark;
-    cursor: pointer;
-    padding: 4px 0;
-    font-weight: 600;
-}
-
-.search-btn{
-    background: rgba(212, 175, 55, 0.15);
-    border: 1px solid #d4af37;
-    color: #d4af37;
-    padding: 14px;
-    border-radius: 16px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 14px;
-    transition: all 0.3s ease;
-}
-
-.search-btn:hover{
-    background: #d4af37;
-    color: #121713;
-}
-
-/* STAYS SECTION */
-.section{ padding:80px 8%; }
-.section-title{ font-family: 'Playfair Display', serif; font-size: 32px; margin-bottom: 30px; color: #1c1917; text-align: center; }
-.stays-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:30px; }
-.card{ background:white; border-radius:20px; overflow:hidden; display: flex; flex-direction: column; box-shadow:0 10px 25px rgba(0,0,0,0.03); transition: transform 0.3s; }
-.card:hover{ transform: translateY(-5px); }
-.card img{ width:100%; height:230px; object-fit:cover; background: #1c241d; }
-.card-content{ padding:25px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; gap: 15px; }
-.card-title{ font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #1c1917; }
-.card-location{ font-size: 12px; color: #80807b; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
-.card-price{ font-size: 15px; font-weight: 600; color: #314232; margin-top: 8px; }
-
-.card-btn-group { display: flex; gap: 10px; margin-top: 10px; }
-
-.card-explore-btn {
-    flex: 1;
-    background: transparent;
-    color: #314232;
-    border: 1px solid #314232;
-    padding: 12px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.card-explore-btn:hover { background: rgba(49, 66, 50, 0.08); }
-
-.card-book-btn {
-    flex: 1.2;
-    background: #314232;
-    color: white;
-    padding: 12px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.card-book-btn:hover { background: #1c241d; }
-
-/* LOYALTY CLUB STYLES */
-.loyalty-section { background: #121713; color: white; padding: 80px 8%; border-top: 1px solid rgba(212, 175, 55, 0.2); }
-.loyalty-container { max-width: 1100px; margin: 0 auto; }
-
-.loyalty-dashboard {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    border-radius: 20px;
-    padding: 30px;
-    margin-bottom: 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.loyalty-input-group {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 10px 20px;
-    border-radius: 30px;
-    border: 1px solid rgba(212, 175, 55, 0.3);
-}
-
-.loyalty-input-group label { font-size: 13px; color: #a8bba5; }
-.loyalty-input-group input { background: transparent; border: none; color: #d4af37; font-size: 18px; font-weight: 700; width: 50px; text-align: center; outline: none; }
-
-.loyalty-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-
-.loyalty-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 16px;
-    padding: 30px;
-    transition: all 0.3s ease;
-}
-
-.loyalty-card.active-card {
-    border-color: #d4af37;
-    background: rgba(212, 175, 55, 0.08);
-    transform: translateY(-5px);
-}
-
-.loyalty-card h4 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 5px; color: #d4af37; }
-.loyalty-card .tier-sub { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #a8bba5; margin-bottom: 20px; }
-.loyalty-card ul { list-style: none; font-size: 13px; color: #d6d3d1; display: flex; flex-direction: column; gap: 12px; }
-
-/* REVIEWS SECTION */
-.reviews-section { background: #f8f6f2; padding: 80px 8%; border-top: 1px solid rgba(0,0,0,0.05); }
-.reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
-.review-card { background: #ffffff; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.03); display: flex; flex-direction: column; justify-content: space-between; }
-.review-stars { color: #d4af37; font-size: 16px; margin-bottom: 12px; }
-.review-text { font-size: 13px; color: #555; line-height: 1.7; font-style: italic; margin-bottom: 20px; }
-.review-author { font-weight: 700; font-size: 14px; color: #1c1917; }
-.review-location { font-size: 11px; color: #80807b; text-transform: uppercase; letter-spacing: 1px; }
-
-.review-btn-container { text-align: center; margin-top: 40px; }
-.btn-submit-review { background: #314232; color: white; border: none; padding: 12px 30px; border-radius: 30px; font-weight: 600; font-size: 13px; cursor: pointer; transition: background 0.2s; }
-.btn-submit-review:hover { background: #1c241d; }
-
-/* REVIEW SUBMISSION MODAL */
-.review-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(12, 18, 13, 0.9); backdrop-filter: blur(10px); z-index: 26000; justify-content: center; align-items: center; padding: 20px; }
-.review-modal-box { background: #121713; color: #f8f6f2; max-width: 450px; width: 100%; border-radius: 24px; padding: 30px; border: 1px solid rgba(212, 175, 55, 0.3); position: relative; }
-.review-modal-box input, .review-modal-box textarea, .review-modal-box select { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid rgba(212, 175, 55, 0.3); color: white; padding: 12px; border-radius: 12px; margin-bottom: 15px; outline: none; font-family: 'Poppins', sans-serif; font-size: 13px; }
-
-/* EXPLORE STAY DETAILS MODAL */
-.explore-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(12, 18, 13, 0.9); backdrop-filter: blur(10px); z-index: 25000; justify-content: center; align-items: center; padding: 20px; }
-.explore-card-box { background: #121713; color: #f8f6f2; max-width: 650px; width: 100%; max-height: 90vh; border-radius: 24px; padding: 30px; position: relative; overflow-y: auto; border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
-.explore-card-box img { width: 100%; height: 280px; object-fit: cover; border-radius: 16px; margin-bottom: 20px; background: #1c241d; }
-.explore-header h3 { font-family: 'Playfair Display', serif; font-size: 26px; color: #d4af37; }
-.explore-header p { font-size: 12px; color: #a8bba5; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px; }
-
-.amenities-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 20px 0; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 14px; border: 1px solid rgba(255,255,255,0.05); }
-.amenity-item { font-size: 12px; color: #e5e5e0; display: flex; align-items: center; gap: 8px; }
-
-/* CHECKOUT DRAWER / MODAL */
-.payment-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 15, 0.85); backdrop-filter: blur(10px); z-index: 20000; justify-content: center; align-items: center; padding: 20px; }
-.payment-card-box { background: #ffffff; max-width: 450px; width: 100%; border-radius: 24px; padding: 30px; position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.25); }
-.modal-close-btn { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 20px; cursor: pointer; color: #80807b; }
-.modal-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: #1c1917; }
-.modal-header p { font-size: 12px; color: #80807b; margin-bottom: 20px; }
-
-.payment-invoice-grid { background: #f8f6f2; border-radius: 16px; padding: 20px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 12px; }
-.invoice-row { display: flex; justify-content: space-between; font-size: 13px; color: #6c6763; }
-.invoice-row.total-row { border-top: 1px dashed #e5e5e0; padding-top: 12px; font-weight: 600; color: #1c1917; font-size: 15px; }
-.invoice-row.token-highlight { color: #314232; font-weight: 600; background: rgba(49, 66, 50, 0.06); padding: 8px 12px; border-radius: 8px; font-size: 14px; }
-
-.promo-input-box { margin-bottom: 20px; background: #f8f6f2; padding: 12px; border-radius: 12px; border: 1px dashed #d4af37; }
-.promo-input-row { display: flex; gap: 8px; }
-.promo-input-row input { flex: 1; padding: 8px 12px; border-radius: 8px; border: 1px solid #d1d5db; font-size: 12px; text-transform: uppercase; outline: none; font-family: 'Poppins', sans-serif; }
-.promo-input-row button { background: #314232; color: white; border: none; padding: 8px 15px; border-radius: 8px; font-weight: 600; font-size: 12px; cursor: pointer; }
-#promo-status-msg { font-size: 11px; margin-top: 6px; font-weight: 500; display: none; }
-
-.upi-payment-action { background: #1c1917; color: white; width: 100%; border: none; padding: 14px; border-radius: 12px; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; }
-
-/* CUSTOM PHONE ENTRY MODAL */
-.custom-dark-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 30000; justify-content: center; align-items: center; padding: 20px; }
-.dark-box { background: linear-gradient(160deg, #121c13 0%, #0d150e 100%); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 24px; padding: 30px; width: 100%; max-width: 380px; text-align: center; color: white; }
-.phone-input-wrapper { border: 1.5px solid #d4af37; border-radius: 16px; background: rgba(0, 0, 0, 0.45); padding: 12px 18px; margin: 20px 0; display: flex; align-items: center; }
-.phone-prefix { color: #d4af37; font-weight: 700; font-size: 18px; margin-right: 10px; }
-.phone-input-wrapper input { width: 100%; background: transparent; border: none; outline: none; color: #ffffff; font-size: 18px; font-weight: 600; letter-spacing: 1.5px; }
-
-footer{ background:#1c241d; color:white; padding:60px 8%; }
-.footer-grid{ display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; }
-footer ul{ list-style:none; }
-footer ul li{ margin:10px 0; }
-footer a{ color:#ddd; text-decoration:none; }
-
-.whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 25px; right: 25px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 10000; display: flex; justify-content: center; align-items: center; }
-
-@media(max-width:900px){
-    header { padding: 20px 5%; }
-    .hero h1{ font-size:42px; }
-    .search-box{ grid-template-columns:1fr; gap:15px; margin-top: -40px; }
-    .search-item { border-right: none; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 10px; }
-    .stays-grid, .footer-grid, .loyalty-grid, .reviews-grid { grid-template-columns:1fr; }
-}
-</style>
+        /* FOOTER */
+        footer { border-top: 1px solid rgba(212, 175, 55, 0.2); padding: 40px 5%; text-align: center; color: #a8bba5; font-size: 13px; }
+    </style>
 </head>
-
 <body>
 
-<header>
-    <a href="#" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
-        <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="46" stroke="#d4af37" stroke-width="1.5" stroke-opacity="0.6"/>
-            <path d="M25 65L50 30L75 65" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M38 65H62" stroke="#d4af37" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <div style="display: flex; flex-direction: column;">
-            <span style="font-family: 'Playfair Display', serif; color: #ffffff; font-size: 22px; font-weight: 700; letter-spacing: 3px;">THE HIDE</span>
-            <span style="font-family: 'Poppins', sans-serif; color: #b3c2b0; font-size: 9px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;">Hidden Stays</span>
+    <header>
+        <div class="logo">THE HIDE</div>
+        <div class="nav-links">
+            <a href="#properties">Cabins</a>
+            <a href="#experience">The Experience</a>
+            <a href="#contact">Contact</a>
         </div>
-    </a>
+    </header>
 
-    <div style="display: flex; align-items: center; gap: 15px;">
-        <button onclick="scrollToStays()" class="btn-nav" style="border:none; cursor:pointer;">Explore Stays</button>
-        <div class="menu-trigger" onclick="toggleDrawer()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
-</header>
+    <section class="hero">
+        <h1>Unplugged Quiet in Himachal</h1>
+        <p>Verified offbeat mountain cabins with acoustic audits (&lt;40 dB), high-speed Wi-Fi, and estate food sourcing.</p>
 
-<div class="drawer-overlay" id="drawer-overlay" onclick="toggleDrawer()"></div>
-<div class="side-drawer" id="side-drawer">
-    <div>
-        <div class="drawer-header">
-            <h3>THE HIDE MENU</h3>
-            <button class="close-drawer-btn" onclick="toggleDrawer()">✕</button>
-        </div>
-
-        <div class="drawer-menu-list">
-            <div class="drawer-card" onclick="toggleDrawer(); scrollToSection('loyalty-club');" style="cursor: pointer;">
-                <h4>The Hideout Club</h4>
-                <p>Unlock member-only tariffs, early check-in privileges, and complimentary bonfire setups. Stay 1 night to level up!</p>
+        <div class="search-bar-card">
+            <div class="search-item">
+                <label>Arrival Date</label>
+                <input type="date" id="checkin-date" onchange="calculateNights()">
             </div>
-
-            <div class="drawer-card" onclick="toggleDrawer(); scrollToSection('reviews');" style="cursor: pointer;">
-                <h4>Verified Guest Reviews</h4>
-                <p>See real feedback and ratings from travelers who stayed at our curated mountain retreats.</p>
+            <div class="search-item">
+                <label>Departure Date</label>
+                <input type="date" id="checkout-date" onchange="calculateNights()">
             </div>
-
-            <div class="drawer-card">
-                <h4>Give 10%, Get 10%</h4>
-                <p>Have a referral code? Use promo code <strong style="color:#d4af37;">NEWHIDE</strong> at checkout for an instant 10% discount on your deposit token!</p>
+            <div class="search-item">
+                <label>Nights</label>
+                <input type="text" id="nights-count-display" value="1 Night" readonly style="width: 70px; text-align: center;">
             </div>
         </div>
-    </div>
+    </section>
 
-    <div style="margin-top: 30px; text-align: center;">
-        <a href="https://wa.me/918219747857" target="_blank" style="color: #d4af37; text-decoration: none; font-size: 13px; font-weight: 600;">Contact Concierge Desk →</a>
-    </div>
-</div>
+    <section class="section-container" id="properties">
+        <h2 class="section-title">Curated Mountain Stays</h2>
+        <p class="section-sub">Select your cabin and reserve your stay instantly</p>
 
-<section class="hero">
-    <div class="hero-content">
-        <h1>Hidden Places.<br>Unforgettable Stays.</h1>
-        <p>Discover unique architectural gems tucked away from the crowd.</p>
-    </div>
-</section>
+        <div class="properties-grid">
+            <div class="property-card">
+                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80" class="card-img" alt="Cedar Wood Cabin">
+                <div class="card-body">
+                    <div class="location-tag">Barot Valley, Mandi</div>
+                    <h3 class="card-title">Cedar Wood Riverside Cabin</h3>
+                    <div class="card-features">
+                        <span><i class="fa-solid fa-volume-xmark"></i> &lt;38 dB</span>
+                        <span><i class="fa-solid fa-wifi"></i> 100 Mbps</span>
+                        <span><i class="fa-solid fa-fire"></i> Fireplace</span>
+                    </div>
+                    <div class="card-price-row">
+                        <div class="price">₹4,800 <span style="font-size:12px; color:#a8bba5;">/ night</span></div>
+                        <button class="book-btn" onclick="openPaymentModal('Cedar Wood Riverside Cabin', 'Barot Valley', 4800)">Reserve Stay</button>
+                    </div>
+                </div>
+            </div>
 
-<div class="search-container">
-    <div class="search-box">
-        <div class="search-item">
-            <label>Destination</label>
-            <select id="search-location" onchange="filterStays()">
-                <option value="ALL">All Valleys</option>
-                <option value="Barot Valley">Barot Valley</option>
-                <option value="Tirthan Valley">Tirthan Valley</option>
-                <option value="Manali">Manali</option>
-            </select>
+            <div class="property-card">
+                <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=800&q=80" class="card-img" alt="Stone Cottage">
+                <div class="card-body">
+                    <div class="location-tag">Tirthan Valley, Kullu</div>
+                    <h3 class="card-title">The Secret Pine Cottage</h3>
+                    <div class="card-features">
+                        <span><i class="fa-solid fa-volume-xmark"></i> &lt;35 dB</span>
+                        <span><i class="fa-solid fa-wifi"></i> 80 Mbps</span>
+                        <span><i class="fa-solid fa-mountain"></i> Valley View</span>
+                    </div>
+                    <div class="card-price-row">
+                        <div class="price">₹5,500 <span style="font-size:12px; color:#a8bba5;">/ night</span></div>
+                        <button class="book-btn" onclick="openPaymentModal('The Secret Pine Cottage', 'Tirthan Valley', 5500)">Reserve Stay</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <img src="https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=800&q=80" class="card-img" alt="Loft Cabin">
+                <div class="card-body">
+                    <div class="location-tag">Jhatingri, Joginder Nagar</div>
+                    <h3 class="card-title">Ridge View Glass Loft</h3>
+                    <div class="card-features">
+                        <span><i class="fa-solid fa-volume-xmark"></i> &lt;40 dB</span>
+                        <span><i class="fa-solid fa-wifi"></i> 120 Mbps</span>
+                        <span><i class="fa-solid fa-sun"></i> Sunset Deck</span>
+                    </div>
+                    <div class="card-price-row">
+                        <div class="price">₹6,200 <span style="font-size:12px; color:#a8bba5;">/ night</span></div>
+                        <button class="book-btn" onclick="openPaymentModal('Ridge View Glass Loft', 'Joginder Nagar', 6200)">Reserve Stay</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="search-item">
-            <label>Check-In</label>
-            <input type="date" id="checkin-date" onchange="calculateNights()">
-        </div>
-        <div class="search-item">
-            <label>Check-Out</label>
-            <input type="date" id="checkout-date" onchange="calculateNights()">
-        </div>
-        <button class="search-btn" onclick="applySearchFilter()">Check Availability</button>
-    </div>
-</div>
+    </section>
 
-<section class="section" id="featured-section">
-    <h2 class="section-title">Curated Mountain Cabins</h2>
-    <div class="stays-grid" id="property-grid">
+    <div class="booking-drawer-overlay" id="booking-drawer-overlay" onclick="closeBookingDrawer()"></div>
+
+    <div class="booking-side-drawer" id="booking-side-drawer">
+        <button class="close-drawer-btn" onclick="closeBookingDrawer()">✕</button>
         
-        <div class="card property-card" data-location="Barot Valley">
-            <img src="https://images.unsplash.com/photo-1626602411112-10742f9a3af8?auto=format&fit=crop&w=600&q=80" 
-                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=600&q=80';" 
-                 alt="Trout Stream Cabin">
-            <div class="card-content">
-                <div>
-                    <div class="card-title">Trout Stream Cabin</div>
-                    <div class="card-location">Barot Valley</div>
-                    <div class="card-price">₹4,500 / night</div>
+        <div id="booking-step-1">
+            <div class="drawer-header">
+                <h3 id="drawer-property-title" style="font-family:'Playfair Display', serif; font-size:24px; color:#d4af37;">Reserve Your Stay</h3>
+                <p id="drawer-property-sub" style="font-size: 12px; color: #a8bba5;">Select your preferred payment method</p>
+            </div>
+
+            <div class="stay-summary-mini">
+                <div><span id="summary-dates">Dates: Selected Dates</span></div>
+                <div><span id="summary-total" style="color:#d4af37; font-weight:700;">Total: ₹0</span></div>
+            </div>
+
+            <form id="guest-info-form" onsubmit="handleGuestSubmit(event)">
+                <div class="input-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="guest-full-name" placeholder="e.g. Uday Parmar" required>
                 </div>
-                <div class="card-btn-group">
-                    <button class="card-explore-btn" onclick="openExploreModal('Trout Stream Cabin', 'Barot Valley', '4,500', 'https://images.unsplash.com/photo-1626602411112-10742f9a3af8?auto=format&fit=crop&w=800&q=80', 'Charming riverside log shelter overlooking the clean, rushing trout streams of Barot Valley. Private bonfire lawn, mountain views, and organic estate kitchen.')">View Details</button>
-                    <button class="card-book-btn" onclick="openPaymentModal('Trout Stream Cabin', 'Barot Valley', 4500)">Book Stay</button>
+
+                <div class="input-group">
+                    <label>Mobile / WhatsApp Number *</label>
+                    <div class="phone-input-inline">
+                        <span>+91</span>
+                        <input type="tel" id="guest-mobile" placeholder="9876543210" maxlength="10" required>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="card property-card" data-location="Tirthan Valley">
-            <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80" 
-                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=600&q=80';" 
-                 alt="Pinecrest Treehouse">
-            <div class="card-content">
-                <div>
-                    <div class="card-title">Pinecrest Treehouse</div>
-                    <div class="card-location">Tirthan Valley</div>
-                    <div class="card-price">₹6,200 / night</div>
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="guest-email" placeholder="uday@example.com">
                 </div>
-                <div class="card-btn-group">
-                    <button class="card-explore-btn" onclick="openExploreModal('Pinecrest Treehouse', 'Tirthan Valley', '6,200', 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80', 'High-elevation wooden glass treehouse setup wrapped inside pine woods with waterfall trail paths nearby.')">View Details</button>
-                    <button class="card-book-btn" onclick="openPaymentModal('Pinecrest Treehouse', 'Tirthan Valley', 6200)">Book Stay</button>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Adult Guests</label>
+                        <select id="guest-count-adults">
+                            <option value="1">1 Adult</option>
+                            <option value="2" selected>2 Adults</option>
+                            <option value="3">3 Adults</option>
+                            <option value="4">4 Adults</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Special Requests</label>
+                        <input type="text" id="guest-notes" placeholder="e.g. Late check-in">
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="card property-card" data-location="Manali">
-            <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=600&q=80" 
-                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80';" 
-                 alt="Apple Grove Lodge">
-            <div class="card-content">
-                <div>
-                    <div class="card-title">Apple Grove Lodge</div>
-                    <div class="card-location">Manali Outskirts</div>
-                    <div class="card-price">₹5,000 / night</div>
+                <div class="input-group" style="margin-top: 10px;">
+                    <label>Select Payment Option *</label>
+                    <div class="payment-options-grid">
+                        <label class="payment-card active" onclick="selectPaymentMethod('PAY_AT_PROPERTY', this)">
+                            <input type="radio" name="payment_choice" value="PAY_AT_PROPERTY" checked hidden>
+                            <div class="pay-title">🏢 Pay at Property</div>
+                            <div class="pay-desc">Pay 100% directly to host upon arrival (0 Advance)</div>
+                        </label>
+
+                        <label class="payment-card" onclick="selectPaymentMethod('UPI_TOKEN', this)">
+                            <input type="radio" name="payment_choice" value="UPI_TOKEN" hidden>
+                            <div class="pay-title">💳 10% Token Online (UPI)</div>
+                            <div class="pay-desc">Lock booking instantly with <span id="token-amount-display" style="color:#d4af37; font-weight:bold;">₹0</span> deposit</div>
+                        </label>
+                    </div>
                 </div>
-                <div class="card-btn-group">
-                    <button class="card-explore-btn" onclick="openExploreModal('Apple Grove Lodge', 'Manali Outskirts', '5,000', 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=800&q=80', 'A traditional raw stone chalet completely isolated inside apple orchards away from town centers.')">View Details</button>
-                    <button class="card-book-btn" onclick="openPaymentModal('Apple Grove Lodge', 'Manali Outskirts', 5000)">Book Stay</button>
-                </div>
-            </div>
+
+                <button type="submit" class="submit-booking-btn" id="drawer-action-btn">Confirm Reservation (Pay at Stay) →</button>
+            </form>
         </div>
 
-    </div>
-</section>
+        <div id="booking-step-2" style="display: none;">
+            <div class="drawer-header">
+                <h3 style="font-family:'Playfair Display', serif; font-size:22px; color:#d4af37;">Verify Mobile Number</h3>
+                <p style="font-size: 12px; color: #a8bba5;">Enter 4-digit code sent to <span id="display-verified-phone" style="color:#d4af37;"></span></p>
+            </div>
 
-<section class="loyalty-section" id="loyalty-club">
-    <div class="loyalty-container">
-        <div class="section-title">
-            <h2 style="color: #d4af37;">The Hideout Club</h2>
-            <p style="color: #a8bba5; font-size: 13px; margin-top: 8px;">Unlock member-only tariffs, visual perks, and priority space allocations.</p>
+            <div class="otp-container">
+                <input type="text" id="otp-input-1" maxlength="1" class="otp-box" onkeyup="moveOtpFocus(this, 'otp-input-2')">
+                <input type="text" id="otp-input-2" maxlength="1" class="otp-box" onkeyup="moveOtpFocus(this, 'otp-input-3')">
+                <input type="text" id="otp-input-3" maxlength="1" class="otp-box" onkeyup="moveOtpFocus(this, 'otp-input-4')">
+                <input type="text" id="otp-input-4" maxlength="1" class="otp-box">
+            </div>
+
+            <button onclick="verifyAndFinalizeBooking()" class="submit-booking-btn">Complete Reservation</button>
+            <button onclick="backToStep1()" class="secondary-btn">← Edit Details</button>
         </div>
 
-        <div class="loyalty-dashboard">
-            <div>
-                <h3 id="current-tier-title" style="font-family:'Playfair Display',serif; font-size:24px; color:#ffffff;">Explorer Account</h3>
-                <p id="current-tier-perks" style="font-size:12px; color:#a8bba5; margin-top:4px;">Stay 1 night to level up to Wanderer Tier!</p>
-            </div>
-            <div class="loyalty-input-group">
-                <label for="loyalty-nights-input">Nights Stayed Logged:</label>
-                <input type="number" id="loyalty-nights-input" value="0" min="0" max="30" oninput="calculateLoyaltyTier()">
-            </div>
-        </div>
-
-        <div class="loyalty-grid">
-            <div class="loyalty-card active-card" id="card-tier-1">
-                <h4>Explorer</h4>
-                <div class="tier-sub">Level 01 • 0 Nights</div>
-                <ul>
-                    <li>✓ Access to hidden platform map layouts</li>
-                    <li>✓ 24/7 Response Support Routing</li>
-                </ul>
+        <div id="booking-step-3" style="display: none; text-align: center; padding-top: 30px;">
+            <div style="font-size: 50px; color: #22c55e;">✓</div>
+            <h3 style="font-family:'Playfair Display', serif; color: #d4af37; font-size: 26px;">Booking Confirmed!</h3>
+            <p style="font-size: 13px; color: #a8bba5; margin: 12px 0;">Your reservation details have been saved and sent to the property caretaker.</p>
+            
+            <div class="confirmation-box">
+                <p><strong>Booking ID:</strong> <span id="confirmed-booking-id">#HIDE-1082</span></p>
+                <p><strong>Payment Mode:</strong> <span id="confirmed-payment-mode" style="color:#d4af37;">Pay at Property</span></p>
+                <p><strong>Total Payable:</strong> <span id="confirmed-total-payable">₹0</span></p>
             </div>
 
-            <div class="loyalty-card" id="card-tier-2">
-                <h4>Wanderer</h4>
-                <div class="tier-sub">Level 02 • 1 to 5 Nights</div>
-                <ul>
-                    <li>✓ Priority booking reservation slots</li>
-                    <li style="color: #d4af37; font-weight: 600;">✓ 5% Flat Booking Discount</li>
-                    <li>✓ Early Check-in Privileges</li>
-                </ul>
-            </div>
-
-            <div class="loyalty-card" id="card-tier-3">
-                <h4>Inner Circle</h4>
-                <div class="tier-sub">Level 03 • 6+ Nights</div>
-                <ul>
-                    <li>✓ Priority access to weekend drop slots</li>
-                    <li style="color: #d4af37; font-weight: 600;">✓ 10% Lifetime Tariff Slash</li>
-                    <li>✓ Free Bonfire & Treks</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="reviews-section" id="reviews">
-    <h2 class="section-title">Verified Guest Reviews</h2>
-    <p style="text-align: center; font-size: 13px; color: #78716c; margin-top: -20px;">Real feedback from travelers who stayed at our curated escapes.</p>
-
-    <div class="reviews-grid" id="reviews-grid-container">
-        <div class="review-card">
-            <div>
-                <div class="review-stars">★★★★★</div>
-                <div class="review-text">"Waking up right next to the rushing river in Barot Valley was magic. Unmatched peace and super smooth UPI booking."</div>
-            </div>
-            <div>
-                <div class="review-author">Ananya Sharma</div>
-                <div class="review-location">Stayed at Trout Stream Cabin</div>
-            </div>
-        </div>
-
-        <div class="review-card">
-            <div>
-                <div class="review-stars">★★★★★</div>
-                <div class="review-text">"The treehouse in Tirthan was insanely clean and private. Used code NEWHIDE for deposit discount. 10/10 recommendation!"</div>
-            </div>
-            <div>
-                <div class="review-author">Rohan Kapoor</div>
-                <div class="review-location">Stayed at Pinecrest Treehouse</div>
-            </div>
-        </div>
-
-        <div class="review-card">
-            <div>
-                <div class="review-stars">★★★★★</div>
-                <div class="review-text">"Tucked inside apple trees away from Manali crowd. Exactly what we needed for a quiet weekend retreat."</div>
-            </div>
-            <div>
-                <div class="review-author">Vikram Mehta</div>
-                <div class="review-location">Stayed at Apple Grove Lodge</div>
-            </div>
+            <button onclick="closeBookingDrawer()" class="submit-booking-btn">Done & Return Home</button>
         </div>
     </div>
 
-    <div class="review-btn-container">
-        <button class="btn-submit-review" onclick="openReviewModal()">+ Write a Guest Review</button>
-    </div>
-</section>
+    <footer id="contact">
+        <p>&copy; 2026 The Hide Stays & Tourism Services. Headquartered in Joginder Nagar, District Mandi, Himachal Pradesh.</p>
+    </footer>
 
-<div class="review-modal" id="review-modal">
-    <div class="review-modal-box">
-        <button class="modal-close-btn" onclick="closeReviewModal()" style="color:#a8bba5;">✕</button>
-        <h3 style="font-family:'Playfair Display',serif; color:#d4af37; font-size:22px; margin-bottom:15px;">Write a Review</h3>
-        
-        <input type="text" id="review-author-input" placeholder="Your Name">
-        <select id="review-cabin-input">
-            <option value="Trout Stream Cabin">Trout Stream Cabin</option>
-            <option value="Pinecrest Treehouse">Pinecrest Treehouse</option>
-            <option value="Apple Grove Lodge">Apple Grove Lodge</option>
-        </select>
-        <select id="review-rating-input">
-            <option value="5">★★★★★ (5/5 Excellent)</option>
-            <option value="4">★★★★☆ (4/5 Very Good)</option>
-        </select>
-        <textarea id="review-text-input" rows="4" placeholder="Share your stay experience..."></textarea>
-        
-        <button onclick="submitGuestReview()" style="width:100%; background:#d4af37; color:#121713; border:none; padding:12px; border-radius:12px; font-weight:700; cursor:pointer;">Submit Review</button>
-    </div>
-</div>
+    <script>
+        // SUPABASE CLIENT INITIALIZATION
+        const SUPABASE_URL = "https://tjlpwkroldhsztkelfuy.supabase.co";
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqbHB3a3JvbGRoc3p0a2VsZnV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ5MjIxMjIsImV4cCI6MjEwMDQ5ODEyMn0.1Ya0pNANKRFggdSq9YjDPLEzPzKY9atyKE6KUcrjCrE";
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-<div class="explore-modal" id="explore-modal">
-    <div class="explore-card-box">
-        <button class="modal-close-btn" onclick="closeExploreModal()" style="color:#a8bba5;">✕</button>
-        <img id="explore-img" src="" 
-             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80';" 
-             alt="Cabin Preview">
-        
-        <div class="explore-header">
-            <h3 id="explore-title">Cabin Title</h3>
-            <p id="explore-location">Valley Region</p>
-        </div>
+        // GLOBAL BOOKING STATE
+        let currentSelectedProperty = "";
+        let currentSelectedLocation = "";
+        let currentSelectedPrice = 0;
+        let currentCalculatedNights = 1;
+        let selectedPaymentMethod = 'PAY_AT_PROPERTY';
 
-        <p id="explore-desc" style="font-size: 13px; color: #a8bba5; line-height: 1.7; margin-bottom: 20px;"></p>
+        // DEFAULT DATES SETUP (TODAY & TOMORROW)
+        window.addEventListener('DOMContentLoaded', () => {
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
 
-        <h4 style="font-size: 14px; color: #d4af37; text-transform: uppercase; letter-spacing: 1px;">Included Amenities</h4>
-        <div class="amenities-grid">
-            <div class="amenity-item">🌲 High-Speed Wi-Fi</div>
-            <div class="amenity-item">🔥 Private Bonfire Setup</div>
-            <div class="amenity-item">🍳 Local Estate Kitchen</div>
-            <div class="amenity-item">🏔️ Panoramic Peak Views</div>
-        </div>
-
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
-            <div>
-                <span style="font-size: 11px; color: #8fae90; text-transform: uppercase;">Tariff Rate</span>
-                <div style="font-size: 20px; font-weight: 700; color: #ffffff;" id="explore-price">₹0</div>
-            </div>
-            <button class="card-book-btn" id="explore-book-trigger" style="width: auto; padding: 12px 25px;">Proceed to Book</button>
-        </div>
-    </div>
-</div>
-
-<div class="payment-modal" id="secure-payment-drawer">
-    <div class="payment-card-box">
-        <button class="modal-close-btn" onclick="closePaymentModal()">✕</button>
-        <div class="modal-header">
-            <h3 id="modal-property-name">Cabin Name</h3>
-            <p id="modal-location-name">Valley Location</p>
-        </div>
-
-        <div class="payment-invoice-grid">
-            <div class="invoice-row"><span>Duration:</span><span id="modal-nights-count">0 Nights</span></div>
-            <div class="invoice-row"><span>Baseline Villa Rate:</span><span id="modal-per-night-cost">₹0</span></div>
-            <div class="invoice-row total-row"><span>Total Stay Price:</span><span id="modal-total-cost">₹0</span></div>
-            <div class="invoice-row token-highlight"><span>10% Token Deposit Due:</span><span id="modal-token-cost">₹0</span></div>
-        </div>
-
-        <div class="promo-input-box">
-            <div class="promo-input-row">
-                <input type="text" id="promo-code-input" placeholder="Referral Code (e.g. NEWHIDE)">
-                <button type="button" onclick="applyPromoCode()">Apply</button>
-            </div>
-            <div id="promo-status-msg"></div>
-        </div>
-
-        <button class="upi-payment-action" onclick="promptGuestPhone()">Pay Token Deposit via UPI</button>
-    </div>
-</div>
-
-<div class="custom-dark-modal" id="phone-modal">
-    <div class="dark-box">
-        <h3 style="font-family:'Playfair Display', serif; color:#d4af37; margin-bottom: 8px;">Guest WhatsApp Contact</h3>
-        <p style="font-size: 12px; color:#a8bba5;">Enter your 10-digit WhatsApp number to receive booking confirmation.</p>
-        <div class="phone-input-wrapper">
-            <span class="phone-prefix">+91</span>
-            <input type="tel" id="guest-phone-number" placeholder="9876543210" maxlength="10">
-        </div>
-        <button onclick="submitGuestBooking()" style="width: 100%; background: #d4af37; color: #121713; border: none; padding: 12px; border-radius: 12px; font-weight: 700; cursor: pointer;">Confirm & Pay UPI</button>
-    </div>
-</div>
-
-<footer>
-    <div class="footer-grid">
-        <div>
-            <span style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 18px; letter-spacing: 2px;">THE HIDE</span>
-            <p style="margin-top: 10px; font-size: 13px; color: #a8bba5;">Curated stays in hidden places.</p>
-        </div>
-        <div>
-            <h3>Explore</h3>
-            <ul><li><a href="#featured-section">Mountain Outposts</a></li></ul>
-        </div>
-        <div>
-            <h3>Company</h3>
-            <ul><li><a href="https://wa.me/918219747857" target="_blank">Contact Concierge</a></li></ul>
-        </div>
-        <div>
-            <h3>Support</h3>
-            <ul>
-                <li><a href="#loyalty-club">Hideout Club</a></li>
-                <li><a href="#reviews">Guest Reviews</a></li>
-            </ul>
-        </div>
-    </div>
-</footer>
-
-<a href="https://wa.me/918219747857?text=Hi%20The%20Hide!" class="whatsapp-float" target="_blank">
-    <svg viewBox="0 0 32 32" style="width:30px; height:30px; fill:white;">
-        <path d="M16 2a14 14 0 0 0-12.2 20.8L2 29l6.4-1.6A14 14 0 1 0 16 2zm7.5 20c-.3.9-1.6 1.7-2.6 1.9-.7.1-1.6.2-4.6-1-3.9-1.6-6.4-5.5-6.6-5.8-.2-.3-1.7-2.2-1.7-4.3 0-2 1-3 1.4-3.4.4-.4.8-.5 1-.5.3 0 .5 0 .8.1.3 0 .6-.1.9.7.3.8 1.1 2.8 1.2 3 .1.2.1.4 0 .6-.1.2-.2.4-.4.6-.2.2-.4.4-.5.6-.2.2-.4.4-.2.8.3.4 1.1 1.9 2.4 3.1 1.7 1.5 3.1 2 3.6 2.2.4.2.7.2.9-.1.3-.3 1.1-1.3 1.4-1.8.3-.4.5-.4.9-.2.4.2 2.4 1.1 2.8 1.3.4.2.7.3.8.5.1.3-.1 1.5-.7 2.4z"/>
-    </svg>
-</a>
-
-<script>
-    const SUPABASE_URL = "https://tjlpwkroldhsztkelfuy.supabase.co";
-    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqbHB3a3JvbGRoc3p0a2VsZnV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ5MjIxMjIsImV4cCI6MjEwMDQ5ODEyMn0.1Ya0pNANKRFggdSq9YjDPLEzPzKY9atyKE6KUcrjCrE";
-    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-    let currentCalculatedNights = 1;
-    let currentSelectedProperty = "";
-    let currentSelectedLocation = "";
-    let currentSelectedPrice = 0;
-    let isDiscountApplied = false;
-    let activeDiscountPercent = 0;
-
-    function toggleDrawer() {
-        document.getElementById('drawer-overlay').classList.toggle('active');
-        document.getElementById('side-drawer').classList.toggle('active');
-    }
-
-    function scrollToSection(id) {
-        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function scrollToStays() {
-        scrollToSection('featured-section');
-    }
-
-    // Set Min Date constraint
-    const today = new Date();
-    const tomorrowStr = new Date(today.getTime() + 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-    document.getElementById('checkin-date').min = tomorrowStr;
-
-    function calculateNights() {
-        const inDate = new Date(document.getElementById('checkin-date').value);
-        const outDate = new Date(document.getElementById('checkout-date').value);
-
-        if (inDate && outDate && outDate > inDate) {
-            const diffTime = Math.abs(outDate - inDate);
-            currentCalculatedNights = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        } else {
-            currentCalculatedNights = 1;
-        }
-    }
-
-    function filterStays() {
-        const selectedVal = document.getElementById('search-location').value;
-        const cards = document.querySelectorAll('.property-card');
-
-        cards.forEach(card => {
-            const cardLoc = card.getAttribute('data-location');
-            if (selectedVal === 'ALL' || cardLoc === selectedVal) {
-                card.style.display = 'flex';
-            } else {
-                card.style.display = 'none';
-            }
+            document.getElementById('checkin-date').value = today.toISOString().split('T')[0];
+            document.getElementById('checkout-date').value = tomorrow.toISOString().split('T')[0];
+            calculateNights();
         });
-    }
 
-    function applySearchFilter() {
-        filterStays();
-        scrollToStays();
-    }
+        // CALCULATE NIGHTS DIFFERENCE
+        function calculateNights() {
+            const checkInVal = document.getElementById('checkin-date').value;
+            const checkOutVal = document.getElementById('checkout-date').value;
 
-    /* LOYALTY TIER CALCULATION */
-    function calculateLoyaltyTier() {
-        const nightsVal = parseInt(document.getElementById('loyalty-nights-input').value) || 0;
-        
-        const title = document.getElementById('current-tier-title');
-        const perks = document.getElementById('current-tier-perks');
-        
-        const c1 = document.getElementById('card-tier-1');
-        const c2 = document.getElementById('card-tier-2');
-        const c3 = document.getElementById('card-tier-3');
+            if (checkInVal && checkOutVal) {
+                const date1 = new Date(checkInVal);
+                const date2 = new Date(checkOutVal);
+                const diffTime = date2 - date1;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-        c1.classList.remove('active-card');
-        c2.classList.remove('active-card');
-        c3.classList.remove('active-card');
-
-        if (nightsVal === 0) {
-            title.innerText = "Explorer Account";
-            perks.innerText = "Stay 1 night to level up to Wanderer Tier!";
-            c1.classList.add('active-card');
-        } else if (nightsVal >= 1 && nightsVal <= 5) {
-            title.innerText = "Wanderer Tier Active";
-            perks.innerText = "5% flat discount active on your bookings.";
-            c2.classList.add('active-card');
-        } else {
-            title.innerText = "Inner Circle Member";
-            perks.innerText = "10% lifetime tariff slash unlocked!";
-            c3.classList.add('active-card');
-        }
-    }
-
-    /* REVIEWS FUNCTIONS */
-    function openReviewModal() {
-        document.getElementById('review-modal').style.display = 'flex';
-    }
-
-    function closeReviewModal() {
-        document.getElementById('review-modal').style.display = 'none';
-    }
-
-    function submitGuestReview() {
-        const author = document.getElementById('review-author-input').value.trim();
-        const cabin = document.getElementById('review-cabin-input').value;
-        const rating = document.getElementById('review-rating-input').value;
-        const text = document.getElementById('review-text-input').value.trim();
-
-        if (!author || !text) {
-            alert("Please provide your name and review details.");
-            return;
+                if (diffDays > 0) {
+                    currentCalculatedNights = diffDays;
+                    document.getElementById('nights-count-display').value = `${diffDays} Night${diffDays > 1 ? 's' : ''}`;
+                } else {
+                    alert("Departure date must be after arrival date.");
+                    currentCalculatedNights = 1;
+                    document.getElementById('nights-count-display').value = "1 Night";
+                }
+            }
         }
 
-        const starsStr = '★'.repeat(rating) + '☆'.repeat(5 - rating);
-        const container = document.getElementById('reviews-grid-container');
+        // OPEN BOOKING DRAWER
+        function openPaymentModal(propertyName, regionName, pricePerNight) {
+            const rawIn = document.getElementById('checkin-date').value;
+            const rawOut = document.getElementById('checkout-date').value;
+            
+            if (!rawIn || !rawOut) {
+                alert("Please select your Arrival and Departure dates first!");
+                document.getElementById('checkin-date').focus();
+                return;
+            }
 
-        const newCard = document.createElement('div');
-        newCard.className = 'review-card';
-        newCard.innerHTML = `
-            <div>
-                <div class="review-stars">${starsStr}</div>
-                <div class="review-text">"${text}"</div>
-            </div>
-            <div>
-                <div class="review-author">${author}</div>
-                <div class="review-location">Stayed at ${cabin}</div>
-            </div>
-        `;
+            currentSelectedProperty = propertyName;
+            currentSelectedLocation = regionName;
+            currentSelectedPrice = pricePerNight;
 
-        container.prepend(newCard);
-        closeReviewModal();
-        alert("Thank you! Your guest review has been posted successfully.");
-    }
+            const totalCost = currentSelectedPrice * currentCalculatedNights;
+            const tokenAmount = Math.round(totalCost * 0.10);
 
-    /* EXPLORE STAY MODAL */
-    function openExploreModal(title, location, price, img, desc) {
-        document.getElementById('explore-title').innerText = title;
-        document.getElementById('explore-location').innerText = location;
-        document.getElementById('explore-price').innerText = `₹${price} / night`;
-        document.getElementById('explore-img').src = img;
-        document.getElementById('explore-desc').innerText = desc;
+            // Update Drawer UI
+            document.getElementById('drawer-property-title').innerText = propertyName;
+            document.getElementById('summary-dates').innerText = `${currentCalculatedNights} Night(s) (${rawIn} to ${rawOut})`;
+            document.getElementById('summary-total').innerText = `Total: ₹${totalCost.toLocaleString('en-IN')}`;
+            document.getElementById('token-amount-display').innerText = `₹${tokenAmount.toLocaleString('en-IN')}`;
 
-        const numericPrice = parseInt(price.replace(/,/g, ''));
-        const bookBtn = document.getElementById('explore-book-trigger');
-        bookBtn.onclick = function() {
-            closeExploreModal();
-            openPaymentModal(title, location.split(',')[0], numericPrice);
-        };
+            // Reset Steps
+            document.getElementById('booking-step-1').style.display = 'block';
+            document.getElementById('booking-step-2').style.display = 'none';
+            document.getElementById('booking-step-3').style.display = 'none';
 
-        document.getElementById('explore-modal').style.display = 'flex';
-    }
-
-    function closeExploreModal() {
-        document.getElementById('explore-modal').style.display = 'none';
-    }
-
-    function openPaymentModal(propertyName, regionName, pricePerNight) {
-        const rawIn = document.getElementById('checkin-date').value;
-        const rawOut = document.getElementById('checkout-date').value;
-        
-        if (!rawIn || !rawOut) {
-            alert("Please pick Arrival and Departure dates first!");
-            document.getElementById('checkin-date').focus();
-            return;
+            // Show Drawer
+            document.getElementById('booking-drawer-overlay').classList.add('active');
+            document.getElementById('booking-side-drawer').classList.add('active');
         }
 
-        isDiscountApplied = false;
-        activeDiscountPercent = 0;
-        document.getElementById('promo-code-input').value = "";
-        document.getElementById('promo-status-msg').style.display = 'none';
-
-        currentSelectedProperty = propertyName;
-        currentSelectedLocation = regionName;
-        currentSelectedPrice = pricePerNight;
-
-        updateModalCalculations();
-        document.getElementById('secure-payment-drawer').style.display = 'flex';
-    }
-
-    function closePaymentModal() {
-        document.getElementById('secure-payment-drawer').style.display = 'none';
-    }
-
-    function updateModalCalculations() {
-        const totalCost = currentSelectedPrice * currentCalculatedNights;
-        let tokenDeposit = Math.round(totalCost * 0.10);
-
-        if (isDiscountApplied) {
-            tokenDeposit = Math.round(tokenDeposit * (1 - activeDiscountPercent));
+        function closeBookingDrawer() {
+            document.getElementById('booking-drawer-overlay').classList.remove('active');
+            document.getElementById('booking-side-drawer').classList.remove('active');
         }
 
-        document.getElementById('modal-property-name').innerText = currentSelectedProperty;
-        document.getElementById('modal-location-name').innerText = currentSelectedLocation;
-        document.getElementById('modal-nights-count').innerText = `${currentCalculatedNights} Night(s)`;
-        document.getElementById('modal-per-night-cost').innerText = `₹${currentSelectedPrice.toLocaleString('en-IN')}`;
-        document.getElementById('modal-total-cost').innerText = `₹${totalCost.toLocaleString('en-IN')}`;
-        document.getElementById('modal-token-cost').innerText = `₹${tokenDeposit.toLocaleString('en-IN')}${isDiscountApplied ? ' (10% OFF Applied)' : ''}`;
-    }
+        function selectPaymentMethod(method, element) {
+            selectedPaymentMethod = method;
+            
+            document.querySelectorAll('.payment-card').forEach(card => card.classList.remove('active'));
+            element.classList.add('active');
 
-    function applyPromoCode() {
-        const code = document.getElementById('promo-code-input').value.trim().toUpperCase();
-        const msgBox = document.getElementById('promo-status-msg');
-
-        if (code === "NEWHIDE") {
-            isDiscountApplied = true;
-            activeDiscountPercent = 0.10;
-            msgBox.style.color = "#22c55e";
-            msgBox.innerText = "✓ Referral code 'NEWHIDE' applied! 10% discount on deposit.";
-            msgBox.style.display = 'block';
-            updateModalCalculations();
-        } else {
-            msgBox.style.color = "#ef4444";
-            msgBox.innerText = "Invalid referral code. Try 'NEWHIDE'.";
-            msgBox.style.display = 'block';
-        }
-    }
-
-    function promptGuestPhone() {
-        document.getElementById('secure-payment-drawer').style.display = 'none';
-        document.getElementById('phone-modal').style.display = 'flex';
-    }
-
-    async function submitGuestBooking() {
-        const phone = document.getElementById('guest-phone-number').value.trim();
-        if (phone.length < 10) {
-            alert("Please enter a valid 10-digit WhatsApp number.");
-            return;
+            const actionBtn = document.getElementById('drawer-action-btn');
+            if (method === 'PAY_AT_PROPERTY') {
+                actionBtn.innerText = "Confirm Reservation (Pay at Stay) →";
+            } else {
+                const tokenAmount = Math.round((currentSelectedPrice * currentCalculatedNights) * 0.10);
+                actionBtn.innerText = `Proceed to Pay 10% Token (₹${tokenAmount.toLocaleString('en-IN')}) →`;
+            }
         }
 
-        const checkIn = document.getElementById('checkin-date').value;
-        const checkOut = document.getElementById('checkout-date').value;
-        const totalCost = currentSelectedPrice * currentCalculatedNights;
-        let tokenDeposit = Math.round(totalCost * 0.10);
-        if (isDiscountApplied) tokenDeposit = Math.round(tokenDeposit * 0.90);
+        function handleGuestSubmit(event) {
+            event.preventDefault();
+            const phone = document.getElementById('guest-mobile').value.trim();
+            
+            if (phone.length < 10) {
+                alert("Please enter a valid 10-digit mobile number.");
+                return;
+            }
 
-        const { data, error } = await _supabase
-            .from('guest_bookings')
-            .insert([{
-                guest_phone: "+91" + phone,
-                property_name: currentSelectedProperty,
-                location: currentSelectedLocation,
-                check_in: checkIn,
-                check_out: checkOut,
-                nights: currentCalculatedNights,
-                token_deposit: tokenDeposit,
-                payment_status: 'PENDING'
-            }]);
-
-        if (error) {
-            alert("Error saving reservation: " + error.message);
-            return;
+            document.getElementById('display-verified-phone').innerText = "+91 " + phone;
+            document.getElementById('booking-step-1').style.display = 'none';
+            document.getElementById('booking-step-2').style.display = 'block';
         }
 
-        document.getElementById('phone-modal').style.display = 'none';
+        function backToStep1() {
+            document.getElementById('booking-step-2').style.display = 'none';
+            document.getElementById('booking-step-1').style.display = 'block';
+        }
 
-        const upiPayUrl = `upi://pay?pa=udayparmar2004-1@okhdfcbank&pn=Uday%20Parmar&am=${tokenDeposit}&cu=INR&tn=Token%20Deposit%20${encodeURIComponent(currentSelectedProperty)}`;
-        window.location.href = upiPayUrl;
+        function moveOtpFocus(current, nextFieldId) {
+            if (current.value.length >= 1) {
+                document.getElementById(nextFieldId).focus();
+            }
+        }
 
-        setTimeout(() => {
-            const waMsg = encodeURIComponent(`Hello! I booked ${currentSelectedProperty} (${checkIn} to ${checkOut}) for ₹${tokenDeposit} deposit token. Phone: ${phone}`);
-            window.location.href = `https://wa.me/918219747857?text=${waMsg}`;
-        }, 1500);
-    }
-</script>
+        // SAVE BOOKING DIRECTLY TO SUPABASE
+        async function verifyAndFinalizeBooking() {
+            const fullName = document.getElementById('guest-full-name').value.trim();
+            const phone = document.getElementById('guest-mobile').value.trim();
+            const email = document.getElementById('guest-email').value.trim();
+            const adults = document.getElementById('guest-count-adults').value;
+            const notes = document.getElementById('guest-notes').value.trim();
+
+            const checkIn = document.getElementById('checkin-date').value;
+            const checkOut = document.getElementById('checkout-date').value;
+            const totalCost = currentSelectedPrice * currentCalculatedNights;
+            const tokenAmount = selectedPaymentMethod === 'UPI_TOKEN' ? Math.round(totalCost * 0.10) : 0;
+            const bookingCode = "HIDE-" + Math.floor(1000 + Math.random() * 9000);
+
+            // Insert into Supabase table 'guest_bookings'
+            const { data, error } = await _supabase
+                .from('guest_bookings')
+                .insert([{
+                    booking_id: bookingCode,
+                    guest_name: fullName,
+                    guest_phone: "+91" + phone,
+                    guest_email: email,
+                    property_name: currentSelectedProperty,
+                    location: currentSelectedLocation,
+                    check_in: checkIn,
+                    check_out: checkOut,
+                    nights: currentCalculatedNights,
+                    adults_count: adults,
+                    special_notes: notes,
+                    total_amount: totalCost,
+                    token_deposit: tokenAmount,
+                    payment_status: selectedPaymentMethod
+                }]);
+
+            if (error) {
+                alert("Error saving reservation: " + error.message);
+                return;
+            }
+
+            // Update Step 3 Confirmation UI
+            document.getElementById('confirmed-booking-id').innerText = "#" + bookingCode;
+            document.getElementById('confirmed-payment-mode').innerText = selectedPaymentMethod === 'PAY_AT_PROPERTY' ? 'Pay at Property (0 Advance)' : '10% Token Paid Online';
+            document.getElementById('confirmed-total-payable').innerText = `₹${totalCost.toLocaleString('en-IN')}`;
+            
+            document.getElementById('booking-step-2').style.display = 'none';
+            document.getElementById('booking-step-3').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
-
 
