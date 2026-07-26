@@ -166,10 +166,6 @@
         .pay-desc { font-size: 10px; color: #a8bba5; margin-top: 2px; }
 
         .submit-booking-btn { width: 100%; background: #d4af37; color: #121713; border: none; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; margin-top: 15px; }
-        .secondary-btn { width: 100%; background: transparent; color: #a8bba5; border: none; padding: 8px; margin-top: 6px; cursor: pointer; font-size: 11px; }
-
-        .otp-container { display: flex; justify-content: center; gap: 10px; margin: 15px 0; }
-        .otp-box { width: 45px; height: 45px; text-align: center; font-size: 18px; font-weight: 700; background: rgba(0,0,0,0.5); border: 1.5px solid #d4af37; border-radius: 8px; color: white; }
 
         .confirmation-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 15px; text-align: left; font-size: 12px; line-height: 1.8; }
 
@@ -504,23 +500,6 @@
             </form>
         </div>
 
-        <div id="booking-step-2" style="display: none;">
-            <div class="drawer-header">
-                <h3 style="font-family:'Playfair Display', serif; font-size:20px; color:#d4af37;">Verify Mobile Number</h3>
-                <p style="font-size: 11px; color: #a8bba5;">Enter 4-digit code sent to <span id="display-verified-phone" style="color:#d4af37;"></span></p>
-            </div>
-
-            <div class="otp-container">
-                <input type="text" id="otp-input-1" maxlength="1" class="otp-box" onkeyup="moveOtpFocus(this, 'otp-input-2')">
-                <input type="text" id="otp-input-2" maxlength="1" class="otp-box" onkeyup="moveOtpFocus(this, 'otp-input-3')">
-                <input type="text" id="otp-input-3" maxlength="1" class="otp-box" onkeyup="moveOtpFocus(this, 'otp-input-4')">
-                <input type="text" id="otp-input-4" maxlength="1" class="otp-box">
-            </div>
-
-            <button onclick="verifyAndFinalizeBooking()" class="submit-booking-btn">Complete Reservation</button>
-            <button onclick="backToStep1()" class="secondary-btn">← Edit Details</button>
-        </div>
-
         <div id="booking-step-3" style="display: none; text-align: center; padding-top: 20px;">
             <div style="font-size: 45px; color: #22c55e;">✓</div>
             <h3 style="font-family:'Playfair Display', serif; color: #d4af37; font-size: 24px;">Booking Confirmed!</h3>
@@ -616,7 +595,6 @@
             document.getElementById('token-amount-display').innerText = `₹${tokenAmount.toLocaleString('en-IN')}`;
 
             document.getElementById('booking-step-1').style.display = 'block';
-            document.getElementById('booking-step-2').style.display = 'none';
             document.getElementById('booking-step-3').style.display = 'none';
 
             document.getElementById('booking-drawer-overlay').classList.add('active');
@@ -642,31 +620,16 @@
             }
         }
 
-        function handleGuestSubmit(event) {
+        // DIRECTLY FINALIZE AND SAVE BOOKING TO SUPABASE (NO OTP REQUIRED)
+        async function handleGuestSubmit(event) {
             event.preventDefault();
-            const phone = document.getElementById('guest-mobile').value.trim();
-            if (phone.length < 10) { alert("Please enter a valid 10-digit mobile number."); return; }
-            document.getElementById('display-verified-phone').innerText = "+91 " + phone;
-            document.getElementById('booking-step-1').style.display = 'none';
-            document.getElementById('booking-step-2').style.display = 'block';
-        }
-
-        function backToStep1() {
-            document.getElementById('booking-step-2').style.display = 'none';
-            document.getElementById('booking-step-1').style.display = 'block';
-        }
-
-        function moveOtpFocus(current, nextFieldId) {
-            if (current.value.length >= 1) { document.getElementById(nextFieldId).focus(); }
-        }
-
-        // SAVE BOOKING TO SUPABASE
-        async function verifyAndFinalizeBooking() {
             const fullName = document.getElementById('guest-full-name').value.trim();
             const phone = document.getElementById('guest-mobile').value.trim();
             const email = document.getElementById('guest-email').value.trim();
             const adults = document.getElementById('guest-count-adults').value;
             const notes = document.getElementById('guest-notes').value.trim();
+
+            if (phone.length < 10) { alert("Please enter a valid 10-digit mobile number."); return; }
 
             const checkIn = document.getElementById('checkin-date').value;
             const checkOut = document.getElementById('checkout-date').value;
@@ -699,7 +662,7 @@
             document.getElementById('confirmed-payment-mode').innerText = selectedPaymentMethod === 'PAY_AT_PROPERTY' ? 'Pay at Property (0 Advance)' : '10% Token Paid Online';
             document.getElementById('confirmed-total-payable').innerText = `₹${totalCost.toLocaleString('en-IN')}`;
             
-            document.getElementById('booking-step-2').style.display = 'none';
+            document.getElementById('booking-step-1').style.display = 'none';
             document.getElementById('booking-step-3').style.display = 'block';
         }
 
@@ -715,7 +678,7 @@
             toggleSupportDrawer();
         }
 
-        // TOGGLE ADMIN DRAWER & UNLOCK WITH UPDATED PASSCODE
+        // TOGGLE ADMIN DRAWER & UNLOCK WITH PASSCODE
         function toggleAdminDrawer() {
             document.getElementById('admin-drawer-overlay').classList.toggle('active');
             document.getElementById('admin-side-drawer').classList.toggle('active');
@@ -773,5 +736,4 @@
     </script>
 </body>
 </html>
-
 
