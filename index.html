@@ -74,20 +74,26 @@
         .hero h1 { font-family: 'Playfair Display', serif; font-size: 42px; color: #f8f6f2; line-height: 1.2; margin-bottom: 15px; }
         .hero p { font-size: 15px; color: #a8bba5; max-width: 650px; margin-bottom: 30px; }
 
-        /* SEARCH & DATES BAR */
+        /* SEARCH & CALENDAR BAR */
         .search-bar-card {
             background: rgba(18, 23, 19, 0.95); border: 1px solid rgba(212, 175, 55, 0.4);
-            border-radius: 16px; padding: 18px 25px; display: flex; flex-wrap: wrap; gap: 15px; align-items: center; justify-content: center;
+            border-radius: 16px; padding: 20px 25px; display: flex; flex-wrap: wrap; gap: 15px; align-items: center; justify-content: center;
             box-shadow: 0 15px 35px rgba(0,0,0,0.6); backdrop-filter: blur(10px); width: 100%; max-width: 850px;
         }
         .search-item { display: flex; flex-direction: column; text-align: left; flex: 1; min-width: 130px; }
         .search-item label { font-size: 11px; text-transform: uppercase; color: #d4af37; letter-spacing: 1px; margin-bottom: 5px; }
         .search-item input, .search-item select {
-            background: transparent; border: none; color: #f8f6f2; font-family: 'Poppins', sans-serif;
-            font-size: 13px; outline: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 3px; width: 100%;
+            background: rgba(0,0,0,0.4); border: 1px solid rgba(212,175,55,0.3); color: #f8f6f2; font-family: 'Poppins', sans-serif;
+            font-size: 13px; outline: none; border-radius: 8px; padding: 10px; width: 100%;
         }
 
-        /* CATEGORY FILTER TABS */
+        .search-btn {
+            background: #d4af37; color: #0b0f0c; border: none; padding: 12px 24px; border-radius: 10px;
+            font-weight: 700; font-size: 13px; cursor: pointer; transition: background 0.2s ease; margin-top: 18px;
+        }
+        .search-btn:hover { background: #f1c40f; }
+
+        /* CATEGORY FILTER TAGS */
         .filter-tags-container { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 30px 0 20px 0; }
         .filter-tag {
             background: rgba(255,255,255,0.05); border: 1px solid rgba(212, 175, 55, 0.3); color: #a8bba5;
@@ -99,6 +105,27 @@
         .section-container { padding: 60px 5%; max-width: 1300px; margin: 0 auto; text-align: center; }
         .section-title { font-family: 'Playfair Display', serif; font-size: 32px; color: #d4af37; margin-bottom: 8px; }
         .section-sub { color: #a8bba5; font-size: 14px; margin-bottom: 40px; }
+
+        /* HOTEL GALLERY SLIDER */
+        .gallery-slider-section { max-width: 900px; margin: 0 auto 50px auto; background: #121713; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 20px; overflow: hidden; position: relative; }
+        .slider-wrapper { display: flex; transition: transform 0.4s ease-in-out; }
+        .slide-item { min-width: 100%; position: relative; }
+        .slide-img { width: 100%; height: 380px; object-fit: cover; display: block; }
+        .slide-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 25px 20px;
+            background: linear-gradient(180deg, transparent 0%, rgba(11,15,12,0.95) 100%);
+            text-align: left; display: flex; justify-content: space-between; align-items: flex-end;
+        }
+        .slide-title { font-family: 'Playfair Display', serif; font-size: 24px; color: #f8f6f2; }
+        .slide-sub { font-size: 12px; color: #d4af37; }
+
+        .slider-btn {
+            position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(212,175,55,0.4); color: #d4af37; width: 40px; height: 40px;
+            border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 16px; z-index: 10;
+        }
+        .slider-btn.prev { left: 15px; }
+        .slider-btn.next { right: 15px; }
 
         /* PROPERTIES GRID */
         .properties-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
@@ -205,6 +232,7 @@
             .hero h1 { font-size: 32px; }
             .section-title { font-size: 26px; }
             .booking-side-drawer { width: 100%; max-width: 100%; }
+            .slide-img { height: 260px; }
         }
     </style>
 </head>
@@ -215,6 +243,7 @@
         
         <div class="desktop-nav">
             <a href="#properties">Cabins</a>
+            <a href="#gallery">Gallery Slider</a>
             <a href="#experiences">Experiences</a>
             <a href="#loyalty">Hide Club</a>
             <a href="#reviews">Reviews</a>
@@ -240,6 +269,9 @@
         </a>
         <a href="#properties" class="menu-link" onclick="toggleMobileMenu();">
             <i class="fa-solid fa-house"></i> View Cabins
+        </a>
+        <a href="#gallery" class="menu-link" onclick="toggleMobileMenu();">
+            <i class="fa-solid fa-images"></i> Hotel Gallery Slider
         </a>
         <a href="#experiences" class="menu-link" onclick="toggleMobileMenu();">
             <i class="fa-solid fa-compass"></i> Mountain Activities
@@ -272,11 +304,11 @@
 
         <div class="search-bar-card">
             <div class="search-item">
-                <label>Arrival Date</label>
+                <label><i class="fa-regular fa-calendar-check"></i> Arrival Date</label>
                 <input type="date" id="checkin-date" onchange="calculateNights()">
             </div>
             <div class="search-item">
-                <label>Departure Date</label>
+                <label><i class="fa-regular fa-calendar-xmark"></i> Departure Date</label>
                 <input type="date" id="checkout-date" onchange="calculateNights()">
             </div>
             <div class="search-item" style="max-width: 90px;">
@@ -284,13 +316,59 @@
                 <input type="text" id="nights-count-display" value="1 Night" readonly style="text-align: center;">
             </div>
             <div class="search-item">
-                <label>Circuit / Region</label>
-                <select id="hero-region-filter" onchange="filterPropertiesByTag('all')">
-                    <option value="all">All Himachal Regions</option>
+                <label><i class="fa-solid fa-location-dot"></i> Region</label>
+                <select id="hero-region-filter">
+                    <option value="all">All Locations</option>
                     <option value="Barot">Barot Valley, Mandi</option>
                     <option value="Tirthan">Tirthan Valley, Kullu</option>
                     <option value="Jhatingri">Jhatingri, Joginder Nagar</option>
                 </select>
+            </div>
+            <button class="search-btn" onclick="executeSearch()"><i class="fa-solid fa-magnifying-glass"></i> Search Stays</button>
+        </div>
+    </section>
+
+    <section class="section-container" id="gallery">
+        <h2 class="section-title">Hotel & Cabin Visual Gallery</h2>
+        <p class="section-sub">Explore our acoustic certified retreats through our showcase carousel</p>
+
+        <div class="gallery-slider-section">
+            <button class="slider-btn prev" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="slider-btn next" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+
+            <div class="slider-wrapper" id="slider-wrapper">
+                <div class="slide-item">
+                    <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80" class="slide-img" alt="Cedar Wood Riverside">
+                    <div class="slide-overlay">
+                        <div>
+                            <div class="slide-title">Cedar Wood Riverside Cabin</div>
+                            <div class="slide-sub"><i class="fa-solid fa-location-dot"></i> Barot Valley, Mandi</div>
+                        </div>
+                        <button class="book-btn" onclick="openPaymentModal('Cedar Wood Riverside Cabin', 'Barot Valley', 4800)">Book ₹4,800/night</button>
+                    </div>
+                </div>
+
+                <div class="slide-item">
+                    <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1200&q=80" class="slide-img" alt="Secret Pine Cottage">
+                    <div class="slide-overlay">
+                        <div>
+                            <div class="slide-title">The Secret Pine Cottage</div>
+                            <div class="slide-sub"><i class="fa-solid fa-location-dot"></i> Tirthan Valley, Kullu</div>
+                        </div>
+                        <button class="book-btn" onclick="openPaymentModal('The Secret Pine Cottage', 'Tirthan Valley', 5500)">Book ₹5,500/night</button>
+                    </div>
+                </div>
+
+                <div class="slide-item">
+                    <img src="https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=1200&q=80" class="slide-img" alt="Ridge View Glass Loft">
+                    <div class="slide-overlay">
+                        <div>
+                            <div class="slide-title">Ridge View Glass Loft</div>
+                            <div class="slide-sub"><i class="fa-solid fa-location-dot"></i> Jhatingri, Joginder Nagar</div>
+                        </div>
+                        <button class="book-btn" onclick="openPaymentModal('Ridge View Glass Loft', 'Joginder Nagar', 6200)">Book ₹6,200/night</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -307,7 +385,7 @@
         </div>
 
         <div class="properties-grid" id="properties-grid-container">
-            <div class="property-card" data-category="riverside workation">
+            <div class="property-card" data-category="riverside workation" data-region="Barot">
                 <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80" class="card-img" alt="Cedar Wood Cabin">
                 <div class="card-body">
                     <div class="location-tag">Barot Valley, Mandi</div>
@@ -324,7 +402,7 @@
                 </div>
             </div>
 
-            <div class="property-card" data-category="workation">
+            <div class="property-card" data-category="workation" data-region="Tirthan">
                 <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=800&q=80" class="card-img" alt="Stone Cottage">
                 <div class="card-body">
                     <div class="location-tag">Tirthan Valley, Kullu</div>
@@ -341,7 +419,7 @@
                 </div>
             </div>
 
-            <div class="property-card" data-category="loft workation">
+            <div class="property-card" data-category="loft workation" data-region="Jhatingri">
                 <img src="https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=800&q=80" class="card-img" alt="Loft Cabin">
                 <div class="card-body">
                     <div class="location-tag">Jhatingri, Joginder Nagar</div>
@@ -373,7 +451,7 @@
             <div class="exp-card">
                 <div class="exp-icon"><i class="fa-solid fa-fire"></i></div>
                 <div class="exp-title">Pine Forest Bonfire & Stargazing</div>
-                <div class="exp-desc">Evening outdoor acoustic acoustic campfire sessions with zero light pollution.</div>
+                <div class="exp-desc">Evening outdoor acoustic campfire sessions with zero light pollution.</div>
             </div>
             <div class="exp-card">
                 <div class="exp-icon"><i class="fa-solid fa-person-hiking"></i></div>
@@ -650,6 +728,15 @@
         let latestGuestWhatsAppNumber = "";
         let latestBookingDetails = {};
 
+        // HOTEL GALLERY SLIDER LOGIC
+        let currentSlideIndex = 0;
+        function moveSlide(direction) {
+            const wrapper = document.getElementById('slider-wrapper');
+            const totalSlides = document.querySelectorAll('.slide-item').length;
+            currentSlideIndex = (currentSlideIndex + direction + totalSlides) % totalSlides;
+            wrapper.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+        }
+
         // DEFAULT DATES SETUP (TODAY & TOMORROW)
         window.addEventListener('DOMContentLoaded', () => {
             const today = new Date();
@@ -660,6 +747,23 @@
             document.getElementById('checkout-date').value = tomorrow.toISOString().split('T')[0];
             calculateNights();
         });
+
+        // SEARCH FUNCTIONALITY
+        function executeSearch() {
+            const region = document.getElementById('hero-region-filter').value;
+            const cards = document.querySelectorAll('.property-card');
+            
+            cards.forEach(card => {
+                const cardRegion = card.getAttribute('data-region') || '';
+                if (region === 'all' || cardRegion === region) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            document.getElementById('properties').scrollIntoView({ behavior: 'smooth' });
+        }
 
         // TOGGLE 3-LINE HAMBURGER MENU
         function toggleMobileMenu() {
@@ -673,7 +777,7 @@
             const buttons = document.querySelectorAll('.filter-tag');
 
             buttons.forEach(b => b.classList.remove('active'));
-            event && event.target && event.target.classList.add('active');
+            if(event && event.target) { event.target.classList.add('active'); }
 
             cards.forEach(card => {
                 const category = card.getAttribute('data-category') || '';
