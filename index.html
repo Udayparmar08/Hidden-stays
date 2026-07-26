@@ -150,22 +150,21 @@
         .input-group label { font-size: 10px; text-transform: uppercase; color: #d4af37; margin-bottom: 4px; letter-spacing: 1px; }
         .input-group input, .input-group select, .input-group textarea {
             background: rgba(0,0,0,0.4); border: 1px solid rgba(212, 175, 55, 0.3);
-            color: white; padding: 10px; border-radius: 8px; outline: none; font-family: 'Poppins', sans-serif; font-size: 13px;
+            color: white; padding: 12px; border-radius: 8px; outline: none; font-family: 'Poppins', sans-serif; font-size: 13px; width: 100%;
         }
 
         .phone-input-inline { display: flex; align-items: center; background: rgba(0,0,0,0.4); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 8px; padding-left: 10px; }
         .phone-input-inline span { color: #d4af37; font-weight: 700; margin-right: 6px; font-size: 13px; }
         .phone-input-inline input { border: none !important; width: 100%; }
 
-        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-
+        /* PAYMENT CARDS GRID */
         .payment-options-grid { display: flex; flex-direction: column; gap: 8px; margin-top: 5px; }
-        .payment-card { background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 8px; padding: 10px 12px; cursor: pointer; text-align: left; }
+        .payment-card { background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 8px; padding: 12px; cursor: pointer; text-align: left; }
         .payment-card.active { background: rgba(212, 175, 55, 0.12); border: 1.5px solid #d4af37; }
         .pay-title { font-size: 12px; font-weight: 700; color: #f8f6f2; }
         .pay-desc { font-size: 10px; color: #a8bba5; margin-top: 2px; }
 
-        .submit-booking-btn { width: 100%; background: #d4af37; color: #121713; border: none; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; margin-top: 15px; }
+        .submit-booking-btn { width: 100%; background: #d4af37; color: #121713; border: none; padding: 14px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; margin-top: 15px; }
 
         .confirmation-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 15px; text-align: left; font-size: 12px; line-height: 1.8; }
 
@@ -463,20 +462,16 @@
                     <input type="email" id="guest-email" placeholder="uday@example.com">
                 </div>
 
-                <div class="input-row">
-                    <div class="input-group">
-                        <label>Adult Guests</label>
-                        <select id="guest-count-adults">
-                            <option value="1">1 Adult</option>
-                            <option value="2" selected>2 Adults</option>
-                            <option value="3">3 Adults</option>
-                            <option value="4">4 Adults</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>Special Requests</label>
-                        <input type="text" id="guest-notes" placeholder="e.g. Late check-in">
-                    </div>
+                <div class="input-group">
+                    <label>Adult Guests *</label>
+                    <select id="guest-count-adults" required>
+                        <option value="1">1 Adult Guest</option>
+                        <option value="2" selected>2 Adult Guests</option>
+                        <option value="3">3 Adult Guests</option>
+                        <option value="4">4 Adult Guests</option>
+                        <option value="5">5 Adult Guests</option>
+                        <option value="6">6+ Adult Guests</option>
+                    </select>
                 </div>
 
                 <div class="input-group" style="margin-top: 5px;">
@@ -484,14 +479,26 @@
                     <div class="payment-options-grid">
                         <label class="payment-card active" onclick="selectPaymentMethod('PAY_AT_PROPERTY', this)">
                             <input type="radio" name="payment_choice" value="PAY_AT_PROPERTY" checked hidden>
-                            <div class="pay-title">🏢 Pay at Property</div>
-                            <div class="pay-desc">Pay 100% directly to host upon arrival (0 Advance)</div>
+                            <div class="pay-title">🏢 Pay 100% at Property</div>
+                            <div class="pay-desc">Pay directly to host upon arrival (0 Advance)</div>
                         </label>
 
                         <label class="payment-card" onclick="selectPaymentMethod('UPI_TOKEN', this)">
                             <input type="radio" name="payment_choice" value="UPI_TOKEN" hidden>
-                            <div class="pay-title">💳 10% Token Online (UPI)</div>
-                            <div class="pay-desc">Lock booking instantly with <span id="token-amount-display" style="color:#d4af37; font-weight:bold;">₹0</span> deposit</div>
+                            <div class="pay-title">📱 UPI Direct (GPay / PhonePe / Paytm)</div>
+                            <div class="pay-desc">Lock booking with 10% deposit (<span class="token-val-str" style="color:#d4af37;">₹0</span>)</div>
+                        </label>
+
+                        <label class="payment-card" onclick="selectPaymentMethod('CARD_TOKEN', this)">
+                            <input type="radio" name="payment_choice" value="CARD_TOKEN" hidden>
+                            <div class="pay-title">💳 Debit / Credit Card</div>
+                            <div class="pay-desc">Visa, Mastercard, RuPay 10% token deposit</div>
+                        </label>
+
+                        <label class="payment-card" onclick="selectPaymentMethod('NETBANKING_TOKEN', this)">
+                            <input type="radio" name="payment_choice" value="NETBANKING_TOKEN" hidden>
+                            <div class="pay-title">🏦 Net Banking & Wallets</div>
+                            <div class="pay-desc">All major Indian banks & digital wallets</div>
                         </label>
                     </div>
                 </div>
@@ -592,7 +599,10 @@
             document.getElementById('drawer-property-title').innerText = propertyName;
             document.getElementById('summary-dates').innerText = `${currentCalculatedNights} Night(s) (${rawIn} to ${rawOut})`;
             document.getElementById('summary-total').innerText = `Total: ₹${totalCost.toLocaleString('en-IN')}`;
-            document.getElementById('token-amount-display').innerText = `₹${tokenAmount.toLocaleString('en-IN')}`;
+            
+            document.querySelectorAll('.token-val-str').forEach(el => {
+                el.innerText = `₹${tokenAmount.toLocaleString('en-IN')}`;
+            });
 
             document.getElementById('booking-step-1').style.display = 'block';
             document.getElementById('booking-step-3').style.display = 'none';
@@ -612,29 +622,33 @@
             element.classList.add('active');
 
             const actionBtn = document.getElementById('drawer-action-btn');
+            const tokenAmount = Math.round((currentSelectedPrice * currentCalculatedNights) * 0.10);
+
             if (method === 'PAY_AT_PROPERTY') {
                 actionBtn.innerText = "Confirm Reservation (Pay at Stay) →";
+            } else if (method === 'UPI_TOKEN') {
+                actionBtn.innerText = `Pay 10% UPI Token (₹${tokenAmount.toLocaleString('en-IN')}) →`;
+            } else if (method === 'CARD_TOKEN') {
+                actionBtn.innerText = `Pay 10% via Card (₹${tokenAmount.toLocaleString('en-IN')}) →`;
             } else {
-                const tokenAmount = Math.round((currentSelectedPrice * currentCalculatedNights) * 0.10);
-                actionBtn.innerText = `Proceed to Pay 10% Token (₹${tokenAmount.toLocaleString('en-IN')}) →`;
+                actionBtn.innerText = `Pay 10% via NetBanking (₹${tokenAmount.toLocaleString('en-IN')}) →`;
             }
         }
 
-        // DIRECTLY FINALIZE AND SAVE BOOKING TO SUPABASE (NO OTP REQUIRED)
+        // DIRECTLY FINALIZE AND SAVE BOOKING TO SUPABASE
         async function handleGuestSubmit(event) {
             event.preventDefault();
             const fullName = document.getElementById('guest-full-name').value.trim();
             const phone = document.getElementById('guest-mobile').value.trim();
             const email = document.getElementById('guest-email').value.trim();
             const adults = document.getElementById('guest-count-adults').value;
-            const notes = document.getElementById('guest-notes').value.trim();
 
             if (phone.length < 10) { alert("Please enter a valid 10-digit mobile number."); return; }
 
             const checkIn = document.getElementById('checkin-date').value;
             const checkOut = document.getElementById('checkout-date').value;
             const totalCost = currentSelectedPrice * currentCalculatedNights;
-            const tokenAmount = selectedPaymentMethod === 'UPI_TOKEN' ? Math.round(totalCost * 0.10) : 0;
+            const tokenAmount = selectedPaymentMethod !== 'PAY_AT_PROPERTY' ? Math.round(totalCost * 0.10) : 0;
             const bookingCode = "HIDE-" + Math.floor(1000 + Math.random() * 9000);
 
             const { data, error } = await _supabase
@@ -650,7 +664,6 @@
                     check_out: checkOut,
                     nights: currentCalculatedNights,
                     adults_count: adults,
-                    special_notes: notes,
                     total_amount: totalCost,
                     token_deposit: tokenAmount,
                     payment_status: selectedPaymentMethod
@@ -659,7 +672,7 @@
             if (error) { alert("Error saving reservation: " + error.message); return; }
 
             document.getElementById('confirmed-booking-id').innerText = "#" + bookingCode;
-            document.getElementById('confirmed-payment-mode').innerText = selectedPaymentMethod === 'PAY_AT_PROPERTY' ? 'Pay at Property (0 Advance)' : '10% Token Paid Online';
+            document.getElementById('confirmed-payment-mode').innerText = selectedPaymentMethod === 'PAY_AT_PROPERTY' ? 'Pay 100% at Property (0 Advance)' : `${selectedPaymentMethod} (10% Token Paid)`;
             document.getElementById('confirmed-total-payable').innerText = `₹${totalCost.toLocaleString('en-IN')}`;
             
             document.getElementById('booking-step-1').style.display = 'none';
@@ -736,4 +749,3 @@
     </script>
 </body>
 </html>
-
