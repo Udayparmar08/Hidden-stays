@@ -78,14 +78,22 @@
         .search-bar-card {
             background: rgba(18, 23, 19, 0.95); border: 1px solid rgba(212, 175, 55, 0.4);
             border-radius: 16px; padding: 18px 25px; display: flex; flex-wrap: wrap; gap: 15px; align-items: center; justify-content: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6); backdrop-filter: blur(10px); width: 100%; max-width: 800px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6); backdrop-filter: blur(10px); width: 100%; max-width: 850px;
         }
-        .search-item { display: flex; flex-direction: column; text-align: left; flex: 1; min-width: 140px; }
+        .search-item { display: flex; flex-direction: column; text-align: left; flex: 1; min-width: 130px; }
         .search-item label { font-size: 11px; text-transform: uppercase; color: #d4af37; letter-spacing: 1px; margin-bottom: 5px; }
-        .search-item input {
+        .search-item input, .search-item select {
             background: transparent; border: none; color: #f8f6f2; font-family: 'Poppins', sans-serif;
-            font-size: 14px; outline: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 3px; width: 100%;
+            font-size: 13px; outline: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 3px; width: 100%;
         }
+
+        /* CATEGORY FILTER TABS */
+        .filter-tags-container { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 30px 0 20px 0; }
+        .filter-tag {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(212, 175, 55, 0.3); color: #a8bba5;
+            padding: 8px 16px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: all 0.2s ease;
+        }
+        .filter-tag.active, .filter-tag:hover { background: #d4af37; color: #0b0f0c; font-weight: 600; border-color: #d4af37; }
 
         /* SECTION STYLES */
         .section-container { padding: 60px 5%; max-width: 1300px; margin: 0 auto; text-align: center; }
@@ -111,6 +119,17 @@
             font-weight: 700; font-size: 12px; cursor: pointer; transition: background 0.2s ease;
         }
 
+        /* EXPERIENCES GRID */
+        .experiences-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+        .exp-card {
+            background: #121713; border: 1px solid rgba(255,255,255,0.1); border-radius: 14px;
+            padding: 20px; text-align: left; transition: border-color 0.2s;
+        }
+        .exp-card:hover { border-color: #d4af37; }
+        .exp-icon { font-size: 28px; color: #d4af37; margin-bottom: 12px; }
+        .exp-title { font-size: 16px; font-weight: 600; color: #f8f6f2; margin-bottom: 6px; }
+        .exp-desc { font-size: 12px; color: #a8bba5; }
+
         /* LOYALTY PROGRAM SECTION */
         .loyalty-card {
             background: linear-gradient(135deg, #121713 0%, #1c241e 100%); border: 1px solid #d4af37;
@@ -124,6 +143,14 @@
         .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 30px; }
         .review-card { background: #121713; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; text-align: left; }
         .review-stars { color: #d4af37; margin-bottom: 8px; font-size: 12px; }
+
+        /* FAQ ACCORDION */
+        .faq-accordion { max-width: 800px; margin: 0 auto; text-align: left; }
+        .faq-item { background: #121713; border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
+        .faq-question { padding: 15px 20px; font-size: 14px; font-weight: 600; color: #f8f6f2; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { padding: 0 20px 15px 20px; font-size: 12px; color: #a8bba5; display: none; }
+        .faq-item.active .faq-answer { display: block; }
+        .faq-item.active .faq-question { color: #d4af37; }
 
         /* ADMIN DRAWER & DASHBOARD */
         .admin-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 12px; text-align: left; }
@@ -188,8 +215,10 @@
         
         <div class="desktop-nav">
             <a href="#properties">Cabins</a>
+            <a href="#experiences">Experiences</a>
             <a href="#loyalty">Hide Club</a>
             <a href="#reviews">Reviews</a>
+            <a href="#faq">FAQs</a>
             <a href="#contact" onclick="toggleSupportDrawer()">Support</a>
             <a href="#admin" onclick="toggleAdminDrawer()" style="color:#d4af37;"><i class="fa-solid fa-lock"></i> Admin</a>
         </div>
@@ -212,11 +241,17 @@
         <a href="#properties" class="menu-link" onclick="toggleMobileMenu();">
             <i class="fa-solid fa-house"></i> View Cabins
         </a>
+        <a href="#experiences" class="menu-link" onclick="toggleMobileMenu();">
+            <i class="fa-solid fa-compass"></i> Mountain Activities
+        </a>
         <a href="#loyalty" class="menu-link" onclick="toggleMobileMenu();">
             <i class="fa-solid fa-crown"></i> Hide Club Loyalty
         </a>
         <a href="#reviews" class="menu-link" onclick="toggleMobileMenu();">
             <i class="fa-solid fa-star"></i> Guest Reviews
+        </a>
+        <a href="#faq" class="menu-link" onclick="toggleMobileMenu();">
+            <i class="fa-solid fa-circle-question"></i> FAQs & Policies
         </a>
         <a href="#support" class="menu-link" onclick="toggleMobileMenu(); toggleSupportDrawer();">
             <i class="fa-solid fa-headset"></i> Contact Support
@@ -225,8 +260,8 @@
 
     <div class="mobile-bottom-nav">
         <a href="#properties" class="mobile-nav-item active"><i class="fa-solid fa-house"></i>Cabins</a>
+        <a href="#experiences" class="mobile-nav-item"><i class="fa-solid fa-compass"></i>Activities</a>
         <a href="#loyalty" class="mobile-nav-item"><i class="fa-solid fa-crown"></i>Loyalty</a>
-        <a href="#reviews" class="mobile-nav-item"><i class="fa-solid fa-star"></i>Reviews</a>
         <a href="#" class="mobile-nav-item" onclick="toggleSupportDrawer()"><i class="fa-solid fa-headset"></i>Support</a>
         <a href="#" class="mobile-nav-item" onclick="toggleAdminDrawer()"><i class="fa-solid fa-user-gear"></i>Admin</a>
     </div>
@@ -248,6 +283,15 @@
                 <label>Nights</label>
                 <input type="text" id="nights-count-display" value="1 Night" readonly style="text-align: center;">
             </div>
+            <div class="search-item">
+                <label>Circuit / Region</label>
+                <select id="hero-region-filter" onchange="filterPropertiesByTag('all')">
+                    <option value="all">All Himachal Regions</option>
+                    <option value="Barot">Barot Valley, Mandi</option>
+                    <option value="Tirthan">Tirthan Valley, Kullu</option>
+                    <option value="Jhatingri">Jhatingri, Joginder Nagar</option>
+                </select>
+            </div>
         </div>
     </section>
 
@@ -255,8 +299,15 @@
         <h2 class="section-title">Curated Mountain Stays</h2>
         <p class="section-sub">Select your cabin and reserve your stay instantly</p>
 
-        <div class="properties-grid">
-            <div class="property-card">
+        <div class="filter-tags-container">
+            <button class="filter-tag active" onclick="filterPropertiesByTag('all')">✨ All Stays</button>
+            <button class="filter-tag" onclick="filterPropertiesByTag('riverside')">🌊 Riverside</button>
+            <button class="filter-tag" onclick="filterPropertiesByTag('workation')">💻 Workation (&lt;40 dB)</button>
+            <button class="filter-tag" onclick="filterPropertiesByTag('loft')">🏔️ Glass Loft</button>
+        </div>
+
+        <div class="properties-grid" id="properties-grid-container">
+            <div class="property-card" data-category="riverside workation">
                 <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80" class="card-img" alt="Cedar Wood Cabin">
                 <div class="card-body">
                     <div class="location-tag">Barot Valley, Mandi</div>
@@ -273,7 +324,7 @@
                 </div>
             </div>
 
-            <div class="property-card">
+            <div class="property-card" data-category="workation">
                 <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=800&q=80" class="card-img" alt="Stone Cottage">
                 <div class="card-body">
                     <div class="location-tag">Tirthan Valley, Kullu</div>
@@ -290,7 +341,7 @@
                 </div>
             </div>
 
-            <div class="property-card">
+            <div class="property-card" data-category="loft workation">
                 <img src="https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=800&q=80" class="card-img" alt="Loft Cabin">
                 <div class="card-body">
                     <div class="location-tag">Jhatingri, Joginder Nagar</div>
@@ -305,6 +356,29 @@
                         <button class="book-btn" onclick="openPaymentModal('Ridge View Glass Loft', 'Joginder Nagar', 6200)">Reserve Stay</button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-container" id="experiences">
+        <h2 class="section-title">Curated Mountain Experiences</h2>
+        <p class="section-sub">Add offbeat local activities to your stay in Mandi & Kullu circuits</p>
+
+        <div class="experiences-grid">
+            <div class="exp-card">
+                <div class="exp-icon"><i class="fa-solid fa-water"></i></div>
+                <div class="exp-title">River Angling & Trout Sourcing</div>
+                <div class="exp-desc">Guided trout fishing sessions along the Uhl River in Barot with local estate cooks.</div>
+            </div>
+            <div class="exp-card">
+                <div class="exp-icon"><i class="fa-solid fa-fire"></i></div>
+                <div class="exp-title">Pine Forest Bonfire & Stargazing</div>
+                <div class="exp-desc">Evening outdoor acoustic acoustic campfire sessions with zero light pollution.</div>
+            </div>
+            <div class="exp-card">
+                <div class="exp-icon"><i class="fa-solid fa-person-hiking"></i></div>
+                <div class="exp-title">Jhatingri Ridge Treks</div>
+                <div class="exp-desc">Escorted forest walks through old British heritage tea estate trails in Joginder Nagar.</div>
             </div>
         </div>
     </section>
@@ -367,6 +441,26 @@
                 <textarea id="review-text" rows="3" placeholder="Share your experience..."></textarea>
             </div>
             <button class="submit-booking-btn" onclick="submitGuestReview()">Submit Review</button>
+        </div>
+    </section>
+
+    <section class="section-container" id="faq">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-sub">Everything you need to know about staying with us</p>
+
+        <div class="faq-accordion">
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">What are the standard Check-in and Check-out times? <span>+</span></div>
+                <div class="faq-answer">Standard Check-in is at 12:00 PM and Check-out is at 10:30 AM. Early check-in or late check-out can be requested based on availability.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">How reliable is the Wi-Fi for remote work? <span>+</span></div>
+                <div class="faq-answer">All properties are equipped with dedicated high-speed optical fiber Wi-Fi (80 to 120 Mbps) with power backups for seamless video calls.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">What is the "Pay at Property" policy? <span>+</span></div>
+                <div class="faq-answer">You can reserve your cabin online with ₹0 advance deposit and pay 100% directly to the property host upon arrival.</div>
+            </div>
         </div>
     </section>
 
@@ -540,7 +634,6 @@
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // 2. EMAILJS INITIALIZATION
-        // Replace "YOUR_PUBLIC_KEY" with your EmailJS Public Key from Account -> General
         try {
             emailjs.init("YOUR_PUBLIC_KEY");
         } catch(e) {
@@ -572,6 +665,29 @@
         function toggleMobileMenu() {
             document.getElementById('menu-drawer-overlay').classList.toggle('active');
             document.getElementById('mobile-menu-drawer').classList.toggle('active');
+        }
+
+        // FILTER PROPERTIES BY TAG
+        function filterPropertiesByTag(tag) {
+            const cards = document.querySelectorAll('.property-card');
+            const buttons = document.querySelectorAll('.filter-tag');
+
+            buttons.forEach(b => b.classList.remove('active'));
+            event && event.target && event.target.classList.add('active');
+
+            cards.forEach(card => {
+                const category = card.getAttribute('data-category') || '';
+                if (tag === 'all' || category.includes(tag)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // FAQ ACCORDION TOGGLE
+        function toggleFaq(element) {
+            element.classList.toggle('active');
         }
 
         // CALCULATE NIGHTS DIFFERENCE
@@ -714,7 +830,6 @@
                 payment_status: selectedPaymentMethod === 'PAY_AT_PROPERTY' ? 'Pay 100% at Property' : `${selectedPaymentMethod} (10% Token Paid)`
             };
 
-            // Replace YOUR_SERVICE_ID and YOUR_TEMPLATE_ID with your EmailJS dashboard keys
             try {
                 emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
                     .then(function(response) {
