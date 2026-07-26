@@ -651,6 +651,7 @@
             const tokenAmount = selectedPaymentMethod !== 'PAY_AT_PROPERTY' ? Math.round(totalCost * 0.10) : 0;
             const bookingCode = "HIDE-" + Math.floor(1000 + Math.random() * 9000);
 
+            // Aligned payload containing adults_count matching the new Supabase SQL schema
             const { data, error } = await _supabase
                 .from('guest_bookings')
                 .insert([{
@@ -663,7 +664,7 @@
                     check_in: checkIn,
                     check_out: checkOut,
                     nights: currentCalculatedNights,
-                    adults_count: adults,
+                    adults_count: adults + " Adult Guest(s)",
                     total_amount: totalCost,
                     token_deposit: tokenAmount,
                     payment_status: selectedPaymentMethod
