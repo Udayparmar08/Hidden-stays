@@ -191,6 +191,40 @@
         .faq-item.active .faq-answer { display: block; }
         .faq-item.active .faq-question { color: #d4af37; }
 
+        /* FLOATING AI ASSISTANT CONCIERGE (BOTTOM RIGHT) */
+        .ai-chat-btn {
+            position: fixed; bottom: 80px; right: 20px; z-index: 19000;
+            background: linear-gradient(135deg, #d4af37 0%, #aa820a 100%); color: #0b0f0c;
+            width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 8px 25px rgba(212,175,55,0.4); cursor: pointer; border: 2px solid #f8f6f2; transition: transform 0.3s ease;
+        }
+        .ai-chat-btn:hover { transform: scale(1.08); }
+        .ai-badge { position: absolute; top: 2px; right: 2px; width: 12px; height: 12px; background: #22c55e; border-radius: 50%; border: 2px solid #121713; }
+
+        .ai-chat-window {
+            position: fixed; bottom: 145px; right: 20px; width: 340px; max-width: 90vw; height: 460px;
+            background: #121713; border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 18px;
+            z-index: 19001; display: none; flex-direction: column; overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+        }
+        .ai-chat-window.active { display: flex; }
+        .ai-chat-header {
+            background: rgba(0,0,0,0.6); padding: 12px 15px; border-bottom: 1px solid rgba(212,175,55,0.3);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .ai-chat-title { font-family: 'Playfair Display', serif; font-size: 15px; color: #d4af37; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .ai-messages-container { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 12px; }
+        
+        .msg-bot { background: rgba(255,255,255,0.06); color: #f8f6f2; border: 1px solid rgba(212,175,55,0.2); padding: 10px 12px; border-radius: 12px 12px 12px 2px; align-self: flex-start; max-width: 85%; }
+        .msg-user { background: #d4af37; color: #0b0f0c; font-weight: 500; padding: 10px 12px; border-radius: 12px 12px 2px 12px; align-self: flex-end; max-width: 85%; }
+
+        .ai-quick-chips { display: flex; gap: 6px; overflow-x: auto; padding: 0 15px 10px 15px; }
+        .chip-btn { background: rgba(0,0,0,0.4); border: 1px solid rgba(212,175,55,0.3); color: #d4af37; font-size: 10px; padding: 5px 10px; border-radius: 12px; white-space: nowrap; cursor: pointer; }
+
+        .ai-chat-input-row { display: flex; padding: 10px; border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4); }
+        .ai-chat-input-row input { flex: 1; background: transparent; border: none; color: white; outline: none; font-size: 12px; padding-left: 8px; }
+        .ai-send-btn { background: #d4af37; color: #0b0f0c; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: 700; }
+
         /* ADMIN DRAWER & DASHBOARD */
         .admin-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 12px; text-align: left; }
         .admin-table th, .admin-table td { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
@@ -250,6 +284,8 @@
             .section-title { font-size: 26px; }
             .booking-side-drawer { width: 100%; max-width: 100%; }
             .slide-img { height: 260px; }
+            .ai-chat-btn { bottom: 75px; right: 15px; width: 48px; height: 48px; }
+            .ai-chat-window { bottom: 130px; right: 15px; width: 92vw; }
         }
     </style>
 </head>
@@ -596,6 +632,37 @@
         </div>
     </section>
 
+    <div class="ai-chat-btn" onclick="toggleAiChat()">
+        <i class="fa-solid fa-robot" style="font-size:22px;"></i>
+        <div class="ai-badge"></div>
+    </div>
+
+    <div class="ai-chat-window" id="ai-chat-window">
+        <div class="ai-chat-header">
+            <div class="ai-chat-title">
+                <i class="fa-solid fa-sparkles"></i> The Hide AI Assistant
+            </div>
+            <button style="background:transparent; border:none; color:#a8bba5; font-size:16px; cursor:pointer;" onclick="toggleAiChat()">✕</button>
+        </div>
+
+        <div class="ai-messages-container" id="ai-messages-list">
+            <div class="msg-bot">
+                Hello! 👋 I am <strong>Hide AI Assistant</strong>. How can I assist you with your stay, booking, or complaint today?
+            </div>
+        </div>
+
+        <div class="ai-quick-chips">
+            <button class="chip-btn" onclick="sendQuickAiQuery('Book a stay')">📅 How to book?</button>
+            <button class="chip-btn" onclick="sendQuickAiQuery('WiFi speed')">📶 Wi-Fi & Workation</button>
+            <button class="chip-btn" onclick="sendQuickAiQuery('Register complaint')">⚠️ Register Complaint</button>
+        </div>
+
+        <div class="ai-chat-input-row">
+            <input type="text" id="ai-input-field" placeholder="Ask about stays, booking, complaint..." onkeypress="handleAiKeyPress(event)">
+            <button class="ai-send-btn" onclick="processUserAiQuery()"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
+
     <div class="booking-drawer-overlay" id="details-drawer-overlay" onclick="closePropertyDetails()"></div>
     <div class="booking-side-drawer" id="details-side-drawer">
         <button class="close-drawer-btn" onclick="closePropertyDetails()">✕</button>
@@ -640,7 +707,7 @@
                 <input type="text" required placeholder="Enter name">
             </div>
             <div class="input-group">
-                <label>Message / Question</label>
+                <label>Message / Question / Complaint</label>
                 <textarea rows="3" required placeholder="How can we help you?"></textarea>
             </div>
             <button type="submit" class="submit-booking-btn">Send Support Message</button>
@@ -920,6 +987,55 @@
                     document.getElementById('nights-count-display').value = "1 Night";
                 }
             }
+        }
+
+        // AI ASSISTANT CONCIERGE LOGIC
+        function toggleAiChat() {
+            document.getElementById('ai-chat-window').classList.toggle('active');
+        }
+
+        function handleAiKeyPress(e) {
+            if (e.key === 'Enter') { processUserAiQuery(); }
+        }
+
+        function sendQuickAiQuery(text) {
+            document.getElementById('ai-input-field').value = text;
+            processUserAiQuery();
+        }
+
+        function processUserAiQuery() {
+            const input = document.getElementById('ai-input-field');
+            const query = input.value.trim();
+            if (!query) return;
+
+            const list = document.getElementById('ai-messages-list');
+
+            // Append user message
+            const userDiv = document.createElement('div');
+            userDiv.className = 'msg-user';
+            userDiv.innerText = query;
+            list.appendChild(userDiv);
+            input.value = '';
+
+            // Generate bot reply
+            setTimeout(() => {
+                const botDiv = document.createElement('div');
+                botDiv.className = 'msg-bot';
+                
+                const lower = query.toLowerCase();
+                if (lower.includes('book') || lower.includes('reserve')) {
+                    botDiv.innerHTML = "You can select dates using the top calendar bar and click <strong>Reserve Stay</strong> on any property. You can choose to <strong>Pay at Property (0 Advance)</strong> or pay a 10% UPI token deposit.";
+                } else if (lower.includes('wifi') || lower.includes('work') || lower.includes('speed')) {
+                    botDiv.innerHTML = "All properties feature high-speed optical fiber Wi-Fi (80 - 120 Mbps) with dedicated power backup and quiet acoustic audits (&lt;40 dB).";
+                } else if (lower.includes('complaint') || lower.includes('issue') || lower.includes('problem')) {
+                    botDiv.innerHTML = "We are sorry for any inconvenience! Please reach out directly to our 24/7 support desk at <strong>+91 8219747857</strong> or click <strong>Support</strong> in the top menu to record your issue.";
+                } else {
+                    botDiv.innerHTML = "Thank you for reaching out to The Hide! You can explore our curated stays in Barot, Tirthan & Joginder Nagar, or contact support anytime at +91 8219747857.";
+                }
+
+                list.appendChild(botDiv);
+                list.scrollTop = list.scrollHeight;
+            }, 500);
         }
 
         // OPEN BOOKING DRAWER
