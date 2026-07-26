@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>The Hide — Curated Mountain Stays & Offbeat Cabins in Himachal</title>
+    <title>The Hide — Curated Mountain Stays & Travel Packages in Himachal</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,24 +64,24 @@
         .mobile-nav-item i { font-size: 18px; margin-bottom: 2px; }
         .mobile-nav-item.active { color: #d4af37; }
 
-        /* HERO SECTION */
+        /* HERO SECTION & TOP SEARCH BAR */
         .hero {
-            min-height: 80vh; background: linear-gradient(180deg, rgba(11, 15, 12, 0.5) 0%, #0b0f0c 100%), 
+            min-height: 85vh; background: linear-gradient(180deg, rgba(11, 15, 12, 0.5) 0%, #0b0f0c 100%), 
                         url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
-            padding: 90px 20px 40px 20px;
+            padding: 95px 20px 40px 20px;
         }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: 42px; color: #f8f6f2; line-height: 1.2; margin-bottom: 15px; }
-        .hero p { font-size: 15px; color: #a8bba5; max-width: 650px; margin-bottom: 30px; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 42px; color: #f8f6f2; line-height: 1.2; margin-bottom: 12px; }
+        .hero p { font-size: 15px; color: #a8bba5; max-width: 650px; margin-bottom: 28px; }
 
-        /* SEARCH & CALENDAR BAR */
-        .search-bar-card {
+        /* SEARCH BAR AT TOP VIEW */
+        .top-search-bar {
             background: rgba(18, 23, 19, 0.95); border: 1px solid rgba(212, 175, 55, 0.4);
-            border-radius: 16px; padding: 20px 25px; display: flex; flex-wrap: wrap; gap: 15px; align-items: center; justify-content: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6); backdrop-filter: blur(10px); width: 100%; max-width: 850px;
+            border-radius: 18px; padding: 20px 25px; display: flex; flex-wrap: wrap; gap: 15px; align-items: center; justify-content: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6); backdrop-filter: blur(12px); width: 100%; max-width: 900px;
         }
-        .search-item { display: flex; flex-direction: column; text-align: left; flex: 1; min-width: 130px; }
-        .search-item label { font-size: 11px; text-transform: uppercase; color: #d4af37; letter-spacing: 1px; margin-bottom: 5px; }
+        .search-item { display: flex; flex-direction: column; text-align: left; flex: 1; min-width: 140px; }
+        .search-item label { font-size: 11px; text-transform: uppercase; color: #d4af37; letter-spacing: 1px; margin-bottom: 5px; font-weight: 600; }
         .search-item input, .search-item select {
             background: rgba(0,0,0,0.4); border: 1px solid rgba(212,175,55,0.3); color: #f8f6f2; font-family: 'Poppins', sans-serif;
             font-size: 13px; outline: none; border-radius: 8px; padding: 10px; width: 100%;
@@ -93,18 +93,18 @@
         }
         .search-btn:hover { background: #f1c40f; }
 
-        /* CATEGORY FILTER TAGS */
-        .filter-tags-container { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 30px 0 20px 0; }
-        .filter-tag {
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(212, 175, 55, 0.3); color: #a8bba5;
-            padding: 8px 16px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: all 0.2s ease;
-        }
-        .filter-tag.active, .filter-tag:hover { background: #d4af37; color: #0b0f0c; font-weight: 600; border-color: #d4af37; }
-
         /* SECTION STYLES */
         .section-container { padding: 60px 5%; max-width: 1300px; margin: 0 auto; text-align: center; }
         .section-title { font-family: 'Playfair Display', serif; font-size: 32px; color: #d4af37; margin-bottom: 8px; }
         .section-sub { color: #a8bba5; font-size: 14px; margin-bottom: 40px; }
+
+        /* CATEGORY FILTER TAGS */
+        .filter-tags-container { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 20px 0 30px 0; }
+        .filter-tag {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(212, 175, 55, 0.3); color: #a8bba5;
+            padding: 8px 18px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: all 0.2s ease;
+        }
+        .filter-tag.active, .filter-tag:hover { background: #d4af37; color: #0b0f0c; font-weight: 600; border-color: #d4af37; }
 
         /* HOTEL GALLERY SLIDER */
         .gallery-slider-section { max-width: 900px; margin: 0 auto 50px auto; background: #121713; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 20px; overflow: hidden; position: relative; }
@@ -127,8 +127,8 @@
         .slider-btn.prev { left: 15px; }
         .slider-btn.next { right: 15px; }
 
-        /* PROPERTIES GRID */
-        .properties-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        /* PROPERTIES GRID & CARDS */
+        .properties-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 30px; }
         .property-card {
             background: #121713; border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 16px;
             overflow: hidden; transition: transform 0.3s ease, border-color 0.3s ease; text-align: left;
@@ -139,23 +139,35 @@
         .location-tag { font-size: 11px; color: #d4af37; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
         .card-title { font-family: 'Playfair Display', serif; font-size: 20px; color: #f8f6f2; margin-bottom: 8px; }
         .card-features { display: flex; gap: 12px; font-size: 11px; color: #a8bba5; margin-bottom: 15px; }
-        .card-price-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
+        
+        .card-actions-row { display: flex; gap: 10px; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; align-items: center; justify-content: space-between; }
         .price { font-size: 18px; font-weight: 700; color: #f8f6f2; }
+        
+        .btn-group { display: flex; gap: 8px; }
+        .view-details-btn {
+            background: transparent; border: 1px solid #d4af37; color: #d4af37; padding: 9px 14px;
+            border-radius: 8px; font-weight: 600; font-size: 11px; cursor: pointer; transition: all 0.2s ease;
+        }
+        .view-details-btn:hover { background: rgba(212,175,55,0.15); }
+        
         .book-btn {
-            background: #d4af37; color: #0b0f0c; border: none; padding: 10px 18px; border-radius: 10px;
+            background: #d4af37; color: #0b0f0c; border: none; padding: 9px 16px; border-radius: 8px;
             font-weight: 700; font-size: 12px; cursor: pointer; transition: background 0.2s ease;
         }
+        .book-btn:hover { background: #f1c40f; }
 
-        /* EXPERIENCES GRID */
-        .experiences-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-        .exp-card {
-            background: #121713; border: 1px solid rgba(255,255,255,0.1); border-radius: 14px;
-            padding: 20px; text-align: left; transition: border-color 0.2s;
+        /* TRAVEL & PACKAGES SECTION */
+        .packages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 20px; }
+        .package-card {
+            background: #121713; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 16px;
+            padding: 25px; text-align: left; position: relative; overflow: hidden;
         }
-        .exp-card:hover { border-color: #d4af37; }
-        .exp-icon { font-size: 28px; color: #d4af37; margin-bottom: 12px; }
-        .exp-title { font-size: 16px; font-weight: 600; color: #f8f6f2; margin-bottom: 6px; }
-        .exp-desc { font-size: 12px; color: #a8bba5; }
+        .package-badge { position: absolute; top: 15px; right: 15px; background: rgba(212,175,55,0.15); color: #d4af37; border: 1px solid #d4af37; font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 12px; text-transform: uppercase; }
+        .package-title { font-family: 'Playfair Display', serif; font-size: 20px; color: #f8f6f2; margin-bottom: 8px; }
+        .package-route { font-size: 12px; color: #d4af37; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+        .package-includes { list-style: none; font-size: 12px; color: #a8bba5; margin-bottom: 20px; }
+        .package-includes li { margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .package-includes li i { color: #22c55e; }
 
         /* LOYALTY PROGRAM SECTION */
         .loyalty-card {
@@ -225,6 +237,11 @@
 
         .confirmation-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 15px; text-align: left; font-size: 12px; line-height: 1.8; }
 
+        /* AMENITIES LIST IN MODAL */
+        .amenities-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 15px 0; text-align: left; }
+        .amenity-chip { background: rgba(255,255,255,0.04); border: 1px solid rgba(212,175,55,0.2); padding: 8px 12px; border-radius: 8px; font-size: 11px; color: #a8bba5; display: flex; align-items: center; gap: 8px; }
+        .amenity-chip i { color: #d4af37; }
+
         /* MEDIA QUERIES FOR MOBILE */
         @media (max-width: 768px) {
             .desktop-nav { display: none; }
@@ -242,9 +259,9 @@
         <div class="logo">THE HIDE</div>
         
         <div class="desktop-nav">
-            <a href="#properties">Cabins</a>
+            <a href="#properties">Stays</a>
+            <a href="#packages">Travel & Packages</a>
             <a href="#gallery">Gallery Slider</a>
-            <a href="#experiences">Experiences</a>
             <a href="#loyalty">Hide Club</a>
             <a href="#reviews">Reviews</a>
             <a href="#faq">FAQs</a>
@@ -268,13 +285,13 @@
             <i class="fa-solid fa-user-gear" style="color:#d4af37;"></i> Admin Dashboard
         </a>
         <a href="#properties" class="menu-link" onclick="toggleMobileMenu();">
-            <i class="fa-solid fa-house"></i> View Cabins
+            <i class="fa-solid fa-house"></i> View Stays
+        </a>
+        <a href="#packages" class="menu-link" onclick="toggleMobileMenu();">
+            <i class="fa-solid fa-route"></i> Travel & Packages
         </a>
         <a href="#gallery" class="menu-link" onclick="toggleMobileMenu();">
             <i class="fa-solid fa-images"></i> Hotel Gallery Slider
-        </a>
-        <a href="#experiences" class="menu-link" onclick="toggleMobileMenu();">
-            <i class="fa-solid fa-compass"></i> Mountain Activities
         </a>
         <a href="#loyalty" class="menu-link" onclick="toggleMobileMenu();">
             <i class="fa-solid fa-crown"></i> Hide Club Loyalty
@@ -291,8 +308,8 @@
     </div>
 
     <div class="mobile-bottom-nav">
-        <a href="#properties" class="mobile-nav-item active"><i class="fa-solid fa-house"></i>Cabins</a>
-        <a href="#experiences" class="mobile-nav-item"><i class="fa-solid fa-compass"></i>Activities</a>
+        <a href="#properties" class="mobile-nav-item active"><i class="fa-solid fa-house"></i>Stays</a>
+        <a href="#packages" class="mobile-nav-item"><i class="fa-solid fa-route"></i>Packages</a>
         <a href="#loyalty" class="mobile-nav-item"><i class="fa-solid fa-crown"></i>Loyalty</a>
         <a href="#" class="mobile-nav-item" onclick="toggleSupportDrawer()"><i class="fa-solid fa-headset"></i>Support</a>
         <a href="#" class="mobile-nav-item" onclick="toggleAdminDrawer()"><i class="fa-solid fa-user-gear"></i>Admin</a>
@@ -300,15 +317,15 @@
 
     <section class="hero">
         <h1>Unplugged Quiet in Himachal</h1>
-        <p>Verified offbeat mountain cabins with acoustic audits (&lt;40 dB), high-speed Wi-Fi, and estate food sourcing.</p>
+        <p>Verified offbeat mountain cabins with acoustic audits (&lt;40 dB), high-speed Wi-Fi, and complete travel packages.</p>
 
-        <div class="search-bar-card">
+        <div class="top-search-bar">
             <div class="search-item">
-                <label><i class="fa-regular fa-calendar-check"></i> Arrival Date</label>
+                <label><i class="fa-regular fa-calendar-check"></i> Check-in Date</label>
                 <input type="date" id="checkin-date" onchange="calculateNights()">
             </div>
             <div class="search-item">
-                <label><i class="fa-regular fa-calendar-xmark"></i> Departure Date</label>
+                <label><i class="fa-regular fa-calendar-xmark"></i> Check-out Date</label>
                 <input type="date" id="checkout-date" onchange="calculateNights()">
             </div>
             <div class="search-item" style="max-width: 90px;">
@@ -316,9 +333,9 @@
                 <input type="text" id="nights-count-display" value="1 Night" readonly style="text-align: center;">
             </div>
             <div class="search-item">
-                <label><i class="fa-solid fa-location-dot"></i> Region</label>
+                <label><i class="fa-solid fa-location-dot"></i> Himachal Region</label>
                 <select id="hero-region-filter">
-                    <option value="all">All Locations</option>
+                    <option value="all">All Himachal Regions</option>
                     <option value="Barot">Barot Valley, Mandi</option>
                     <option value="Tirthan">Tirthan Valley, Kullu</option>
                     <option value="Jhatingri">Jhatingri, Joginder Nagar</option>
@@ -375,7 +392,7 @@
 
     <section class="section-container" id="properties">
         <h2 class="section-title">Curated Mountain Stays</h2>
-        <p class="section-sub">Select your cabin and reserve your stay instantly</p>
+        <p class="section-sub">Select your stay or view full property amenities & price details</p>
 
         <div class="filter-tags-container">
             <button class="filter-tag active" onclick="filterPropertiesByTag('all')">✨ All Stays</button>
@@ -395,9 +412,12 @@
                         <span><i class="fa-solid fa-wifi"></i> 100 Mbps</span>
                         <span><i class="fa-solid fa-star" style="color:#d4af37;"></i> 4.9</span>
                     </div>
-                    <div class="card-price-row">
+                    <div class="card-actions-row">
                         <div class="price">₹4,800 <span style="font-size:11px; color:#a8bba5;">/ night</span></div>
-                        <button class="book-btn" onclick="openPaymentModal('Cedar Wood Riverside Cabin', 'Barot Valley', 4800)">Reserve Stay</button>
+                        <div class="btn-group">
+                            <button class="view-details-btn" onclick="openPropertyDetails('Cedar Wood Riverside Cabin', 'Barot Valley, Mandi', 4800, '38 dB Noise Audit', '100 Mbps Dedicated Fiber', 'Full Power Backup & Fireplace', 'Uhl River Facing Deck', 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80')">View Details</button>
+                            <button class="book-btn" onclick="openPaymentModal('Cedar Wood Riverside Cabin', 'Barot Valley', 4800)">Reserve Stay</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -412,9 +432,12 @@
                         <span><i class="fa-solid fa-wifi"></i> 80 Mbps</span>
                         <span><i class="fa-solid fa-star" style="color:#d4af37;"></i> 4.8</span>
                     </div>
-                    <div class="card-price-row">
+                    <div class="card-actions-row">
                         <div class="price">₹5,500 <span style="font-size:11px; color:#a8bba5;">/ night</span></div>
-                        <button class="book-btn" onclick="openPaymentModal('The Secret Pine Cottage', 'Tirthan Valley', 5500)">Reserve Stay</button>
+                        <div class="btn-group">
+                            <button class="view-details-btn" onclick="openPropertyDetails('The Secret Pine Cottage', 'Tirthan Valley, Kullu', 5500, '35 dB Ultra Quiet', '80 Mbps Optical Fiber', 'Pine Forest View & Organic Kitchen', 'Trout River Stream Access', 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=800&q=80')">View Details</button>
+                            <button class="book-btn" onclick="openPaymentModal('The Secret Pine Cottage', 'Tirthan Valley', 5500)">Reserve Stay</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -429,34 +452,65 @@
                         <span><i class="fa-solid fa-wifi"></i> 120 Mbps</span>
                         <span><i class="fa-solid fa-star" style="color:#d4af37;"></i> 5.0</span>
                     </div>
-                    <div class="card-price-row">
+                    <div class="card-actions-row">
                         <div class="price">₹6,200 <span style="font-size:11px; color:#a8bba5;">/ night</span></div>
-                        <button class="book-btn" onclick="openPaymentModal('Ridge View Glass Loft', 'Joginder Nagar', 6200)">Reserve Stay</button>
+                        <div class="btn-group">
+                            <button class="view-details-btn" onclick="openPropertyDetails('Ridge View Glass Loft', 'Jhatingri, Joginder Nagar', 6200, '40 dB Panoramic Loft', '120 Mbps Dual Fiber Wi-Fi', '360° Glass Sunset View Deck', 'Private Estate Dining', 'https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=800&q=80')">View Details</button>
+                            <button class="book-btn" onclick="openPaymentModal('Ridge View Glass Loft', 'Joginder Nagar', 6200)">Reserve Stay</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section-container" id="experiences">
-        <h2 class="section-title">Curated Mountain Experiences</h2>
-        <p class="section-sub">Add offbeat local activities to your stay in Mandi & Kullu circuits</p>
+    <section class="section-container" id="packages">
+        <h2 class="section-title">Travel & Stay Packages</h2>
+        <p class="section-sub">Seamless door-to-door transit packages bundled with cabin stays</p>
 
-        <div class="experiences-grid">
-            <div class="exp-card">
-                <div class="exp-icon"><i class="fa-solid fa-water"></i></div>
-                <div class="exp-title">River Angling & Trout Sourcing</div>
-                <div class="exp-desc">Guided trout fishing sessions along the Uhl River in Barot with local estate cooks.</div>
+        <div class="packages-grid">
+            <div class="package-card">
+                <div class="package-badge">POPULAR PACKAGE</div>
+                <h3 class="package-title">Delhi to Himachal Circuit</h3>
+                <div class="package-route"><i class="fa-solid fa-bus"></i> Delhi NCR ➔ Barot / Tirthan / Joginder Nagar</div>
+                <ul class="package-includes">
+                    <li><i class="fa-solid fa-circle-check"></i> Luxury Volvo Bus / Private AC Car Transfer</li>
+                    <li><i class="fa-solid fa-circle-check"></i> 3 Nights Offbeat Cabin Stay Included</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Daily Organic Breakfast & Estate Trout Meals</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Dedicated Workstation with Fiber Wi-Fi</li>
+                </ul>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div><span style="font-size:18px; font-weight:700; color:#d4af37;">₹12,499</span> <span style="font-size:10px; color:#a8bba5;">/ person</span></div>
+                    <button class="book-btn" onclick="openPaymentModal('Delhi to Himachal Travel Package', 'Himachal Circuit', 12499)">Select Package</button>
+                </div>
             </div>
-            <div class="exp-card">
-                <div class="exp-icon"><i class="fa-solid fa-fire"></i></div>
-                <div class="exp-title">Pine Forest Bonfire & Stargazing</div>
-                <div class="exp-desc">Evening outdoor acoustic campfire sessions with zero light pollution.</div>
+
+            <div class="package-card">
+                <div class="package-badge">EXPRESS ROUTE</div>
+                <h3 class="package-title">Chandigarh to Himachal Express</h3>
+                <div class="package-route"><i class="fa-solid fa-car"></i> Chandigarh ➔ Mandi / Barot Valley</div>
+                <ul class="package-includes">
+                    <li><i class="fa-solid fa-circle-check"></i> Direct Private Sedan / SUV Pickup</li>
+                    <li><i class="fa-solid fa-circle-check"></i> 2 Nights Riverside Cabin Stay</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Bonfire Experience & Ridge Trail Trek</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Pay at Stay / 10% Token Flexibility</li>
+                </ul>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div><span style="font-size:18px; font-weight:700; color:#d4af37;">₹9,800</span> <span style="font-size:10px; color:#a8bba5;">/ person</span></div>
+                    <button class="book-btn" onclick="openPaymentModal('Chandigarh to Himachal Package', 'Mandi Circuit', 9800)">Select Package</button>
+                </div>
             </div>
-            <div class="exp-card">
-                <div class="exp-icon"><i class="fa-solid fa-person-hiking"></i></div>
-                <div class="exp-title">Jhatingri Ridge Treks</div>
-                <div class="exp-desc">Escorted forest walks through old British heritage tea estate trails in Joginder Nagar.</div>
+
+            <div class="package-card" style="opacity:0.75; border-style:dashed;">
+                <div class="package-badge" style="background:rgba(255,255,255,0.1); color:#a8bba5; border-color:#a8bba5;">COMING SOON</div>
+                <h3 class="package-title">Other India Circuits</h3>
+                <div class="package-route" style="color:#a8bba5;"><i class="fa-solid fa-plane"></i> Mumbai, Bangalore, Spiti & Ladakh</div>
+                <ul class="package-includes">
+                    <li><i class="fa-solid fa-clock" style="color:#d4af37;"></i> Mumbai to Himachal Workation Escapes</li>
+                    <li><i class="fa-solid fa-clock" style="color:#d4af37;"></i> Bengaluru to Spiti High-Altitude Cabins</li>
+                    <li><i class="fa-solid fa-clock" style="color:#d4af37;"></i> Flight + Helicopter + Luxury Homestay Transit</li>
+                </ul>
+                <button class="submit-booking-btn" style="background:rgba(255,255,255,0.05); color:#a8bba5; border:1px solid #a8bba5; cursor:default;" disabled>Routes Launching Soon</button>
             </div>
         </div>
     </section>
@@ -541,6 +595,32 @@
             </div>
         </div>
     </section>
+
+    <div class="booking-drawer-overlay" id="details-drawer-overlay" onclick="closePropertyDetails()"></div>
+    <div class="booking-side-drawer" id="details-side-drawer">
+        <button class="close-drawer-btn" onclick="closePropertyDetails()">✕</button>
+        <img id="detail-modal-img" src="" style="width:100%; height:200px; object-fit:cover; border-radius:12px; margin-bottom:15px;" alt="Cabin Preview">
+        <h3 id="detail-modal-title" style="font-family:'Playfair Display', serif; font-size:22px; color:#d4af37;">Property Name</h3>
+        <p id="detail-modal-location" style="font-size:12px; color:#a8bba5; margin-bottom:15px;"><i class="fa-solid fa-location-dot"></i> Location</p>
+
+        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(212,175,55,0.3); border-radius:12px; padding:15px; margin-bottom:15px;">
+            <div style="font-size:12px; font-weight:700; color:#d4af37; margin-bottom:8px;">PROPERTY AMENITIES & FACILITIES</div>
+            <div class="amenities-grid">
+                <div class="amenity-chip"><i class="fa-solid fa-volume-xmark"></i> <span id="detail-f1">Acoustic Audit</span></div>
+                <div class="amenity-chip"><i class="fa-solid fa-wifi"></i> <span id="detail-f2">High Speed Fiber</span></div>
+                <div class="amenity-chip"><i class="fa-solid fa-bolt"></i> <span id="detail-f3">Power Backup</span></div>
+                <div class="amenity-chip"><i class="fa-solid fa-mountain"></i> <span id="detail-f4">Scenic View</span></div>
+            </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.03); border:1px dashed rgba(212,175,55,0.3); border-radius:12px; padding:15px; margin-bottom:15px; text-align:left;">
+            <div style="font-size:12px; font-weight:700; color:#d4af37; margin-bottom:5px;">NIGHTLY RATE BREAKDOWN</div>
+            <p style="font-size:18px; font-weight:700;" id="detail-modal-price">₹0 / night</p>
+            <p style="font-size:11px; color:#a8bba5;">Pay 100% on arrival at property OR Lock with 10% online deposit.</p>
+        </div>
+
+        <button class="submit-booking-btn" id="detail-modal-book-btn">Proceed to Reserve Stay →</button>
+    </div>
 
     <div class="booking-drawer-overlay" id="support-drawer-overlay" onclick="toggleSupportDrawer()"></div>
     <div class="booking-side-drawer" id="support-side-drawer">
@@ -769,6 +849,32 @@
         function toggleMobileMenu() {
             document.getElementById('menu-drawer-overlay').classList.toggle('active');
             document.getElementById('mobile-menu-drawer').classList.toggle('active');
+        }
+
+        // PROPERTY DETAILS MODAL LOGIC
+        function openPropertyDetails(title, location, price, f1, f2, f3, f4, imgUrl) {
+            document.getElementById('detail-modal-title').innerText = title;
+            document.getElementById('detail-modal-location').innerHTML = `<i class="fa-solid fa-location-dot"></i> ${location}`;
+            document.getElementById('detail-modal-price').innerText = `₹${price.toLocaleString('en-IN')} / night`;
+            document.getElementById('detail-modal-img').src = imgUrl;
+
+            document.getElementById('detail-f1').innerText = f1;
+            document.getElementById('detail-f2').innerText = f2;
+            document.getElementById('detail-f3').innerText = f3;
+            document.getElementById('detail-f4').innerText = f4;
+
+            document.getElementById('detail-modal-book-btn').onclick = function() {
+                closePropertyDetails();
+                openPaymentModal(title, location, price);
+            };
+
+            document.getElementById('details-drawer-overlay').classList.add('active');
+            document.getElementById('details-side-drawer').classList.add('active');
+        }
+
+        function closePropertyDetails() {
+            document.getElementById('details-drawer-overlay').classList.remove('active');
+            document.getElementById('details-side-drawer').classList.remove('active');
         }
 
         // FILTER PROPERTIES BY TAG
