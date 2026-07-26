@@ -12,6 +12,8 @@
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
     <style>
         /* BASE & RESET */
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -165,6 +167,7 @@
         .pay-desc { font-size: 10px; color: #a8bba5; margin-top: 2px; }
 
         .submit-booking-btn { width: 100%; background: #d4af37; color: #121713; border: none; padding: 14px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; margin-top: 15px; }
+        .whatsapp-voucher-btn { width: 100%; background: #22c55e; color: #ffffff; border: none; padding: 14px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; margin-top: 10px; display: flex; justify-content: center; align-items: center; gap: 8px; }
 
         .confirmation-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 15px; text-align: left; font-size: 12px; line-height: 1.8; }
 
@@ -458,8 +461,8 @@
                 </div>
 
                 <div class="input-group">
-                    <label>Email Address</label>
-                    <input type="email" id="guest-email" placeholder="uday@example.com">
+                    <label>Email Address *</label>
+                    <input type="email" id="guest-email" placeholder="uday@example.com" required>
                 </div>
 
                 <div class="input-group">
@@ -510,7 +513,7 @@
         <div id="booking-step-3" style="display: none; text-align: center; padding-top: 20px;">
             <div style="font-size: 45px; color: #22c55e;">✓</div>
             <h3 style="font-family:'Playfair Display', serif; color: #d4af37; font-size: 24px;">Booking Confirmed!</h3>
-            <p style="font-size: 12px; color: #a8bba5; margin: 10px 0;">Your reservation details have been saved and sent to the property caretaker.</p>
+            <p style="font-size: 12px; color: #a8bba5; margin: 10px 0;">Your reservation details have been saved, and confirmation notifications were dispatched via Mail & WhatsApp.</p>
             
             <div class="confirmation-box">
                 <p><strong>Booking ID:</strong> <span id="confirmed-booking-id">#HIDE-1082</span></p>
@@ -518,7 +521,11 @@
                 <p><strong>Total Payable:</strong> <span id="confirmed-total-payable">₹0</span></p>
             </div>
 
-            <button onclick="closeBookingDrawer()" class="submit-booking-btn">Done & Return Home</button>
+            <button id="whatsapp-voucher-link" class="whatsapp-voucher-btn" onclick="openWhatsAppConfirmation()">
+                <i class="fa-brands fa-whatsapp" style="font-size:18px;"></i> Open WhatsApp Confirmation Voucher
+            </button>
+
+            <button onclick="closeBookingDrawer()" class="submit-booking-btn" style="background:transparent; border:1px solid #d4af37; color:#d4af37;">Done & Return Home</button>
         </div>
     </div>
 
@@ -527,10 +534,18 @@
     </footer>
 
     <script>
-        // SUPABASE CLIENT INITIALIZATION
+        // 1. SUPABASE CLIENT INITIALIZATION
         const SUPABASE_URL = "https://tjlpwkroldhsztkelfuy.supabase.co";
         const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqbHB3a3JvbGRoc3p0a2VsZnV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ5MjIxMjIsImV4cCI6MjEwMDQ5ODEyMn0.1Ya0pNANKRFggdSq9YjDPLEzPzKY9atyKE6KUcrjCrE";
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // 2. EMAILJS INITIALIZATION
+        // Replace "YOUR_PUBLIC_KEY" with your EmailJS Public Key from Account -> General
+        try {
+            emailjs.init("YOUR_PUBLIC_KEY");
+        } catch(e) {
+            console.log("EmailJS SDK initializing...");
+        }
 
         // GLOBAL BOOKING STATE
         let currentSelectedProperty = "";
@@ -538,6 +553,9 @@
         let currentSelectedPrice = 0;
         let currentCalculatedNights = 1;
         let selectedPaymentMethod = 'PAY_AT_PROPERTY';
+        let latestGeneratedBookingId = "";
+        let latestGuestWhatsAppNumber = "";
+        let latestBookingDetails = {};
 
         // DEFAULT DATES SETUP (TODAY & TOMORROW)
         window.addEventListener('DOMContentLoaded', () => {
@@ -635,7 +653,7 @@
             }
         }
 
-        // DIRECTLY FINALIZE AND SAVE BOOKING TO SUPABASE
+        // DIRECTLY FINALIZE AND SAVE BOOKING TO SUPABASE & EMAILJS
         async function handleGuestSubmit(event) {
             event.preventDefault();
             const fullName = document.getElementById('guest-full-name').value.trim();
@@ -651,7 +669,17 @@
             const tokenAmount = selectedPaymentMethod !== 'PAY_AT_PROPERTY' ? Math.round(totalCost * 0.10) : 0;
             const bookingCode = "HIDE-" + Math.floor(1000 + Math.random() * 9000);
 
-            // Aligned payload containing adults_count matching the new Supabase SQL schema
+            latestGeneratedBookingId = bookingCode;
+            latestGuestWhatsAppNumber = phone;
+            latestBookingDetails = {
+                bookingCode, fullName, phone, email, adults,
+                propertyName: currentSelectedProperty,
+                location: currentSelectedLocation,
+                checkIn, checkOut, nights: currentCalculatedNights,
+                totalCost, paymentStatus: selectedPaymentMethod
+            };
+
+            // 1. Save to Supabase
             const { data, error } = await _supabase
                 .from('guest_bookings')
                 .insert([{
@@ -672,12 +700,63 @@
 
             if (error) { alert("Error saving reservation: " + error.message); return; }
 
+            // 2. Send Automated Confirmation Email via EmailJS
+            const templateParams = {
+                booking_id: bookingCode,
+                to_name: fullName,
+                to_email: email,
+                property_name: currentSelectedProperty,
+                location: currentSelectedLocation,
+                check_in: checkIn,
+                check_out: checkOut,
+                nights: currentCalculatedNights,
+                total_amount: "₹" + totalCost.toLocaleString('en-IN'),
+                payment_status: selectedPaymentMethod === 'PAY_AT_PROPERTY' ? 'Pay 100% at Property' : `${selectedPaymentMethod} (10% Token Paid)`
+            };
+
+            // Replace YOUR_SERVICE_ID and YOUR_TEMPLATE_ID with your EmailJS dashboard keys
+            try {
+                emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+                    .then(function(response) {
+                        console.log("Email sent successfully via EmailJS!", response.status, response.text);
+                    }, function(error) {
+                        console.error("EmailJS sending failed:", error);
+                    });
+            } catch(e) {
+                console.log("EmailJS dispatch skipped or missing keys.", e);
+            }
+
+            // 3. Update Step 3 Confirmation View
             document.getElementById('confirmed-booking-id').innerText = "#" + bookingCode;
             document.getElementById('confirmed-payment-mode').innerText = selectedPaymentMethod === 'PAY_AT_PROPERTY' ? 'Pay 100% at Property (0 Advance)' : `${selectedPaymentMethod} (10% Token Paid)`;
             document.getElementById('confirmed-total-payable').innerText = `₹${totalCost.toLocaleString('en-IN')}`;
             
             document.getElementById('booking-step-1').style.display = 'none';
             document.getElementById('booking-step-3').style.display = 'block';
+
+            // Auto-open WhatsApp voucher after short delay
+            setTimeout(() => {
+                openWhatsAppConfirmation();
+            }, 800);
+        }
+
+        // GENERATE WHATSAPP DIRECT VOUCHER MESSAGE
+        function openWhatsAppConfirmation() {
+            const b = latestBookingDetails;
+            const waText = encodeURIComponent(
+                `*THE HIDE — BOOKING CONFIRMATION VOUCHER*\n\n` +
+                `*Booking ID:* #${b.bookingCode}\n` +
+                `*Guest Name:* ${b.fullName}\n` +
+                `*Property:* ${b.propertyName} (${b.location})\n` +
+                `*Dates:* ${b.checkIn} to ${b.checkOut} (${b.nights} Night/s)\n` +
+                `*Guests:* ${b.adults} Adult(s)\n` +
+                `*Total Payable:* ₹${b.totalCost ? b.totalCost.toLocaleString('en-IN') : 0}\n` +
+                `*Payment Option:* ${b.paymentStatus}\n\n` +
+                `Thank you for choosing The Hide! Our Joginder Nagar operations team will share caretaker contacts and route directions.`
+            );
+
+            const waUrl = `https://wa.me/918219747857?text=${waText}`;
+            window.open(waUrl, '_blank');
         }
 
         // TOGGLE SUPPORT DRAWER
@@ -750,3 +829,4 @@
     </script>
 </body>
 </html>
+
